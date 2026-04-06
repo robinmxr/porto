@@ -1,0 +1,53 @@
+<div class="w-full h-full flex flex-col items-center justify-start pt-16 md:pt-32 px-4 md:px-8 pb-40 overflow-y-auto pointer-events-auto hide-scrollbar">
+  <div class="w-full max-w-3xl relative">
+    
+    <div class="flex items-center gap-4 mb-10 md:mb-14">
+      <h2 class="text-xl md:text-3xl font-extrabold text-on-surface tracking-tighter font-mono group cursor-default truncate">ls ./experience <span class="bg-primary/20 text-[10px] md:text-xs px-2 py-1 rounded ml-2 tracking-widest text-primary uppercase inline-block -translate-y-1">History</span></h2>
+    </div>
+
+    <!-- Timeline Wrapper -->
+    <div class="relative pl-8 md:pl-12 border-l-2 border-outline-variant/30 space-y-12 md:space-y-16 pb-16">
+      
+      <!-- Experience 1 -->
+      <div class="relative group cursor-pointer hover:-translate-y-2 transition-transform duration-500">
+        <!-- Node Marker -->
+        <div class="absolute -left-[2.25rem] md:-left-[3.25rem] top-6 w-4 h-4 rounded-full bg-surface-container border-2 border-primary group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(159,167,255,0.8)] transition-all duration-300"></div>
+        
+        <div class="glass-panel p-6 md:p-8 rounded-[2rem] clay-high-depth hover:shadow-[0_20px_40px_rgba(159,167,255,0.1)] border border-transparent group-hover:border-primary/20 transition-all duration-500">
+          <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-4">
+            <div>
+              <div class="font-label text-[10px] md:text-xs text-primary tracking-widest uppercase mb-1">05_2021 — Present</div>
+              <h3 class="text-xl md:text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">Dist_Systems Architect</h3>
+              <p class="text-xs md:text-sm font-semibold text-secondary-dim mt-1">@ Nebula Stream Inc.</p>
+            </div>
+            <span class="material-symbols-outlined text-3xl md:text-4xl text-outline-variant opacity-20 group-hover:opacity-100 group-hover:text-primary transition-all duration-500 rotate-12 group-hover:rotate-0" data-icon="deployed_code">deployed_code</span>
+          </div>
+          <p class="text-on-surface-variant text-xs md:text-sm leading-relaxed">
+            Architected and deployed entirely async microservice backends, enabling throughput over 10M events a second. Completely rewrote the core routing handler from Go to Rust, reducing end-to-end latency by 45%.
+          </p>
+        </div>
+      </div>
+
+      <!-- Experience 2 -->
+      <div class="relative group cursor-pointer hover:-translate-y-2 transition-transform duration-500">
+        <!-- Node Marker -->
+        <div class="absolute -left-[2.25rem] md:-left-[3.25rem] top-6 w-4 h-4 rounded-full bg-surface-container border-2 border-secondary group-hover:bg-secondary group-hover:shadow-[0_0_15px_rgba(193,128,255,0.8)] transition-all duration-300"></div>
+        
+        <div class="bg-surface-container-low p-6 md:p-8 rounded-[2rem] clay-high-depth hover:shadow-[0_20px_40px_rgba(193,128,255,0.1)] border border-transparent group-hover:border-secondary/20 transition-all duration-500">
+          <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-4">
+            <div>
+              <div class="font-label text-[10px] md:text-xs text-secondary tracking-widest uppercase mb-1">11_2018 — 04_2021</div>
+              <h3 class="text-xl md:text-2xl font-bold text-on-surface group-hover:text-secondary transition-colors">Senior DevOps Engineer</h3>
+              <p class="text-xs md:text-sm font-semibold text-secondary-dim mt-1">@ Chronos Tech</p>
+            </div>
+            <span class="material-symbols-outlined text-3xl md:text-4xl text-outline-variant opacity-20 group-hover:opacity-100 group-hover:text-secondary transition-all duration-500 -rotate-12 group-hover:rotate-0" data-icon="account_tree">account_tree</span>
+          </div>
+          <p class="text-on-surface-variant text-xs md:text-sm leading-relaxed">
+            Transitioned legacy monolith to Kubernetes deployment. Automated CI/CD pipelines across AWS, improving team release cycles by 4x. Handled on-premise migrations to highly available cloud clusters.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

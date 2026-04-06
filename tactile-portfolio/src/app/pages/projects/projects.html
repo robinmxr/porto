@@ -1,0 +1,136 @@
+<div class="w-full h-full flex flex-col items-center justify-start pt-16 md:pt-32 px-4 md:px-8 pb-40 overflow-y-auto pointer-events-auto hide-scrollbar">
+  <div class="w-full max-w-5xl">
+    <div class="flex items-center gap-4 mb-6 md:mb-10">
+      <h2 class="text-xl md:text-3xl font-extrabold text-[#9fa7ff] tracking-tighter font-mono group cursor-default truncate">ls ./projects //</h2>
+      <div class="h-[1px] flex-1 bg-gradient-to-r from-primary/30 to-transparent"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Project Card 1 -->
+      <div class="glass-panel p-8 rounded-[2rem] bg-surface-container clay-high-depth hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_40px_80px_rgba(159,167,255,0.15)] transition-all duration-500 cursor-pointer group relative anim-float">
+        <div class="absolute inset-0 border-2 border-transparent group-hover:border-primary/20 rounded-[2rem] transition-colors duration-500"></div>
+        <div class="flex items-center justify-between mb-6">
+          <span class="material-symbols-outlined text-4xl text-primary group-hover:drop-shadow-[0_0_8px_rgba(159,167,255,0.8)] transition-all" data-icon="memory">memory</span>
+          <span class="font-mono text-xs text-secondary-dim bg-secondary/10 px-3 py-1 rounded-full uppercase tracking-widest border border-secondary/20">Active</span>
+        </div>
+        <h3 class="text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Neural_Path_v2</h3>
+        <p class="text-sm text-on-surface-variant leading-relaxed">
+          CUDA-accelerated neural networks optimized for edge-device inferencing latency.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-6">
+          <span class="text-[10px] font-label uppercase tracking-wider text-surface-tint border border-outline/30 px-2 py-1 rounded">PyTorch</span>
+          <span class="text-[10px] font-label uppercase tracking-wider text-surface-tint border border-outline/30 px-2 py-1 rounded">C++</span>
+        </div>
+      </div>
+
+      <!-- Project Card 2 -->
+      <div class="glass-panel p-8 rounded-[2rem] bg-surface-container clay-high-depth hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_40px_80px_rgba(159,167,255,0.15)] transition-all duration-500 cursor-pointer group relative delay-75 anim-float">
+        <div class="absolute inset-0 border-2 border-transparent group-hover:border-secondary/20 rounded-[2rem] transition-colors duration-500"></div>
+        <div class="flex items-center justify-between mb-6">
+          <span class="material-symbols-outlined text-4xl text-secondary group-hover:drop-shadow-[0_0_8px_rgba(193,128,255,0.8)] transition-all" data-icon="token">token</span>
+          <span class="font-mono text-xs text-primary/50 bg-primary/5 px-3 py-1 rounded-full uppercase tracking-widest border border-primary/20">Archived</span>
+        </div>
+        <h3 class="text-xl font-bold text-on-surface mb-2 group-hover:text-secondary transition-colors">Vault_Protocol</h3>
+        <p class="text-sm text-on-surface-variant leading-relaxed">
+          Zero-Knowledge proof integration layer for cross-chain liquidity vaults.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-6">
+          <span class="text-[10px] font-label uppercase tracking-wider text-secondary-dim border border-outline/30 px-2 py-1 rounded">Solidity</span>
+          <span class="text-[10px] font-label uppercase tracking-wider text-secondary-dim border border-outline/30 px-2 py-1 rounded">Go</span>
+        </div>
+      </div>
+
+      <!-- Project Card 3 -->
+      <div class="glass-panel p-8 rounded-[2rem] bg-surface-container clay-high-depth hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_40px_80px_rgba(159,167,255,0.15)] transition-all duration-500 cursor-pointer group relative delay-150 anim-float">
+        <div class="absolute inset-0 border-2 border-transparent group-hover:border-tertiary/20 rounded-[2rem] transition-colors duration-500"></div>
+        <div class="flex items-center justify-between mb-6">
+          <span class="material-symbols-outlined text-4xl text-tertiary group-hover:drop-shadow-[0_0_8px_rgba(198,255,243,0.8)] transition-all" data-icon="router">router</span>
+          <span class="font-mono text-xs text-tertiary-dim bg-tertiary/10 px-3 py-1 rounded-full uppercase tracking-widest border border-tertiary/20">Syncing</span>
+        </div>
+        <h3 class="text-xl font-bold text-on-surface mb-2 group-hover:text-tertiary transition-colors">Omni_Router</h3>
+        <p class="text-sm text-on-surface-variant leading-relaxed">
+          High-throughput gRPC microservice router capable of mapping 10m+ req/s.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-6">
+          <span class="text-[10px] font-label uppercase tracking-wider text-tertiary-dim border border-outline/30 px-2 py-1 rounded">Rust</span>
+          <span class="text-[10px] font-label uppercase tracking-wider text-tertiary-dim border border-outline/30 px-2 py-1 rounded">gRPC</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TECH STACK SECTION -->
+    <div class="mt-24 mb-12">
+      <div class="flex items-center gap-4 mb-10 md:mb-16">
+        <h2 class="text-xl md:text-3xl font-extrabold text-[#9fa7ff] tracking-tighter font-mono group cursor-default truncate">cat skills.json //</h2>
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-primary/30 to-transparent"></div>
+      </div>
+
+      <div class="flex flex-wrap justify-center items-center gap-4 md:gap-10">
+        <!-- Skill 1: .NET -->
+        <div class="w-36 h-36 md:w-48 md:h-48 rounded-full bg-surface-container-low flex items-center justify-center clay-high-depth border border-primary/10 hover:scale-110 hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_20px_40px_rgba(159,167,255,0.2)] transition-all duration-500 cursor-pointer group anim-float rotate-3">
+          <div class="flex flex-col items-center">
+            <span class="material-symbols-outlined text-primary text-3xl md:text-5xl group-hover:scale-125 transition-transform duration-300" data-icon="terminal">terminal</span>
+            <span class="font-label text-[10px] md:text-sm mt-2 md:mt-3 font-bold uppercase text-on-surface group-hover:text-primary transition-colors">.NET Core</span>
+            <div class="mt-2 h-1.5 w-12 md:w-16 bg-surface-container-highest rounded-full overflow-hidden">
+              <div class="h-full bg-primary" style="width: 90%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill 2: Angular -->
+        <div class="w-24 h-24 md:w-32 md:h-32 rounded-full bg-surface-container-high flex items-center justify-center clay-high-depth mt-[-2rem] md:-mt-16 border border-secondary/10 hover:scale-110 hover:-translate-y-2 hover:border-secondary/50 hover:shadow-[0_20px_40px_rgba(193,128,255,0.2)] transition-all duration-500 cursor-pointer group delay-75 anim-float-slow -rotate-6">
+          <div class="flex flex-col items-center">
+            <span class="material-symbols-outlined text-secondary text-xl md:text-2xl group-hover:scale-125 transition-transform duration-300" data-icon="change_history">change_history</span>
+            <span class="font-label text-[7px] md:text-[9px] mt-1 font-bold uppercase text-on-surface group-hover:text-secondary transition-colors">Angular</span>
+            <div class="mt-1 h-1 w-6 md:w-10 bg-surface-container-highest rounded-full overflow-hidden">
+              <div class="h-full bg-secondary" style="width: 85%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill 3: Postgres -->
+        <div class="w-40 h-40 md:w-52 md:h-52 rounded-full bg-surface-container-lowest flex items-center justify-center clay-high-depth mt-4 md:mt-16 border border-tertiary/10 hover:scale-110 hover:-translate-y-2 hover:border-tertiary/50 hover:shadow-[0_20px_40px_rgba(198,255,243,0.2)] transition-all duration-500 cursor-pointer group delay-150 anim-float rotate-2">
+          <div class="flex flex-col items-center">
+            <span class="material-symbols-outlined text-tertiary text-3xl md:text-5xl group-hover:scale-125 transition-transform duration-300" data-icon="database">database</span>
+            <span class="font-label text-[10px] md:text-sm mt-2 md:mt-3 font-bold uppercase text-on-surface group-hover:text-tertiary transition-colors">PostgreSQL</span>
+            <div class="mt-2 h-1.5 w-14 md:w-20 bg-surface-container-highest rounded-full overflow-hidden">
+              <div class="h-full bg-tertiary" style="width: 80%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill 4: React -->
+        <div class="w-20 h-20 md:w-28 md:h-28 rounded-full bg-surface-container flex items-center justify-center clay-high-depth mb-[-1rem] md:-mb-12 md:ml-4 border border-primary/10 hover:scale-110 hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_20px_40px_rgba(159,167,255,0.2)] transition-all duration-500 cursor-pointer group delay-200 anim-float-slow -rotate-12">
+          <div class="flex flex-col items-center">
+            <span class="material-symbols-outlined text-primary text-lg md:text-xl group-hover:scale-125 transition-transform duration-300" data-icon="rebase_edit">rebase_edit</span>
+            <span class="font-label text-[6px] md:text-[8px] mt-1 font-bold uppercase text-on-surface group-hover:text-primary transition-colors">React</span>
+          </div>
+        </div>
+
+        <!-- Skill 5: Cloud -->
+        <div class="w-32 h-32 md:w-44 md:h-44 rounded-full bg-surface-container-low flex items-center justify-center clay-high-depth mt-[-1rem] md:-mt-10 border border-secondary/10 hover:scale-110 hover:-translate-y-2 hover:border-secondary/50 hover:shadow-[0_20px_40px_rgba(193,128,255,0.2)] transition-all duration-500 cursor-pointer group delay-300 anim-float rotate-6">
+          <div class="flex flex-col items-center">
+            <span class="material-symbols-outlined text-secondary text-2xl md:text-4xl group-hover:scale-125 transition-transform duration-300" data-icon="cloud">cloud</span>
+            <span class="font-label text-[8px] md:text-xs mt-2 md:mt-3 font-bold uppercase text-on-surface group-hover:text-secondary transition-colors">Azure / GCP</span>
+            <div class="mt-2 h-1 w-10 md:w-14 bg-surface-container-highest rounded-full overflow-hidden">
+              <div class="h-full bg-secondary" style="width: 65%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill 6: Docker -->
+        <div class="w-28 h-28 md:w-36 md:h-36 rounded-full bg-surface-container-high flex items-center justify-center clay-high-depth mt-8 md:mt-20 border border-tertiary/10 hover:scale-110 hover:-translate-y-2 hover:border-tertiary/50 hover:shadow-[0_20px_40px_rgba(198,255,243,0.2)] transition-all duration-500 cursor-pointer group delay-500 anim-float-slow -rotate-3">
+          <div class="flex flex-col items-center">
+            <span class="material-symbols-outlined text-tertiary text-xl md:text-3xl group-hover:scale-125 transition-transform duration-300" data-icon="dock">dock</span>
+            <span class="font-label text-[8px] md:text-xs mt-1 md:mt-2 font-bold uppercase text-on-surface group-hover:text-tertiary transition-colors">Docker</span>
+            <div class="mt-1 h-1 w-8 md:w-12 bg-surface-container-highest rounded-full overflow-hidden">
+              <div class="h-full bg-tertiary" style="width: 70%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

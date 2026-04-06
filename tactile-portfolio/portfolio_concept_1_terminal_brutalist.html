@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0a; color: #e8e8e8; font-family: 'Space Mono', monospace; overflow-x: hidden; }
+  .scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px); pointer-events: none; z-index: 100; }
+  .grid-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,255,100,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,100,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .container { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; position: relative; }
+  .prompt-line { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; }
+  .prompt { color: #00ff64; font-size: 13px; }
+  .cursor { display: inline-block; width: 10px; height: 18px; background: #00ff64; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 4px; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .output { margin-left: 0; margin-bottom: 2rem; }
+  .name-ascii { color: #00ff64; font-size: 11px; line-height: 1.2; letter-spacing: 0; white-space: pre; margin: 1.5rem 0; }
+  .tag-line { color: #888; font-size: 13px; margin-bottom: 2rem; }
+  .tag-line span { color: #00ff64; }
+  .divider { border: none; border-top: 1px solid #222; margin: 2rem 0; }
+  .section-label { color: #555; font-size: 11px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 1rem; }
+  .skill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 2rem; }
+  .skill-item { border: 1px solid #1a1a1a; padding: 12px; background: #0f0f0f; transition: all 0.2s; cursor: default; }
+  .skill-item:hover { border-color: #00ff64; background: #001a0a; }
+  .skill-name { font-size: 12px; color: #e8e8e8; margin-bottom: 4px; }
+  .skill-bar-wrap { height: 2px; background: #1a1a1a; }
+  .skill-bar { height: 2px; background: #00ff64; }
+  .projects-list { margin-bottom: 2rem; }
+  .project-row { display: flex; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px solid #111; cursor: pointer; transition: all 0.15s; }
+  .project-row:hover { padding-left: 12px; }
+  .proj-arrow { color: #00ff64; font-size: 12px; opacity: 0; transition: opacity 0.15s; }
+  .project-row:hover .proj-arrow { opacity: 1; }
+  .proj-num { color: #333; font-size: 11px; width: 24px; }
+  .proj-name { color: #e8e8e8; font-size: 13px; flex: 1; }
+  .proj-stack { color: #444; font-size: 11px; }
+  .status-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #00ff64; color: #0a0a0a; font-family: 'Space Mono', monospace; font-size: 11px; padding: 4px 16px; display: flex; justify-content: space-between; z-index: 200; }
+  .contact-row { display: flex; gap: 2rem; margin-top: 1.5rem; }
+  .contact-item { font-size: 12px; color: #555; }
+  .contact-item a { color: #00ff64; text-decoration: none; }
+  .contact-item a:hover { text-decoration: underline; }
+  .badge { display: inline-block; background: #001a0a; border: 1px solid #00ff64; color: #00ff64; font-size: 10px; padding: 2px 8px; margin-right: 6px; margin-bottom: 6px; }
+  .avail { color: #00ff64; font-size: 12px; }
+  .avail::before { content: '● '; animation: blink 2s ease-in-out infinite; }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="scanline"></div>
+<div class="container">
+  <div class="prompt-line">
+    <span class="prompt">robin@portfolio:~$</span>
+    <span style="color:#e8e8e8;font-size:13px;">whoami</span>
+  </div>
+  <pre class="name-ascii">
+ ██████╗  ██████╗ ██████╗ ██╗███╗   ██╗
+ ██╔══██╗██╔═══██╗██╔══██╗██║████╗  ██║
+ ██████╔╝██║   ██║██████╔╝██║██╔██╗ ██║
+ ██╔══██╗██║   ██║██╔══██╗██║██║╚██╗██║
+ ██║  ██║╚██████╔╝██████╔╝██║██║ ╚████║
+ ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝</pre>
+  <div class="tag-line">// <span>Full-Stack Engineer</span> · .NET · Angular · System Architecture</div>
+  <div class="avail">Available for new opportunities</div>
+  <hr class="divider">
+  <div class="prompt-line" style="margin-bottom:1rem;">
+    <span class="prompt">robin@portfolio:~$</span>
+    <span style="color:#e8e8e8;font-size:13px;">cat skills.json</span>
+  </div>
+  <div class="section-label">// tech stack</div>
+  <div class="skill-grid">
+    <div class="skill-item"><div class="skill-name">.NET Core</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+    <div class="skill-item"><div class="skill-name">Angular</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+    <div class="skill-item"><div class="skill-name">PostgreSQL</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
+    <div class="skill-item"><div class="skill-name">React / MERN</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
+    <div class="skill-item"><div class="skill-name">Azure</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div></div>
+    <div class="skill-item"><div class="skill-name">Docker</div><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></div>
+  </div>
+  <div class="prompt-line" style="margin-bottom:1rem;">
+    <span class="prompt">robin@portfolio:~$</span>
+    <span style="color:#e8e8e8;font-size:13px;">ls ./projects</span>
+  </div>
+  <div class="projects-list">
+    <div class="project-row"><span class="proj-arrow">→</span><span class="proj-num">01</span><span class="proj-name">PetCare Platform</span><span class="proj-stack">.NET · pgvector · Angular PWA</span></div>
+    <div class="project-row"><span class="proj-arrow">→</span><span class="proj-num">02</span><span class="proj-name">SNOMED CT Search API</span><span class="proj-stack">EF Core · Semantic Search</span></div>
+    <div class="project-row"><span class="proj-arrow">→</span><span class="proj-num">03</span><span class="proj-name">Payment Gateway Integration</span><span class="proj-stack">Stripe · SSLCommerz</span></div>
+    <div class="project-row"><span class="proj-arrow">→</span><span class="proj-num">04</span><span class="proj-name">ConnexPay Solutions</span><span class="proj-stack">Laravel · REST APIs</span></div>
+  </div>
+  <div class="contact-row">
+    <div class="contact-item">// <a href="#">github</a></div>
+    <div class="contact-item">// <a href="#">linkedin</a></div>
+    <div class="contact-item">// <a href="#">robin@email.com</a></div>
+  </div>
+  <div class="prompt-line" style="margin-top:2rem;">
+    <span class="prompt">robin@portfolio:~$</span>
+    <span class="cursor"></span>
+  </div>
+</div>
+<div class="status-bar">
+  <span>PORTFOLIO v1.0 — ROBIN.EXEC</span>
+  <span>DHAKA, BD · UTC+6 · [OPEN TO WORK]</span>
+</div>
+</body>
+</html>
