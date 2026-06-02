@@ -1,0 +1,85 @@
+@if (project(); as p) {
+  <div class="detail-page" [style.--accent]="p.accent" [style.--project-bg]="p.background" [style.--project-border]="p.border">
+
+    <!-- Topbar -->
+    <header class="detail-topbar">
+      <div class="detail-topbar-inner">
+        <button type="button" class="detail-back" (click)="goBack()">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+          Back to home
+        </button>
+        <span class="detail-breadcrumb">{{ p.name }} · {{ p.year }}</span>
+      </div>
+    </header>
+
+    <main class="detail-shell">
+
+      <!-- Hero -->
+      <section class="detail-hero" [style.background]="p.background" [style.borderColor]="p.border">
+        <div class="detail-hero__glow" [style.background]="p.accent"></div>
+        <div class="detail-hero__content">
+          <p class="detail-type">{{ p.type }}</p>
+          <h1 class="detail-title" [style.color]="p.text">{{ p.name }}</h1>
+          <p class="detail-description" [style.color]="p.text">{{ p.description }}</p>
+        </div>
+      </section>
+
+      <!-- Metrics -->
+      <section class="detail-metrics">
+        @for (metric of p.metrics; track metric.label) {
+          <div class="detail-metric">
+            <span class="detail-metric__value" [style.color]="p.accent">{{ metric.value }}</span>
+            <span class="detail-metric__label">{{ metric.label }}</span>
+          </div>
+        }
+      </section>
+
+      <!-- Body grid -->
+      <div class="detail-body">
+
+        <!-- Highlights -->
+        <section class="detail-section detail-section--highlights">
+          <h2 class="detail-section__title">What was built</h2>
+          <ul class="detail-highlights">
+            @for (item of p.highlights; track item) {
+              <li class="detail-highlight">
+                <span class="detail-highlight__dot" [style.background]="p.accent" aria-hidden="true"></span>
+                {{ item }}
+              </li>
+            }
+          </ul>
+        </section>
+
+        <!-- Stack -->
+        <section class="detail-section detail-section--stack">
+          <h2 class="detail-section__title">Tech stack</h2>
+          <div class="detail-stack">
+            @for (tech of p.stack; track tech) {
+              <span class="detail-stack__tag" [style.borderColor]="p.border" [style.color]="p.text">{{ tech }}</span>
+            }
+          </div>
+
+          <div class="detail-cta-block">
+            <p class="detail-cta-block__label">Interested in working together?</p>
+            <a class="detail-cta-btn" [href]="'mailto:' + profile.email" [style.background]="p.accent" [style.color]="p.background">
+              Get in touch →
+            </a>
+            @if (p.repoUrl) {
+              <a class="detail-cta-link" [href]="p.repoUrl" target="_blank" rel="noopener noreferrer">View repo ↗</a>
+            }
+            @if (p.demoUrl) {
+              <a class="detail-cta-link" [href]="p.demoUrl" target="_blank" rel="noopener noreferrer">Live demo ↗</a>
+            }
+            <a class="detail-cta-link" routerLink="/">← All projects</a>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+} @else {
+  <div class="detail-not-found">
+    <p>Project not found.</p>
+    <a routerLink="/">← Back to home</a>
+  </div>
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aria Chen — Senior Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400;500;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#050510;color:#e8e8f0;font-family:'Inter Tight',sans-serif;overflow-x:hidden;min-height:100vh;position:relative}
+
+body::before{content:'';position:fixed;top:-300px;left:50%;transform:translateX(-50%);width:1200px;height:1200px;background:radial-gradient(circle,rgba(120,80,255,.4) 0%,rgba(80,40,200,.12) 30%,transparent 60%);filter:blur(80px);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse at top,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at top,#000 30%,transparent 75%);z-index:0}
+
+.wrap{max-width:1200px;margin:0 auto;padding:32px 6vw 80px;position:relative;z-index:1}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:8px 0 64px;font-family:'Geist Mono',monospace;font-size:13px;color:#a8a8d0}
+nav .logo{color:#fff;font-weight:500;letter-spacing:-.02em}
+nav .links a{color:#a8a8d0;text-decoration:none;margin-left:24px;transition:color .2s}
+nav .links a:hover{color:#fff}
+
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:6px 14px;font-size:12px;color:#c0c0e0;margin-bottom:32px;backdrop-filter:blur(10px);font-family:'Geist Mono',monospace}
+.badge .pulse{width:8px;height:8px;background:#7ee787;border-radius:50%;box-shadow:0 0 12px #7ee787;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.4}}
+
+h1{font-size:clamp(48px,8vw,104px);font-weight:200;line-height:1;letter-spacing:-.04em;margin-bottom:24px;background:linear-gradient(180deg,#fff 0%,#9090b0 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+h1 .accent{background:linear-gradient(90deg,#a78bfa 0%,#7ee787 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-style:italic;font-weight:300}
+
+.sub{font-size:clamp(16px,1.6vw,20px);color:#a8a8d0;max-width:560px;line-height:1.6;margin-bottom:48px;font-weight:300}
+
+.cta{display:flex;gap:12px;margin-bottom:120px;flex-wrap:wrap}
+.cta a{padding:12px 22px;border-radius:8px;font-size:13px;text-decoration:none;font-weight:500;transition:all .2s;display:inline-flex;align-items:center;gap:8px;font-family:'Geist Mono',monospace}
+.cta .primary{background:#fff;color:#000}
+.cta .primary:hover{background:#a78bfa;color:#fff}
+.cta .secondary{background:rgba(255,255,255,.04);color:#fff;border:1px solid rgba(255,255,255,.1)}
+.cta .secondary:hover{background:rgba(255,255,255,.08)}
+
+.section-h{font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:#7ee787;margin-bottom:16px}
+.section-title{font-size:clamp(32px,4.5vw,48px);font-weight:300;letter-spacing:-.03em;color:#fff;margin-bottom:48px;max-width:680px}
+.section-title em{font-style:italic;color:#a78bfa}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:120px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.04) 0%,rgba(255,255,255,.01) 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;transition:all .3s;backdrop-filter:blur(20px);position:relative;overflow:hidden;cursor:pointer}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6),transparent);opacity:0;transition:opacity .3s}
+.card:hover{border-color:rgba(167,139,250,.3);transform:translateY(-4px);background:linear-gradient(180deg,rgba(167,139,250,.06) 0%,rgba(255,255,255,.01) 100%)}
+.card:hover::before{opacity:1}
+.card .icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#a78bfa);margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;box-shadow:0 4px 16px rgba(167,139,250,.3)}
+.card h3{font-size:18px;font-weight:500;color:#fff;margin-bottom:8px;letter-spacing:-.01em}
+.card p{font-size:13px;color:#a8a8d0;line-height:1.6}
+.card .meta{font-family:'Geist Mono',monospace;font-size:10px;color:#7ee787;margin-top:16px;text-transform:uppercase;letter-spacing:.1em}
+
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;margin-bottom:120px}
+.metric{background:#0a0a18;padding:32px 24px;backdrop-filter:blur(10px)}
+.metric .num{font-size:40px;font-weight:200;letter-spacing:-.03em;background:linear-gradient(135deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:8px}
+.metric .lbl{font-family:'Geist Mono',monospace;font-size:11px;color:#a8a8d0;text-transform:uppercase;letter-spacing:.1em}
+
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:120px}
+.tech{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 16px;font-family:'Geist Mono',monospace;font-size:13px;color:#c0c0e0;transition:all .2s;text-align:center}
+.tech:hover{border-color:rgba(167,139,250,.4);color:#fff;background:rgba(167,139,250,.06)}
+
+.contact{text-align:center;padding:80px 24px;border:1px solid rgba(255,255,255,.08);border-radius:24px;background:radial-gradient(ellipse at center,rgba(167,139,250,.1),transparent);position:relative}
+.contact h2{font-size:clamp(36px,5vw,56px);font-weight:200;letter-spacing:-.03em;margin-bottom:16px;background:linear-gradient(180deg,#fff,#9090b0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.contact h2 em{font-style:italic;color:#a78bfa;-webkit-text-fill-color:#a78bfa}
+.contact p{color:#a8a8d0;font-size:16px;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+footer{margin-top:80px;padding-top:32px;border-top:1px solid rgba(255,255,255,.06);font-family:'Geist Mono',monospace;font-size:11px;color:#666;display:flex;justify-content:space-between;text-transform:uppercase;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <div class="logo">aria.chen</div>
+    <div class="links">
+      <a href="#work">work</a>
+      <a href="#stack">stack</a>
+      <a href="#contact">contact</a>
+    </div>
+  </nav>
+
+  <span class="badge"><span class="pulse"></span>Available · Q3 2025</span>
+
+  <h1>Senior engineer.<br>Building <span class="accent">infrastructure</span> that<br>doesn't get in the way.</h1>
+
+  <p class="sub">I'm a senior software engineer with 9 years of experience designing developer platforms and distributed backends. Currently focused on observability tooling and runtime performance.</p>
+
+  <div class="cta">
+    <a href="#contact" class="primary">Get in touch →</a>
+    <a href="#" class="secondary">View resume</a>
+  </div>
+
+  <div class="section-h" id="work">— Selected work</div>
+  <h2 class="section-title">Systems I've shipped that <em>matter</em>.</h2>
+
+  <div class="cards">
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>Edge cache layer</h3>
+      <p>Built a globally-distributed read cache that cut p99 read latency from 240ms → 18ms across 12 regions for a Series-D fintech.</p>
+      <div class="meta">Rust · Anycast · 2024</div>
+    </div>
+    <div class="card">
+      <div class="icon">◆</div>
+      <h3>Tracing platform</h3>
+      <p>Designed a tail-sampled tracing pipeline ingesting 8M spans/sec, used by 600+ engineers to debug production incidents.</p>
+      <div class="meta">Go · ClickHouse · 2023</div>
+    </div>
+    <div class="card">
+      <div class="icon">▲</div>
+      <h3>Deploy platform</h3>
+      <p>Internal CI/CD platform that reduced average deploy time from 18 min to 3 min and rolled back failed deploys automatically.</p>
+      <div class="meta">Go · Kubernetes · 2022</div>
+    </div>
+    <div class="card">
+      <div class="icon">◇</div>
+      <h3>OSS · spanmark</h3>
+      <p>Open-source span enrichment library for OpenTelemetry. 4.7k stars, used by ~70 companies in production.</p>
+      <div class="meta">Go · OSS · 2021</div>
+    </div>
+  </div>
+
+  <div class="section-h">— By the numbers</div>
+  <h2 class="section-title">Quietly significant <em>scale</em>.</h2>
+
+  <div class="metrics">
+    <div class="metric"><div class="num">9 yrs</div><div class="lbl">Experience</div></div>
+    <div class="metric"><div class="num">8M/sec</div><div class="lbl">Peak throughput</div></div>
+    <div class="metric"><div class="num">99.99%</div><div class="lbl">Uptime SLO</div></div>
+    <div class="metric"><div class="num">4.7k ⭐</div><div class="lbl">OSS stars</div></div>
+  </div>
+
+  <div class="section-h" id="stack">— Stack</div>
+  <h2 class="section-title">The tools I reach for <em>first</em>.</h2>
+
+  <div class="stack-grid">
+    <div class="tech">Go</div><div class="tech">Rust</div><div class="tech">Python</div><div class="tech">TypeScript</div>
+    <div class="tech">Kubernetes</div><div class="tech">Terraform</div><div class="tech">AWS</div><div class="tech">GCP</div>
+    <div class="tech">Postgres</div><div class="tech">Kafka</div><div class="tech">ClickHouse</div><div class="tech">Redis</div>
+    <div class="tech">gRPC</div><div class="tech">GraphQL</div><div class="tech">OpenTelemetry</div><div class="tech">Envoy</div>
+  </div>
+
+  <div class="contact" id="contact">
+    <h2>Let's build <em>something</em>.</h2>
+    <p>Currently considering staff and principal-track roles, or short consulting engagements. The best way to reach me is by email.</p>
+    <div class="cta" style="margin:0;justify-content:center">
+      <a href="mailto:hi@ariachen.dev" class="primary">hi@ariachen.dev →</a>
+      <a href="#" class="secondary">github</a>
+      <a href="#" class="secondary">linkedin</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2025 Aria Chen</span>
+    <span>San Francisco · GMT-8</span>
+  </footer>
+</div>
+</body>
+</html>

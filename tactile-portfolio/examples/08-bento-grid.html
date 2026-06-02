@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priya Iyer — Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f4f2;color:#0a0a0a;font-family:'Inter Tight',sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;padding:24px}
+
+.wrap{max-width:1280px;margin:0 auto}
+
+.head{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;margin-bottom:24px;font-size:14px;font-weight:500}
+.head .links a{color:#0a0a0a;text-decoration:none;margin-left:24px;opacity:.6;transition:opacity .2s}
+.head .links a:hover{opacity:1}
+.head .dot{display:inline-block;width:8px;height:8px;background:#16a34a;border-radius:50%;margin-right:6px;vertical-align:middle;box-shadow:0 0 0 4px rgba(22,163,74,.18);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(22,163,74,.05)}}
+
+.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:minmax(120px,auto);gap:16px}
+
+.tile{background:#fff;border-radius:24px;padding:28px;position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
+.tile:hover{transform:translateY(-2px);box-shadow:0 20px 40px rgba(0,0,0,.06)}
+
+/* tile spans */
+.t-hero{grid-column:span 8;grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg,#fff 0%,#f0f0ed 100%)}
+.t-avatar{grid-column:span 4;grid-row:span 2;background:linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 100%);color:#fff;display:flex;flex-direction:column;justify-content:flex-end}
+.t-stat{grid-column:span 3}
+.t-stack{grid-column:span 6;grid-row:span 2}
+.t-now{grid-column:span 6}
+.t-quote{grid-column:span 6;background:#0a0a0a;color:#fff}
+.t-proj{grid-column:span 6;grid-row:span 2}
+.t-proj-sm{grid-column:span 6}
+.t-contact{grid-column:span 12;background:linear-gradient(135deg,#fef9c3 0%,#fef08a 100%)}
+
+@media(max-width:900px){
+  .t-hero,.t-avatar,.t-stack,.t-proj,.t-now,.t-quote,.t-proj-sm{grid-column:span 12}
+  .t-stat{grid-column:span 6}
+}
+
+/* hero */
+.t-hero .label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:#666;margin-bottom:16px}
+.t-hero h1{font-size:clamp(32px,4.5vw,56px);font-weight:600;line-height:1.02;letter-spacing:-.03em;margin-bottom:16px}
+.t-hero h1 em{font-style:italic;font-weight:300;color:#666}
+.t-hero p{font-size:16px;color:#444;line-height:1.5;max-width:520px}
+
+/* avatar */
+.t-avatar .glyph{position:absolute;top:24px;right:24px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;color:#888;text-transform:uppercase}
+.t-avatar .photo{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#7ee787);margin-bottom:16px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:#1a1a1a}
+.t-avatar .name{font-size:24px;font-weight:600;letter-spacing:-.02em;margin-bottom:4px}
+.t-avatar .role{font-size:13px;color:#aaa;font-family:'JetBrains Mono',monospace}
+
+/* stat tile */
+.t-stat .num{font-size:48px;font-weight:600;letter-spacing:-.03em;line-height:1;margin-bottom:8px}
+.t-stat .lbl{font-size:13px;color:#666;font-weight:500}
+.t-stat .delta{font-family:'JetBrains Mono',monospace;font-size:11px;color:#16a34a;margin-top:8px;text-transform:uppercase;letter-spacing:.1em}
+.t-stat.dark{background:#0a0a0a;color:#fff}
+.t-stat.dark .lbl{color:#888}
+.t-stat.green{background:#dcfce7}
+.t-stat.peach{background:#fed7aa}
+
+/* stack */
+.t-stack .label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:#666;margin-bottom:20px}
+.t-stack h3{font-size:24px;font-weight:600;letter-spacing:-.02em;margin-bottom:20px}
+.t-stack .pills{display:flex;flex-wrap:wrap;gap:8px}
+.t-stack .pill{background:#f4f4f2;border:1px solid #e5e5e2;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500;color:#333;font-family:'JetBrains Mono',monospace;transition:all .2s}
+.t-stack .pill:hover{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
+
+/* now */
+.t-now .label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:#666;margin-bottom:12px}
+.t-now h3{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3;margin-bottom:12px}
+.t-now h3 em{font-style:italic;color:#666;font-weight:400}
+.t-now p{font-size:14px;color:#555;line-height:1.55}
+
+/* quote */
+.t-quote .mark{font-size:80px;line-height:1;font-weight:700;color:#444;margin-bottom:-20px}
+.t-quote p{font-size:22px;font-weight:500;letter-spacing:-.01em;line-height:1.3;margin-bottom:16px}
+.t-quote cite{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.15em}
+
+/* projects */
+.t-proj .label,.t-proj-sm .label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:#666;margin-bottom:12px}
+.t-proj .num,.t-proj-sm .num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#999;margin-bottom:24px;letter-spacing:.1em}
+.t-proj h3,.t-proj-sm h3{font-size:32px;font-weight:600;letter-spacing:-.025em;line-height:1.05;margin-bottom:12px}
+.t-proj h3 em,.t-proj-sm h3 em{font-style:italic;color:#666;font-weight:300}
+.t-proj p,.t-proj-sm p{font-size:14px;color:#555;line-height:1.55;margin-bottom:16px}
+.t-proj .meta,.t-proj-sm .meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.1em;display:flex;gap:14px}
+.t-proj.accent{background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%)}
+
+/* contact */
+.t-contact{padding:48px;text-align:center}
+.t-contact h2{font-size:clamp(36px,5vw,56px);font-weight:600;letter-spacing:-.03em;line-height:1.05;margin-bottom:12px}
+.t-contact h2 em{font-style:italic;font-weight:300;color:#666}
+.t-contact p{font-size:16px;color:#444;margin-bottom:24px}
+.t-contact a{display:inline-block;background:#0a0a0a;color:#fff;padding:14px 28px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:500;margin:4px;transition:transform .2s,background .2s}
+.t-contact a:hover{transform:scale(1.04)}
+.t-contact a.alt{background:transparent;color:#0a0a0a;border:1px solid #0a0a0a}
+.t-contact a.alt:hover{background:#0a0a0a;color:#fff}
+
+footer{text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.15em;padding:24px 0 0;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <div>Priya Iyer · Senior Engineer</div>
+    <div class="links">
+      <span><span class="dot"></span>Open to roles</span>
+      <a href="#">Resume</a>
+      <a href="#">Email</a>
+    </div>
+  </header>
+
+  <main class="bento">
+
+    <div class="tile t-hero">
+      <div>
+        <div class="label">— PORTFOLIO · 2025</div>
+        <h1>Building <em>resilient</em> systems for products that scale.</h1>
+      </div>
+      <p>Senior software engineer with 11 years of experience. I lead distributed-systems teams and ship infrastructure that gets out of the way of product engineers.</p>
+    </div>
+
+    <div class="tile t-avatar">
+      <div class="glyph">— ID 0247</div>
+      <div class="photo">PI</div>
+      <div class="name">Priya Iyer</div>
+      <div class="role">she/her · bengaluru, in</div>
+    </div>
+
+    <div class="tile t-stat dark">
+      <div class="num">11<span style="font-size:24px;color:#888">y</span></div>
+      <div class="lbl" style="color:#aaa">Experience</div>
+      <div class="delta" style="color:#7ee787">▲ Senior IC</div>
+    </div>
+
+    <div class="tile t-stat green">
+      <div class="num">2.4M</div>
+      <div class="lbl">Req/sec peak</div>
+      <div class="delta">▲ at p99 22ms</div>
+    </div>
+
+    <div class="tile t-stat peach">
+      <div class="num">99.99%</div>
+      <div class="lbl">Uptime SLO</div>
+      <div class="delta">— 18 months</div>
+    </div>
+
+    <div class="tile t-stat">
+      <div class="num">5.1k</div>
+      <div class="lbl">GitHub stars</div>
+      <div class="delta">▲ Open source</div>
+    </div>
+
+    <div class="tile t-stack">
+      <div class="label">— STACK</div>
+      <h3>The tools<br>I reach for first.</h3>
+      <div class="pills">
+        <span class="pill">Go</span><span class="pill">Rust</span><span class="pill">Python</span>
+        <span class="pill">TypeScript</span><span class="pill">Postgres</span><span class="pill">Kafka</span>
+        <span class="pill">Redis</span><span class="pill">ClickHouse</span><span class="pill">Kubernetes</span>
+        <span class="pill">Terraform</span><span class="pill">AWS</span><span class="pill">GCP</span>
+        <span class="pill">gRPC</span><span class="pill">OpenTelemetry</span><span class="pill">Linux</span>
+      </div>
+    </div>
+
+    <div class="tile t-now">
+      <div class="label">— CURRENTLY</div>
+      <h3>Designing a <em>multi-tenant</em> data plane for a fintech.</h3>
+      <p>Working remotely with a small team in London. Focus areas this quarter: tenant isolation, latency budgets, blast-radius reduction.</p>
+    </div>
+
+    <div class="tile t-quote">
+      <div class="mark">"</div>
+      <p>The dullest infrastructure is usually the most beloved. I optimise for that.</p>
+      <cite>— Priya, on what she does</cite>
+    </div>
+
+    <div class="tile t-proj accent">
+      <div class="num">— 01 / Featured</div>
+      <h3>Settlement<br>engine <em>rebuild</em></h3>
+      <p>Migrated a Java monolith handling £2.3B/day to an event-sourced Rust service. Zero customer-visible incidents over an 18-month cutover.</p>
+      <div class="meta"><span>Rust</span><span>Postgres</span><span>2024</span></div>
+    </div>
+
+    <div class="tile t-proj">
+      <div class="num">— 02</div>
+      <h3>Realtime<br><em>tracing</em> platform</h3>
+      <p>Tail-sampled tracing pipeline ingesting 8M spans/sec. Cut MTTD from 22 min to 90 sec across 600+ services.</p>
+      <div class="meta"><span>Go</span><span>ClickHouse</span><span>2023</span></div>
+    </div>
+
+    <div class="tile t-proj-sm">
+      <div class="num">— 03</div>
+      <h3>Internal <em>devx</em> platform</h3>
+      <p>Replaced four CI tools with one. Cut deploy times 18→3 min for ~140 engineers.</p>
+      <div class="meta"><span>Go</span><span>K8s</span><span>2022</span></div>
+    </div>
+
+    <div class="tile t-proj-sm">
+      <div class="num">— 04 · OSS</div>
+      <h3>spanmark <em>tracer</em></h3>
+      <p>Open-source span enrichment library for OTel. 5.1k stars, used in production by ~70 companies.</p>
+      <div class="meta"><span>Go</span><span>OSS</span><span>since 2021</span></div>
+    </div>
+
+    <div class="tile t-contact">
+      <h2>Have a hard <em>problem</em>?</h2>
+      <p>Currently considering staff and principal-track roles for late 2025.</p>
+      <a href="mailto:hello@priyaiyer.dev">Email me →</a>
+      <a href="#" class="alt">GitHub</a>
+      <a href="#" class="alt">LinkedIn</a>
+    </div>
+
+  </main>
+
+  <footer>© 2025 · Priya Iyer · Bengaluru / Remote</footer>
+</div>
+</body>
+</html>

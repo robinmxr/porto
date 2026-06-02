@@ -1,13 +1,24 @@
 import { Routes } from '@angular/router';
-import { Home } from './pages/home/home';
-import { Projects } from './pages/projects/projects';
-import { Experience } from './pages/experience/experience';
-import { Bio } from './pages/bio/bio';
 
 export const routes: Routes = [
-  { path: '', component: Home, data: { animation: 'HomePage' } },
-  { path: 'projects', component: Projects, data: { animation: 'ProjectsPage' } },
-  { path: 'experience', component: Experience, data: { animation: 'ExperiencePage' } },
-  { path: 'bio', component: Bio, data: { animation: 'BioPage' } },
-  { path: '**', redirectTo: '' }
+  {
+    path: '',
+    loadComponent: () => import('./pages/projects/projects').then(m => m.Projects),
+  },
+  {
+    path: 'experience',
+    loadComponent: () => import('./pages/experience/experience').then(m => m.Experience),
+  },
+  {
+    path: 'bio',
+    loadComponent: () => import('./pages/bio/bio').then(m => m.Bio),
+  },
+  {
+    path: 'project/:id',
+    loadComponent: () => import('./pages/project-detail/project-detail').then(m => m.ProjectDetail),
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];

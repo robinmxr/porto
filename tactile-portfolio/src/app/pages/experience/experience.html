@@ -1,53 +1,80 @@
-<div class="w-full h-full flex flex-col items-center justify-start pt-16 md:pt-32 px-4 md:px-8 pb-40 overflow-y-auto pointer-events-auto hide-scrollbar">
-  <div class="w-full max-w-3xl relative">
-    
-    <div class="flex items-center gap-4 mb-10 md:mb-14">
-      <h2 class="text-xl md:text-3xl font-extrabold text-on-surface tracking-tighter font-mono group cursor-default truncate">ls ./experience <span class="bg-primary/20 text-[10px] md:text-xs px-2 py-1 rounded ml-2 tracking-widest text-primary uppercase inline-block -translate-y-1">History</span></h2>
+<div class="exp-page">
+
+  <header class="exp-topbar">
+    <div class="exp-topbar__inner">
+      <a class="exp-back" routerLink="/">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+        </svg>
+        Home
+      </a>
+      <span class="exp-topbar__title">{{ profile.shortName }}</span>
     </div>
+  </header>
 
-    <!-- Timeline Wrapper -->
-    <div class="relative pl-8 md:pl-12 border-l-2 border-outline-variant/30 space-y-12 md:space-y-16 pb-16">
-      
-      <!-- Experience 1 -->
-      <div class="relative group cursor-pointer hover:-translate-y-2 transition-transform duration-500">
-        <!-- Node Marker -->
-        <div class="absolute -left-[2.25rem] md:-left-[3.25rem] top-6 w-4 h-4 rounded-full bg-surface-container border-2 border-primary group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(159,167,255,0.8)] transition-all duration-300"></div>
-        
-        <div class="glass-panel p-6 md:p-8 rounded-[2rem] clay-high-depth hover:shadow-[0_20px_40px_rgba(159,167,255,0.1)] border border-transparent group-hover:border-primary/20 transition-all duration-500">
-          <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-4">
-            <div>
-              <div class="font-label text-[10px] md:text-xs text-primary tracking-widest uppercase mb-1">05_2021 — Present</div>
-              <h3 class="text-xl md:text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">Dist_Systems Architect</h3>
-              <p class="text-xs md:text-sm font-semibold text-secondary-dim mt-1">@ Nebula Stream Inc.</p>
-            </div>
-            <span class="material-symbols-outlined text-3xl md:text-4xl text-outline-variant opacity-20 group-hover:opacity-100 group-hover:text-primary transition-all duration-500 rotate-12 group-hover:rotate-0" data-icon="deployed_code">deployed_code</span>
+  <main class="exp-shell">
+
+    <header class="exp-header">
+      <p class="exp-eyebrow">career</p>
+      <h1 class="exp-headline">Backend work,<br>kept practical.</h1>
+      <p class="exp-sub">{{ profile.summary }}</p>
+    </header>
+
+    <div class="exp-timeline">
+      @for (item of experience; track item.role + item.company; let i = $index) {
+        <div class="exp-entry">
+          <div class="exp-entry__marker">
+            <span class="exp-entry__dot" [class.exp-entry__dot--primary]="i === 0" [class.exp-entry__dot--secondary]="i !== 0"></span>
           </div>
-          <p class="text-on-surface-variant text-xs md:text-sm leading-relaxed">
-            Architected and deployed entirely async microservice backends, enabling throughput over 10M events a second. Completely rewrote the core routing handler from Go to Rust, reducing end-to-end latency by 45%.
-          </p>
-        </div>
-      </div>
-
-      <!-- Experience 2 -->
-      <div class="relative group cursor-pointer hover:-translate-y-2 transition-transform duration-500">
-        <!-- Node Marker -->
-        <div class="absolute -left-[2.25rem] md:-left-[3.25rem] top-6 w-4 h-4 rounded-full bg-surface-container border-2 border-secondary group-hover:bg-secondary group-hover:shadow-[0_0_15px_rgba(193,128,255,0.8)] transition-all duration-300"></div>
-        
-        <div class="bg-surface-container-low p-6 md:p-8 rounded-[2rem] clay-high-depth hover:shadow-[0_20px_40px_rgba(193,128,255,0.1)] border border-transparent group-hover:border-secondary/20 transition-all duration-500">
-          <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-4">
-            <div>
-              <div class="font-label text-[10px] md:text-xs text-secondary tracking-widest uppercase mb-1">11_2018 — 04_2021</div>
-              <h3 class="text-xl md:text-2xl font-bold text-on-surface group-hover:text-secondary transition-colors">Senior DevOps Engineer</h3>
-              <p class="text-xs md:text-sm font-semibold text-secondary-dim mt-1">@ Chronos Tech</p>
+          <div class="exp-entry__body">
+            <div class="exp-entry__meta">
+              <span class="exp-entry__period">{{ item.period }}</span>
+              @if (item.status) {
+                <span class="exp-entry__status">{{ item.status }}</span>
+              }
             </div>
-            <span class="material-symbols-outlined text-3xl md:text-4xl text-outline-variant opacity-20 group-hover:opacity-100 group-hover:text-secondary transition-all duration-500 -rotate-12 group-hover:rotate-0" data-icon="account_tree">account_tree</span>
-          </div>
-          <p class="text-on-surface-variant text-xs md:text-sm leading-relaxed">
-            Transitioned legacy monolith to Kubernetes deployment. Automated CI/CD pipelines across AWS, improving team release cycles by 4x. Handled on-premise migrations to highly available cloud clusters.
-          </p>
-        </div>
-      </div>
+            <h2 class="exp-entry__role">{{ item.role }}</h2>
+            <p class="exp-entry__company">{{ item.company }}</p>
+            <div class="exp-entry__divider"></div>
+            <p class="exp-entry__summary">{{ item.summary }}</p>
+            <ul class="exp-entry__achievements">
+              @for (achievement of item.achievements; track achievement) {
+                <li>{{ achievement }}</li>
+              }
+            </ul>
 
+            <div class="exp-entry__visual" aria-hidden="true">
+              <svg viewBox="0 0 460 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="20" width="72" height="36" rx="8" fill="#9fa7ff" fill-opacity="0.1" stroke="#9fa7ff" stroke-opacity="0.3" stroke-width="1"/>
+                <text x="36" y="34" fill="#9fa7ff" fill-opacity="0.8" font-size="8" font-family="monospace" text-anchor="middle">request</text>
+                <text x="36" y="46" fill="#9fa7ff" fill-opacity="0.5" font-size="7" font-family="monospace" text-anchor="middle">validate</text>
+                <line x1="72" y1="38" x2="102" y2="38" stroke="currentColor" stroke-opacity="0.2" stroke-width="1.5"/>
+                <polyline points="98,34 103,38 98,42" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="104" y="20" width="72" height="36" rx="8" fill="#9fa7ff" fill-opacity="0.1" stroke="#9fa7ff" stroke-opacity="0.3" stroke-width="1"/>
+                <text x="140" y="34" fill="#9fa7ff" fill-opacity="0.8" font-size="8" font-family="monospace" text-anchor="middle">service</text>
+                <text x="140" y="46" fill="#9fa7ff" fill-opacity="0.5" font-size="7" font-family="monospace" text-anchor="middle">rules</text>
+                <line x1="176" y1="38" x2="206" y2="38" stroke="currentColor" stroke-opacity="0.2" stroke-width="1.5"/>
+                <polyline points="202,34 207,38 202,42" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="208" y="20" width="72" height="36" rx="8" fill="#9fa7ff" fill-opacity="0.1" stroke="#9fa7ff" stroke-opacity="0.3" stroke-width="1"/>
+                <text x="244" y="34" fill="#9fa7ff" fill-opacity="0.8" font-size="8" font-family="monospace" text-anchor="middle">data</text>
+                <text x="244" y="46" fill="#9fa7ff" fill-opacity="0.5" font-size="7" font-family="monospace" text-anchor="middle">persist</text>
+                <line x1="280" y1="38" x2="310" y2="38" stroke="currentColor" stroke-opacity="0.2" stroke-width="1.5"/>
+                <polyline points="306,34 311,38 306,42" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="312" y="20" width="72" height="36" rx="8" fill="#4ade80" fill-opacity="0.1" stroke="#4ade80" stroke-opacity="0.4" stroke-width="1"/>
+                <text x="348" y="34" fill="#4ade80" fill-opacity="0.9" font-size="8" font-family="monospace" text-anchor="middle">response</text>
+                <text x="348" y="46" fill="#4ade80" fill-opacity="0.6" font-size="7" font-family="monospace" text-anchor="middle">typed</text>
+              </svg>
+            </div>
+
+            <div class="exp-entry__tags">
+              @for (tech of item.stack; track tech) {
+                <span class="exp-entry__tag">{{ tech }}</span>
+              }
+            </div>
+          </div>
+        </div>
+      }
     </div>
-  </div>
+  </main>
+
 </div>
