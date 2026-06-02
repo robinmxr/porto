@@ -161,15 +161,22 @@ canvas {
 }
 
 .nav__link--contact {
-  background: var(--text);
-  color: var(--bg);
+  background: linear-gradient(135deg, #f59e0b, #fb7185);
+  color: #171611;
   font-weight: 600;
-  border-color: var(--text);
+  border-color: transparent;
   margin-left: 6px;
+  box-shadow: 0 10px 24px rgba(245, 158, 11, 0.18);
 }
 
 .nav__link--contact:hover {
-  opacity: 0.85;
+  opacity: 0.92;
+}
+
+.nav__link--contact.is-active {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  color: #171611;
+  border-color: transparent;
 }
 
 .shell {
@@ -285,6 +292,11 @@ canvas {
   font-size: 16px;
 }
 
+html:not(.dark) .body-copy,
+html:not(.dark) .project-desc {
+  color: #4f4a43;
+}
+
 .tags {
   margin-top: 22px;
   display: flex;
@@ -305,8 +317,32 @@ canvas {
   border: 1px solid var(--border);
 }
 
+html:not(.dark) .tag {
+  background: #f1ede6;
+  color: #5d564c;
+}
+
 .status-label {
   color: var(--xp-muted);
+}
+
+html:not(.dark) .card__eyebrow,
+html:not(.dark) .status-label,
+html:not(.dark) .status-location,
+html:not(.dark) .status-xp__label,
+html:not(.dark) .xp-period--inline,
+html:not(.dark) .xp-company-line,
+html:not(.dark) .xp-achievements li,
+html:not(.dark) .xp-achievements li::before,
+html:not(.dark) .xp-tag,
+html:not(.dark) .project-type,
+html:not(.dark) .project-cta {
+  color: #6a6258;
+}
+
+html:not(.dark) .xp-block,
+html:not(.dark) .xp-tag {
+  background: rgba(255, 255, 255, 0.76);
 }
 
 .status-top {
@@ -326,11 +362,20 @@ canvas {
   width: fit-content;
 }
 
+html:not(.dark) .status-badge {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.18);
+}
+
 .status-badge__text {
   font-size: 14px;
   font-weight: 600;
   color: #4ade80;
   letter-spacing: 0.01em;
+}
+
+html:not(.dark) .status-badge__text {
+  color: #1f7a4d;
 }
 
 .status-dot {
@@ -340,6 +385,10 @@ canvas {
   background: #22c55e;
   animation: pulse 2s infinite;
   flex-shrink: 0;
+}
+
+html:not(.dark) .status-dot {
+  background: #1f7a4d;
 }
 
 .status-location {
@@ -597,6 +646,16 @@ canvas {
   letter-spacing: 0.04em;
 }
 
+html:not(.dark) .detail-breadcrumb,
+html:not(.dark) .detail-type,
+html:not(.dark) .detail-metric__label,
+html:not(.dark) .detail-section__title,
+html:not(.dark) .detail-cta-block__label,
+html:not(.dark) .detail-cta-link,
+html:not(.dark) .detail-back {
+  color: #6a6258;
+}
+
 .detail-shell {
   max-width: 860px;
   margin: 0 auto;
@@ -638,6 +697,11 @@ canvas {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   opacity: 0.55;
+}
+
+html:not(.dark) .detail-type,
+html:not(.dark) .detail-description {
+  opacity: 1;
 }
 
 .detail-title {
@@ -687,6 +751,10 @@ canvas {
   font-weight: 500;
 }
 
+html:not(.dark) .detail-metric__label {
+  color: #6a6258;
+}
+
 .detail-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -708,6 +776,10 @@ canvas {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+html:not(.dark) .detail-section__title {
+  color: #6a6258;
 }
 
 .detail-highlights {
@@ -754,6 +826,19 @@ canvas {
   opacity: 0.85;
 }
 
+html:not(.dark) .detail-stack__tag {
+  background: #f6f1ea !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #4f463d !important;
+  opacity: 1;
+}
+
+html:not(.dark) .detail-stack__tag {
+  background: #f6f1ea;
+  color: #4f463d !important;
+  opacity: 1;
+}
+
 .detail-cta-block {
   padding-top: 24px;
   border-top: 1px solid var(--border);
@@ -766,6 +851,10 @@ canvas {
   margin: 0;
   font-size: 14px;
   color: var(--muted);
+}
+
+html:not(.dark) .detail-cta-block__label {
+  color: #6a6258;
 }
 
 .detail-cta-btn {
@@ -791,6 +880,11 @@ canvas {
   text-decoration: none;
   text-align: center;
   transition: color 0.15s ease;
+}
+
+html:not(.dark) .detail-cta-link:hover,
+html:not(.dark) .detail-back:hover {
+  color: var(--text);
 }
 
 .detail-cta-link:hover {
@@ -840,13 +934,33 @@ canvas {
 
 .culture-feature {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  align-items: flex-start;
+  gap: 14px;
   margin-top: 20px;
   padding: 14px;
   border-radius: 14px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.04);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.03));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.culture-feature--music {
+  position: relative;
+  overflow: hidden;
+}
+
+.culture-feature--music::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(251, 191, 36, 0.22), transparent 42%),
+    radial-gradient(circle at bottom left, rgba(244, 114, 182, 0.14), transparent 38%);
+  pointer-events: none;
+}
+
+.culture-feature--music > * {
+  position: relative;
+  z-index: 1;
 }
 
 .album-art-link {
@@ -871,17 +985,10 @@ canvas {
 }
 
 .song-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   min-width: 0;
-}
-
-.culture-kicker {
-  display: block;
-  margin: 0 0 5px;
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
 }
 
 .song-title {
@@ -890,18 +997,15 @@ canvas {
   font-size: 18px;
   font-weight: 400;
   line-height: 1.1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  color: #fbbf24;
 }
 
 .song-artist {
-  margin: 6px 0 0;
-  color: var(--muted);
+  margin: 0;
+  color: #fde68a;
   font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 .culture-note {
@@ -922,7 +1026,7 @@ canvas {
   display: grid;
   grid-template-columns: 38px 1fr;
   gap: 11px;
-  align-items: center;
+  align-items: start;
   min-width: 0;
   padding: 11px;
   border-radius: 12px;
@@ -930,6 +1034,13 @@ canvas {
   background: rgba(255, 255, 255, 0.035);
   text-decoration: none;
   transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.culture-item__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
 }
 
 .culture-item:hover {
@@ -947,6 +1058,40 @@ canvas {
   color: var(--text);
 }
 
+.culture-item--book {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.14), rgba(255, 255, 255, 0.03));
+}
+
+.culture-item--book .culture-item__icon {
+  background: rgba(34, 197, 94, 0.16);
+  color: #86efac;
+}
+
+.culture-item--book strong {
+  color: #86efac;
+}
+
+.culture-item--book small {
+  color: #bbf7d0;
+}
+
+.culture-item--movie {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.16), rgba(255, 255, 255, 0.03));
+}
+
+.culture-item--movie .culture-item__icon {
+  background: rgba(59, 130, 246, 0.16);
+  color: #93c5fd;
+}
+
+.culture-item--movie strong {
+  color: #bfdbfe;
+}
+
+.culture-item--movie small {
+  color: #dbeafe;
+}
+
 .culture-item__icon svg {
   width: 20px;
   height: 20px;
@@ -956,9 +1101,9 @@ canvas {
 .culture-item small {
   display: block;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 .culture-item strong {
@@ -1001,6 +1146,18 @@ canvas {
   font-size: 13px;
   line-height: 1.55;
   opacity: 0.7;
+}
+
+html:not(.dark) .project-desc {
+  opacity: 1;
+}
+
+html:not(.dark) .project-cta {
+  opacity: 0.8;
+}
+
+html:not(.dark) .project-cta:hover {
+  opacity: 1;
 }
 
 .project-panel {
@@ -1099,21 +1256,48 @@ canvas {
 
 .card-contact {
   grid-column: span 12;
-  padding: 40px 48px;
-  background: #181816;
-  color: #f0efeb;
-  border-color: transparent;
+  padding: 38px 42px;
+  color: #221a12;
+  border-color: rgba(251, 146, 60, 0.12);
+  background: #fbf7f1;
+  overflow: hidden;
 }
 
 html.dark .card-contact {
-  background: #0d0d0c;
+  background: #111111;
+  color: #fff7ed;
+  border-color: rgba(251, 146, 60, 0.18);
+}
+
+.card-contact::before {
+  content: '';
+  position: absolute;
+  inset: -40px -40px auto auto;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: rgba(251, 146, 60, 0.08);
+  pointer-events: none;
+}
+
+.card-contact::after {
+  content: '';
+  position: absolute;
+  inset: auto auto -70px -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(96, 165, 250, 0.06);
+  pointer-events: none;
 }
 
 .contact-inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 48px;
+  gap: 40px;
 }
 
 .contact-left {
@@ -1121,8 +1305,29 @@ html.dark .card-contact {
   min-width: 0;
 }
 
+.contact-headline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .contact-eyebrow {
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(76, 61, 44, 0.68);
+}
+
+.contact-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f4e3d3;
+  border: 1px solid rgba(124, 63, 0, 0.12);
+  color: #8c4b17;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .card__title--contact {
@@ -1139,57 +1344,125 @@ html.dark .card-contact {
   margin: 14px 0 0;
   font-size: 15px;
   line-height: 1.6;
-  opacity: 0.55;
-  max-width: 44ch;
+  opacity: 0.78;
+  max-width: 48ch;
+}
+
+.contact-pills {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.contact-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #f4ede5;
+  border: 1px solid rgba(124, 63, 0, 0.08);
+  color: #5f4a38;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: lowercase;
+}
+
+.contact-pill--primary {
+  background: #ead3b6;
+  color: #6c3f10;
+  border-color: rgba(124, 63, 0, 0.12);
 }
 
 .contact-right {
   flex-shrink: 0;
+  min-width: 0;
 }
 
 .contact-links {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
+  min-width: 0;
 }
 
 .contact-link {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 11px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 9px;
+  padding: 11px 14px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   color: inherit;
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
   white-space: nowrap;
 }
 
 .contact-link:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: #fffaf5;
+  border-color: rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
 }
 
 .contact-link--primary {
+  background: #f2dcc2;
+  border-color: rgba(124, 63, 0, 0.14);
+  font-weight: 700;
+  color: #5b3411;
+}
+
+html.dark .contact-eyebrow {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+html.dark .contact-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 247, 237, 0.88);
+}
+
+html.dark .contact-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 247, 237, 0.82);
+}
+
+html.dark .contact-pill--primary {
+  background: rgba(251, 191, 36, 0.18);
+  color: #fff3d6;
+  border-color: rgba(251, 191, 36, 0.18);
+}
+
+html.dark .contact-link {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+html.dark .contact-link:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.18);
-  font-weight: 600;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+html.dark .contact-link--primary {
+  background: rgba(251, 191, 36, 0.18);
+  border-color: rgba(251, 191, 36, 0.18);
+  color: #fff3d6;
 }
 
 .contact-link__icon {
   width: 14px;
   height: 14px;
   flex-shrink: 0;
-  opacity: 0.75;
+  opacity: 0.78;
 }
 
 .contact-link__arrow {
-  opacity: 0.4;
+  opacity: 0.5;
   font-size: 12px;
 }
 
@@ -1267,6 +1540,7 @@ html.dark .card-contact {
 
   .contact-links {
     min-width: unset;
+    flex-direction: row;
   }
 
   /* Detail page */
@@ -1335,7 +1609,7 @@ html.dark .card-contact {
 
   /* Contact card */
   .card-contact {
-    padding: 28px 20px;
+    padding: 26px 18px;
   }
 
   .contact-links {

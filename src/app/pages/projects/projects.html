@@ -7,7 +7,7 @@
         <button type="button" class="nav__link" [class.is-active]="activeFilter() === null" (click)="filterCards(null)">Home</button>
         <button type="button" class="nav__link" [class.is-active]="activeFilter() === 'work'" (click)="filterCards('work')">Work</button>
         <button type="button" class="nav__link" [class.is-active]="activeFilter() === 'about'" (click)="filterCards('about')">About</button>
-        <a class="nav__link nav__link--contact" [href]="'mailto:' + profile.email">Contact</a>
+        <button type="button" class="nav__link nav__link--contact" [class.is-active]="activeFilter() === 'contact'" (click)="filterCards('contact')">Contact</button>
         <button type="button" class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
           <span aria-hidden="true">{{ isDark() ? '☀' : '☾' }}</span>
         </button>
@@ -119,44 +119,40 @@
       <article class="card card-culture" data-cat="about" [class.is-muted]="isMuted('about')" [style.order]="cardOrder('about')">
         <div class="culture-head">
           <p class="culture-label">off-screen taste</p>
-          <span class="culture-mark" aria-hidden="true">3</span>
+          <span class="culture-mark" aria-hidden="true">📌</span>
         </div>
 
-        <div class="culture-feature">
+        <div class="culture-feature culture-feature--music">
           <a [href]="culture.music.url || '#'" target="_blank" rel="noopener noreferrer" class="album-art-link">
             <img class="album-art" [src]="culture.music.albumArtUrl" [alt]="culture.music.title" />
           </a>
           <div class="song-meta">
-            <p class="culture-kicker">music</p>
             <p class="song-title">{{ culture.music.title }}</p>
             <p class="song-artist">{{ culture.music.artist }}</p>
           </div>
         </div>
-        <p class="culture-note">{{ culture.music.note }}</p>
 
         <div class="culture-list">
-          <a class="culture-item" [href]="culture.book.url || '#'" target="_blank" rel="noopener noreferrer">
+          <a class="culture-item culture-item--book" [href]="culture.book.url || '#'" target="_blank" rel="noopener noreferrer">
             <span class="culture-item__icon" aria-hidden="true">
               <svg viewBox="0 0 20 20" fill="none">
                 <path d="M5 4.5h5.5c1.9 0 3.5 1.5 3.5 3.4v7.6H8.5A3.5 3.5 0 0 1 5 12V4.5Z" stroke="currentColor" stroke-width="1.4"/>
                 <path d="M5 4.5v11h9" stroke="currentColor" stroke-width="1.4"/>
               </svg>
             </span>
-            <span>
-              <span class="culture-kicker">book</span>
+            <span class="culture-item__copy">
               <strong>{{ culture.book.title }}</strong>
               <small>{{ culture.book.creator }}</small>
             </span>
           </a>
-          <a class="culture-item" [href]="culture.movie.url || '#'" target="_blank" rel="noopener noreferrer">
+          <a class="culture-item culture-item--movie" [href]="culture.movie.url || '#'" target="_blank" rel="noopener noreferrer">
             <span class="culture-item__icon" aria-hidden="true">
               <svg viewBox="0 0 20 20" fill="none">
                 <rect x="3.5" y="5" width="13" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/>
                 <path d="M7 5v10M13 5v10M3.5 8h3M13 8h3.5M3.5 12h3M13 12h3.5" stroke="currentColor" stroke-width="1.2"/>
               </svg>
             </span>
-            <span>
-              <span class="culture-kicker">movie</span>
+            <span class="culture-item__copy">
               <strong>{{ culture.movie.title }}</strong>
               <small>{{ culture.movie.creator }}</small>
             </span>
@@ -165,12 +161,21 @@
       </article>
 
       <!-- ROW 5: contact (12) — full width -->
-      <article class="card card-contact" data-cat="about" [class.is-muted]="isMuted('about')" [style.order]="cardOrder('about')">
+      <article class="card card-contact" data-cat="contact" [class.is-muted]="isMuted('contact')" [style.order]="cardOrder('contact')">
         <div class="contact-inner">
           <div class="contact-left">
-            <p class="card__eyebrow contact-eyebrow">get in touch</p>
+            <div class="contact-headline">
+              <p class="card__eyebrow contact-eyebrow">get in touch</p>
+              <span class="contact-badge">available now</span>
+            </div>
             <h2 class="card__title card__title--contact">Let's build something worth shipping.</h2>
             <p class="contact-sub">Available for backend roles, full-stack product work, and teams that care about maintainable systems.</p>
+            <div class="contact-pills" aria-label="contact focus areas">
+              <span class="contact-pill contact-pill--primary">backend</span>
+              <span class="contact-pill">full stack</span>
+              <span class="contact-pill">product work</span>
+              <span class="contact-pill">remote-friendly</span>
+            </div>
           </div>
           <div class="contact-right">
             <div class="contact-links">

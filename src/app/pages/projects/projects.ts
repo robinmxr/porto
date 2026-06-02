@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { PROJECT_CARDS, ProjectCardData } from './project-cards.data';
 import { INFO } from '../../data/info';
 
-type FilterCategory = 'about' | 'work' | null;
+type FilterCategory = 'about' | 'work' | 'contact' | null;
 
 @Component({
   selector: 'app-projects',
@@ -77,12 +77,12 @@ export class Projects {
     });
   }
 
-  protected cardOrder(category: 'about' | 'work'): number {
+  protected cardOrder(category: 'about' | 'work' | 'contact'): number {
     const f = this.activeFilter();
     return (f === null || f === category) ? 0 : 1;
   }
 
-  protected isMuted(category: 'about' | 'work'): boolean {
+  protected isMuted(category: 'about' | 'work' | 'contact'): boolean {
     const filter = this.activeFilter();
     return filter !== null && category !== filter;
   }
