@@ -259,6 +259,8 @@ canvas {
   line-height: 1;
 }
 
+.navbar__brand-short { display: none; }
+
 .navbar__links {
   display: flex;
   align-items: center;
@@ -404,7 +406,9 @@ canvas {
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   animation: fadeUp 0.55s ease 0.32s both;
-  transition: opacity 0.5s ease, filter 0.5s ease;
+  will-change: transform;
+  scale: 1;
+  transition: opacity 0.5s ease, filter 0.5s ease, scale 0.5s ease;
 }
 
 /* ── Section visibility ── */
@@ -1432,53 +1436,109 @@ canvas {
 
 /* ── Responsive ── */
 
+@media (max-width: 860px) {
+  .grid-card--hero,
+  .grid-card--status,
+  .grid-card--about,
+  .grid-card--experience,
+  .grid-card--skills,
+  .grid-card--contact {
+    grid-column: span 12;
+  }
+
+  .grid-card {
+    border-radius: 14px;
+  }
+
+  .grid-card--status {
+    padding: 20px;
+  }
+
+  .experience__entry {
+    gap: 14px;
+  }
+
+  .experience__content {
+    padding-bottom: 24px;
+  }
+
+  .experience__achievements {
+    gap: 4px;
+  }
+
+  .detail-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .detail-body {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-hero {
+    padding: 32px 24px;
+  }
+}
+
 @media (max-width: 820px) {
+  .navbar__brand-full { display: none; }
+  .navbar__brand-short { display: inline; }
+
   .navbar {
-    padding: 10px 12px;
+    padding: 8px 12px;
   }
 
   .navbar__inner {
     max-width: none;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 0;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0 0 14px;
     gap: 0;
-    border-radius: 18px;
+    border-radius: 999px;
   }
 
   .navbar__brand {
-    padding: 12px 16px;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    text-align: left;
+    padding: 0 12px 0 0;
+    border-right: 1px solid var(--border);
+    font-size: 15px;
+    line-height: 1;
+    flex-shrink: 0;
   }
 
   .navbar__links {
-    padding: 6px 8px;
+    padding: 4px 4px;
     justify-content: flex-start;
     overflow-x: auto;
     scrollbar-width: none;
-    flex: none;
+    flex: 1;
     min-width: 0;
+    gap: 1px;
   }
 
   .navbar__links::-webkit-scrollbar {
     display: none;
   }
 
+  .navbar__link {
+    padding: 7px 10px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .navbar__link--cta {
+    margin-left: 2px;
+  }
+
+  .theme-toggle {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    margin-left: 2px;
+    flex-shrink: 0;
+  }
+
   .grid {
     padding: 14px;
     gap: 10px;
-  }
-
-  .grid-card--hero,
-  .grid-card--status,
-  .grid-card--about,
-  .grid-card--experience,
-  .grid-card--project,
-  .grid-card--skills,
-  .grid-card--contact {
-    grid-column: span 12;
   }
 
   #projects {
@@ -1498,69 +1558,102 @@ canvas {
   .grid-card--contact {
     padding: 28px;
   }
-
-  .detail-metrics {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .detail-body {
-    grid-template-columns: 1fr;
-  }
-
-  .detail-hero {
-    padding: 32px 24px;
-  }
 }
 
-@media (max-width: 540px) {
-  .navbar {
-    padding: 8px 10px;
-  }
-
-  .navbar__inner {
-    border-radius: 16px;
-  }
-
-  .navbar__brand {
-    font-size: 15px;
-    padding: 10px 14px;
-  }
-
-  .navbar__links {
-    padding: 5px 6px;
-  }
-
-  .navbar__link {
-    padding: 5px 9px;
-    font-size: 12px;
-  }
-
-  .theme-toggle {
-    width: 28px;
-    height: 28px;
-    font-size: 14px;
-  }
+@media (max-width: 660px) {
+  .navbar { display: none; }
 
   .grid {
-    padding: 10px;
-    gap: 8px;
+    padding: 16px;
   }
 
-  .grid-card--hero {
-    padding: 28px;
+  .grid-card {
+    border-radius: 12px;
   }
 
-  .grid-card--skills {
-    padding: 22px;
+  #projects {
+    grid-template-columns: 1fr;
   }
 
   .skills__grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 14px;
+  }
+
+  .grid-card--experience {
+    padding: 22px 20px;
+  }
+
+  .experience__entry {
+    gap: 10px;
+  }
+
+  .experience__content {
+    padding-bottom: 20px;
+  }
+
+  .experience__role {
+    font-size: 15px;
+  }
+
+  .experience__achievements li {
+    font-size: 13px;
+  }
+
+  .experience__meta {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 540px) {
+  .grid {
+    padding: 14px;
+    gap: 8px;
+  }
+
+  .grid-card {
+    border-radius: 12px;
+  }
+
+  .grid-card--hero {
+    padding: 24px 20px;
+  }
+
+  .grid-card--status {
+    padding: 18px;
+  }
+
+  .grid-card--about {
+    padding: 20px;
+  }
+
+  .grid-card--skills {
+    padding: 20px;
+  }
+
+  .grid-card--contact {
+    padding: 24px 20px;
   }
 
   .project-card__body {
     padding: 18px;
+  }
+
+  .hero__name {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+  .hero__tagline {
+    font-size: 14px;
+  }
+
+  .hero__headline {
+    font-size: 15px;
+  }
+
+  .hero__summary {
+    font-size: 14px;
   }
 
   .hero__ctas {
@@ -1572,25 +1665,96 @@ canvas {
     justify-content: center;
   }
 
+  .btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .contact__link {
+    padding: 12px 14px;
+  }
+
+  .modal {
+    padding: 24px 20px;
+    border-radius: 14px;
+  }
+
+  .modal__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .modal__metric {
+    padding: 12px 14px;
+  }
+
   .detail-metrics {
     grid-template-columns: 1fr;
   }
 
   .detail-topbar {
-    padding: 8px 10px;
+    padding: 6px 8px;
   }
 
   .detail-topbar-inner {
     max-width: none;
-    padding: 3px 10px 3px 3px;
+    padding: 3px 8px 3px 3px;
   }
 
   .detail-shell {
-    padding: 20px 16px 60px;
+    padding: 16px 12px 60px;
+    gap: 16px;
   }
 
   .detail-hero {
     padding: 24px 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .grid {
+    padding: 12px;
+    gap: 6px;
+  }
+
+  .grid-card--hero {
+    padding: 20px 16px;
+  }
+
+  .grid-card--status {
+    padding: 16px;
+  }
+
+  .grid-card--about {
+    padding: 16px;
+  }
+
+  .grid-card--experience {
+    padding: 18px 16px;
+  }
+
+  .grid-card--skills {
+    padding: 16px;
+  }
+
+  .grid-card--contact {
+    padding: 20px 16px;
+  }
+
+  .project-card__body {
+    padding: 14px;
+  }
+
+  .hero__name {
+    font-size: clamp(1.5rem, 9vw, 1.8rem);
+  }
+
+  .contact__link {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .experience__content {
+    padding-bottom: 16px;
   }
 }
 

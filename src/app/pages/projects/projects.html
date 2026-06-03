@@ -16,7 +16,10 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="navbar__inner">
-      <button type="button" class="navbar__brand" (click)="navClick('hero')">{{ profile.shortName }}</button>
+      <button type="button" class="navbar__brand" (click)="navClick('hero')">
+        <span class="navbar__brand-full">{{ profile.shortName }}</span>
+        <span class="navbar__brand-short">{{ profile.initials }}</span>
+      </button>
       <nav class="navbar__links" aria-label="section navigation">
         <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === null" (click)="navClick('hero')">Home</button>
         <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === 'projects'" (click)="navClick('projects')">Projects</button>
