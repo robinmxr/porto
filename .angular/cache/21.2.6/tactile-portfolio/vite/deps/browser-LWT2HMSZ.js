@@ -5,7 +5,7 @@ import {
   __spreadValues,
   setClassMetadata,
   ɵɵdefineInjectable
-} from "./chunk-VINPALRC.js";
+} from "./chunk-YEPWIHIR.js";
 
 // node_modules/@angular/animations/fesm2022/_private_export-chunk.mjs
 var AnimationMetadataType;
@@ -4325,4 +4325,4 @@ export {
   validateStyleProperty as ɵvalidateStyleProperty,
   validateWebAnimatableStyleProperty as ɵvalidateWebAnimatableStyleProperty
 };
-//# sourceMappingURL=browser-GJQM6MOE.js.map
+//# sourceMappingURL=browser-LWT2HMSZ.js.map

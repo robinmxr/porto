@@ -13,6 +13,7 @@ export interface PortfolioInfo {
     status: string;
     mode: string;
     email: string;
+    education: string;
   };
   links: {
     github: string;
@@ -49,6 +50,7 @@ export interface ProjectCardData {
   lightAccent: string;
   lightText: string;
   stack: string[];
+  focusAreas: string[];
   metrics: { label: string; value: string }[];
   highlights: string[];
   year: string;

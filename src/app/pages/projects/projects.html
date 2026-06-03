@@ -1,13 +1,29 @@
-<div class="page">
-  <header class="topbar">
-    <div class="topbar__inner">
-      <button type="button" class="brand" (click)="filterCards(null)">{{ profile.name }}</button>
+<div class="page" (keydown)="onKeydown($event)">
 
-      <nav class="nav" aria-label="portfolio filters">
-        <button type="button" class="nav__link" [class.is-active]="activeFilter() === null" (click)="filterCards(null)">Home</button>
-        <button type="button" class="nav__link" [class.is-active]="activeFilter() === 'work'" (click)="filterCards('work')">Work</button>
-        <button type="button" class="nav__link" [class.is-active]="activeFilter() === 'about'" (click)="filterCards('about')">About</button>
-        <button type="button" class="nav__link nav__link--contact" [class.is-active]="activeFilter() === 'contact'" (click)="filterCards('contact')">Contact</button>
+  <!-- Background decor -->
+  <div class="bg-decor" aria-hidden="true">
+    <svg class="bg-decor__blob bg-decor__blob--1" viewBox="0 0 600 600" width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="300" cy="300" r="300" fill="currentColor"/>
+    </svg>
+    <svg class="bg-decor__blob bg-decor__blob--2" viewBox="0 0 500 500" width="500" height="500" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="250" cy="250" r="250" fill="currentColor"/>
+    </svg>
+    <svg class="bg-decor__blob bg-decor__blob--3" viewBox="0 0 400 400" width="400" height="400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="50" y="50" width="300" height="300" rx="60" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <button type="button" class="navbar__brand" (click)="navClick('hero')">{{ profile.shortName }}</button>
+      <nav class="navbar__links" aria-label="section navigation">
+        <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === null" (click)="navClick('hero')">Home</button>
+        <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === 'projects'" (click)="navClick('projects')">Projects</button>
+        <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === 'experience'" (click)="navClick('experience')">Experience</button>
+        <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === 'skills'" (click)="navClick('skills')">Skills</button>
+        <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === 'about'" (click)="navClick('about')">About</button>
+        <button type="button" class="navbar__link navbar__link--cta" [class.navbar__link--active]="activeView() === 'contact'" (click)="navClick('contact')">Contact</button>
         <button type="button" class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
           <span aria-hidden="true">{{ isDark() ? '☀' : '☾' }}</span>
         </button>
@@ -15,194 +31,237 @@
     </div>
   </header>
 
-  <main class="shell">
-    <section class="grid" aria-label="portfolio cards">
+  <div class="grid" [class.is-filtering]="activeView() !== null">
 
-      <!-- ROW 1: intro (6) + status/experience (6) -->
-      <article class="card card-intro" data-cat="about" [class.is-muted]="isMuted('about')" [style.order]="cardOrder('about')">
-        <div class="avatar-row">
-          <div class="avatar" aria-hidden="true">{{ profile.initials }}</div>
-          <div>
-            <p class="card__eyebrow">about</p>
-            <p class="card__eyebrow" style="margin-top: 4px; color: var(--muted); font-weight: 500;">{{ profile.focus }}</p>
-          </div>
+    <!-- Row 1: Hero (8) + Status (4) -->
+    <section id="hero" class="grid-card grid-card--hero"
+      [style.order]="sectionOrder('hero')" [class.is-visible]="isSectionVisible('hero')" [class.is-hidden]="!isSectionVisible('hero')">
+      <p class="hero__role">{{ profile.role }}</p>
+      <h1 class="hero__name">{{ profile.name }}</h1>
+      <p class="hero__tagline">{{ profile.focus }}</p>
+      <p class="hero__headline">{{ profile.headline }}</p>
+      <p class="hero__summary">{{ profile.summary }}</p>
+      <div class="hero__ctas">
+        <button type="button" class="btn btn--primary" (click)="navClick('projects')">View Projects</button>
+        <a class="btn btn--outline" [href]="links.resume" target="_blank" rel="noopener noreferrer">Download Resume</a>
+        <a class="btn btn--ghost" [href]="links.github" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </section>
+
+    <div id="status" class="grid-card grid-card--status"
+      [style.order]="sectionOrder('status')" [class.is-visible]="isSectionVisible('status')" [class.is-hidden]="!isSectionVisible('status')">
+      <p class="grid-card__eyebrow">availability</p>
+      <div class="status__badge">
+        <span class="status__dot" aria-hidden="true"></span>
+        <span>{{ profile.status }}</span>
+      </div>
+      <p class="status__location">{{ profile.location }}</p>
+      <p class="status__mode">{{ profile.mode }}</p>
+      <p class="status__education">{{ profile.education }}</p>
+      <div class="status__block">
+        <p class="status__label">Interested in</p>
+        <div class="status__tags">
+          <span class="tag">backend engineering</span>
+          <span class="tag">healthcare systems</span>
+          <span class="tag">scalable applications</span>
+          <span class="tag">API-heavy products</span>
         </div>
+      </div>
+    </div>
 
-        <h1 class="card__title card__title--intro">{{ profile.headline }}</h1>
-        <p class="body-copy">{{ profile.summary }}</p>
+    <!-- Row 2: About (4) + Experience (8) -->
+    <div id="about" class="grid-card grid-card--about"
+      [style.order]="sectionOrder('about')" [class.is-visible]="isSectionVisible('about')" [class.is-hidden]="!isSectionVisible('about')">
+      <p class="grid-card__eyebrow">currently reading</p>
+      <a class="about__book" [href]="culture.book.url || '#'" target="_blank" rel="noopener noreferrer">
+        <strong>{{ culture.book.title }}</strong>
+        <small>{{ culture.book.creator }}</small>
+      </a>
+      <p class="about__note">{{ culture.book.note }}</p>
+      <div class="about__section">
+        <p class="status__label">favorite movie</p>
+        <a class="about__book" [href]="culture.movie.url || '#'" target="_blank" rel="noopener noreferrer">
+          <strong>{{ culture.movie.title }}</strong>
+          <small>{{ culture.movie.creator }}</small>
+        </a>
+        <p class="about__note">{{ culture.movie.note }}</p>
+      </div>
+      <div class="about__section">
+        <p class="status__label">listening to</p>
+        <a class="about__book" [href]="culture.music.url || '#'" target="_blank" rel="noopener noreferrer">
+          <strong>{{ culture.music.title }}</strong>
+          <small>{{ culture.music.artist }}</small>
+        </a>
+        <p class="about__note">{{ culture.music.note }}</p>
+      </div>
+    </div>
 
-        <div class="intro-footer" aria-label="skills and interests">
-          @for (skill of introSkills; track skill) {
-            <span class="tag">{{ skill }}</span>
-          }
-        </div>
-      </article>
-
-      <article class="card card-status" data-cat="about" [class.is-muted]="isMuted('about')" [style.order]="cardOrder('about')">
-        <div class="status-top">
-          <p class="card__eyebrow status-label">current status</p>
-          <div class="status-badge">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span class="status-badge__text">{{ profile.status }}</span>
-          </div>
-          <p class="status-location">{{ profile.location }}</p>
-        </div>
-
-        <div class="status-xp" aria-label="recent experience">
-          <p class="status-xp__label">experience</p>
-
-          @for (item of featuredExperience; track item.role + item.company; let i = $index) {
-          <div class="xp-block" [class.xp-block--primary]="i === 0" [class.xp-block--secondary]="i === 1">
-            <div class="xp-block__header">
-              <div class="xp-block__accent" [class.xp-block__accent--primary]="i === 0" [class.xp-block__accent--secondary]="i === 1"></div>
-              <div class="xp-block__title-row">
-                <span class="xp-role">{{ item.role }}</span>
-                <span class="xp-period xp-period--inline">{{ item.period }}</span>
+    <div id="experience" class="grid-card grid-card--experience"
+      [style.order]="sectionOrder('experience')" [class.is-visible]="isSectionVisible('experience')" [class.is-hidden]="!isSectionVisible('experience')">
+      <p class="grid-card__eyebrow">career</p>
+      <h2 class="grid-card__title">Experience</h2>
+      <div class="experience__timeline">
+        @for (item of experience; track item.role + item.company; let i = $index; let last = $last) {
+          <div class="experience__entry">
+            <div class="experience__marker">
+              <span class="experience__dot" [class.experience__dot--primary]="i === 0"></span>
+              @if (!last) {
+                <span class="experience__line"></span>
+              }
+            </div>
+            <div class="experience__content">
+              <div class="experience__meta">
+                <span class="experience__period">{{ item.period }}</span>
+                @if (item.status) {
+                  <span class="experience__status">{{ item.status }}</span>
+                }
               </div>
-              <span class="xp-company-line">{{ item.company }}</span>
-            </div>
-            <ul class="xp-achievements">
-              @for (achievement of item.achievements.slice(0, 2); track achievement) {
-                <li>{{ achievement }}</li>
-              }
-            </ul>
-            <div class="xp-tech">
-              @for (tech of item.stack.slice(0, 4); track tech) {
-                <span class="xp-tag">{{ tech }}</span>
-              }
-            </div>
-          </div>
-          }
-        </div>
-      </article>
-
-      @for (card of projectCards; track card.id) {
-        <article class="card card-project" data-cat="work" [class.is-muted]="isMuted('work')" [style.order]="cardOrder('work')"
-          [style.background]="isDark() ? card.background : card.lightBackground"
-          [style.borderColor]="isDark() ? card.border : card.lightBorder"
-          [style.color]="isDark() ? card.text : card.lightText"
-          [style.--project-accent]="isDark() ? card.accent : card.lightAccent">
-          <div class="project-head">
-            <h2 class="project-name">{{ card.name }}</h2>
-            <p class="project-type">{{ card.type }}</p>
-          </div>
-          <p class="project-desc">{{ card.description }}</p>
-          <div class="project-panel" aria-hidden="true">
-            <svg viewBox="0 0 180 40" fill="none" class="project-svg">
-              <line x1="20" y1="30" x2="160" y2="30" stroke="var(--project-accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.22"/>
-              <polyline points="20,29 46,24 72,27 98,12 124,17 154,9" stroke="var(--project-accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.82"/>
-              <circle cx="98" cy="12" r="4" fill="var(--project-accent)" opacity="0.9"/>
-            </svg>
-          </div>
-          <a class="project-cta" [routerLink]="['/project', card.id]" (click)="$event.stopPropagation()">
-            View project <span aria-hidden="true">→</span>
-          </a>
-        </article>
-      }
-
-      <article class="card card-skills" data-cat="work" [class.is-muted]="isMuted('work')" [style.order]="cardOrder('work')">
-        <p class="card__eyebrow">technical skills</p>
-        <div class="skills-grid">
-          @for (group of skillGroups; track group.label) {
-            <div class="skill-group">
-              <p class="skill-group__label">{{ group.label }}</p>
-              <div class="skill-tags">
-                @for (skill of group.items; track skill) {
-                  <span class="tag">{{ skill }}</span>
+              <h3 class="experience__role">{{ item.role }}</h3>
+              <p class="experience__company">{{ item.company }}</p>
+              <ul class="experience__achievements">
+                @for (achievement of item.achievements; track achievement) {
+                  <li>{{ achievement }}</li>
+                }
+              </ul>
+              <div class="experience__stack">
+                @for (tech of item.stack; track tech) {
+                  <span class="tag">{{ tech }}</span>
                 }
               </div>
             </div>
-          }
-        </div>
-      </article>
+          </div>
+        }
+      </div>
+    </div>
 
-      <article class="card card-culture" data-cat="about" [class.is-muted]="isMuted('about')" [style.order]="cardOrder('about')">
-        <div class="culture-head">
-          <p class="culture-label">off-screen taste</p>
-          <span class="culture-mark" aria-hidden="true">📌</span>
-        </div>
+    <!-- Row 3: Projects (12, 3-column sub-grid) -->
+    <div id="projects" [style.order]="sectionOrder('projects')" [class.is-visible]="isSectionVisible('projects')" [class.is-hidden]="!isSectionVisible('projects')">
+      @for (card of projectCards; track card.id) {
+        <article id="project-{{ card.id }}" class="grid-card grid-card--project">
+          <div class="project-card__body" (click)="openModal(card.id)">
+            <p class="project-card__type">{{ card.type }}</p>
+            <h3 class="project-card__name">{{ card.name }}</h3>
+            <p class="project-card__desc">{{ card.description }}</p>
+            <div class="project-card__focus">
+              @for (area of card.focusAreas; track area) {
+                <span class="project-card__pill">{{ area }}</span>
+              }
+            </div>
+            <div class="project-card__stack">
+              @for (tech of card.stack.slice(0, 4); track tech) {
+                <span class="tag">{{ tech }}</span>
+              }
+              @if (card.stack.length > 4) {
+                <span class="tag">+{{ card.stack.length - 4 }}</span>
+              }
+            </div>
+            <button type="button" class="project-card__cta" (click)="openModal(card.id)">View Details <span class="project-card__cta-arrow" aria-hidden="true">&#8599;</span></button>
+          </div>
+          <button type="button" class="project-card__expand" (click)="openModal(card.id)" aria-label="View project details">
+            <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor"><path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+          </button>
+        </article>
+      }
+    </div>
 
-        <div class="culture-feature culture-feature--music">
-          <a [href]="culture.music.url || '#'" target="_blank" rel="noopener noreferrer" class="album-art-link">
-            <img class="album-art" [src]="culture.music.albumArtUrl" [alt]="culture.music.title" />
-          </a>
-          <div class="song-meta">
-            <p class="song-title">{{ culture.music.title }}</p>
-            <p class="song-artist">{{ culture.music.artist }}</p>
+    <!-- Project Modal -->
+    @if (selectedCard(); as card) {
+      <div class="modal-backdrop" (click)="closeModal()">
+        <div class="modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" tabindex="-1">
+          <div class="modal__header">
+            <div>
+              <p class="modal__type">{{ card.type }}</p>
+              <h2 class="modal__title">{{ card.name }}</h2>
+            </div>
+            <button type="button" class="modal__close" (click)="closeModal()" aria-label="Close">
+              <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </button>
+          </div>
+          <p class="modal__desc">{{ card.description }}</p>
+          <div class="modal__metrics">
+            @for (metric of card.metrics; track metric.label) {
+              <div class="modal__metric">
+                <span class="modal__metric-value" [style.color]="isDark() ? card.accent : card.lightAccent">{{ metric.value }}</span>
+                <span class="modal__metric-label">{{ metric.label }}</span>
+              </div>
+            }
+          </div>
+          <ul class="modal__highlights">
+            @for (item of card.highlights; track item) {
+              <li>
+                <span class="modal__highlight-dot" [style.background]="isDark() ? card.accent : card.lightAccent" aria-hidden="true"></span>
+                {{ item }}
+              </li>
+            }
+          </ul>
+          <div class="modal__stack">
+            @for (tech of card.stack; track tech) {
+              <span class="modal__stack-tag">{{ tech }}</span>
+            }
+          </div>
+          <div class="modal__actions">
+            <button type="button" class="btn btn--primary" (click)="viewProject(card.id)">Full Details &nbsp;&#8594;</button>
+            @if (card.repoUrl) {
+              <a class="btn btn--outline" [href]="card.repoUrl" target="_blank" rel="noopener noreferrer">Source &#8599;</a>
+            }
+            @if (card.demoUrl) {
+              <a class="btn btn--outline" [href]="card.demoUrl" target="_blank" rel="noopener noreferrer">Demo &#8599;</a>
+            }
           </div>
         </div>
+      </div>
+    }
 
-        <div class="culture-list">
-          <a class="culture-item culture-item--book" [href]="culture.book.url || '#'" target="_blank" rel="noopener noreferrer">
-            <span class="culture-item__icon" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none">
-                <path d="M5 4.5h5.5c1.9 0 3.5 1.5 3.5 3.4v7.6H8.5A3.5 3.5 0 0 1 5 12V4.5Z" stroke="currentColor" stroke-width="1.4"/>
-                <path d="M5 4.5v11h9" stroke="currentColor" stroke-width="1.4"/>
-              </svg>
-            </span>
-            <span class="culture-item__copy">
-              <strong>{{ culture.book.title }}</strong>
-              <small>{{ culture.book.creator }}</small>
-            </span>
-          </a>
-          <a class="culture-item culture-item--movie" [href]="culture.movie.url || '#'" target="_blank" rel="noopener noreferrer">
-            <span class="culture-item__icon" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none">
-                <rect x="3.5" y="5" width="13" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/>
-                <path d="M7 5v10M13 5v10M3.5 8h3M13 8h3.5M3.5 12h3M13 12h3.5" stroke="currentColor" stroke-width="1.2"/>
-              </svg>
-            </span>
-            <span class="culture-item__copy">
-              <strong>{{ culture.movie.title }}</strong>
-              <small>{{ culture.movie.creator }}</small>
-            </span>
-          </a>
-        </div>
-      </article>
-
-      <!-- ROW 5: contact (12) — full width -->
-      <article class="card card-contact" data-cat="contact" [class.is-muted]="isMuted('contact')" [style.order]="cardOrder('contact')">
-        <div class="contact-inner">
-          <div class="contact-left">
-            <div class="contact-headline">
-              <p class="card__eyebrow contact-eyebrow">get in touch</p>
-              <span class="contact-badge">available now</span>
-            </div>
-            <h2 class="card__title card__title--contact">Let's build something worth shipping.</h2>
-            <p class="contact-sub">Available for backend roles, full-stack product work, and teams that care about maintainable systems.</p>
-            <div class="contact-pills" aria-label="contact focus areas">
-              <span class="contact-pill contact-pill--primary">backend</span>
-              <span class="contact-pill">full stack</span>
-              <span class="contact-pill">product work</span>
-              <span class="contact-pill">remote-friendly</span>
+    <!-- Row 4: Skills (12) -->
+    <div id="skills" class="grid-card grid-card--skills"
+      [style.order]="sectionOrder('skills')" [class.is-visible]="isSectionVisible('skills')" [class.is-hidden]="!isSectionVisible('skills')">
+      <p class="grid-card__eyebrow">toolkit</p>
+      <h2 class="grid-card__title">Skills</h2>
+      <div class="skills__grid">
+        @for (group of skillGroups; track group.label) {
+          <div class="skills__group">
+            <p class="skills__group-label">{{ group.label }}</p>
+            <div class="skills__tags">
+              @for (skill of group.items; track skill) {
+                <span class="tag">{{ skill }}</span>
+              }
             </div>
           </div>
-          <div class="contact-right">
-            <div class="contact-links">
-              <a class="contact-link contact-link--primary" [href]="'mailto:' + profile.email">
-                <svg class="contact-link__icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.003 5.884 10 9.882l7.997-3.998A2 2 0 0 0 16 4H4a2 2 0 0 0-1.997 1.884z"/><path d="m18 8.118-8 4-8-4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.118z"/></svg>
-                <span>{{ profile.email }}</span>
-              </a>
-              <a class="contact-link" [href]="links.github" target="_blank" rel="noopener noreferrer">
-                <svg class="contact-link__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                <span>GitHub</span>
-                <span class="contact-link__arrow" aria-hidden="true">↗</span>
-              </a>
-              <a class="contact-link" [href]="links.linkedin" target="_blank" rel="noopener noreferrer">
-                <svg class="contact-link__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                <span>LinkedIn</span>
-                <span class="contact-link__arrow" aria-hidden="true">↗</span>
-              </a>
-              <a class="contact-link" [href]="links.resume" target="_blank" rel="noopener noreferrer">
-                <svg class="contact-link__icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
-                <span>Resume</span>
-                <span class="contact-link__arrow" aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </article>
+        }
+      </div>
+    </div>
 
-    </section>
-  </main>
+    <!-- Row 5: Contact (12) -->
+    <div id="contact" class="grid-card grid-card--contact"
+      [style.order]="sectionOrder('contact')" [class.is-visible]="isSectionVisible('contact')" [class.is-hidden]="!isSectionVisible('contact')">
+      <div class="contact__inner">
+        <div class="contact__left">
+          <p class="grid-card__eyebrow">get in touch</p>
+          <h2 class="contact__headline">Let's build software that survives beyond the first release.</h2>
+        </div>
+        <div class="contact__right">
+          <a class="contact__link" [href]="'mailto:' + profile.email">
+            <svg class="contact__link-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.003 5.884 10 9.882l7.997-3.998A2 2 0 0 0 16 4H4a2 2 0 0 0-1.997 1.884z"/><path d="m18 8.118-8 4-8-4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.118z"/></svg>
+            <span>{{ profile.email }}</span>
+          </a>
+          <a class="contact__link" [href]="links.github" target="_blank" rel="noopener noreferrer">
+            <svg class="contact__link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            <span>GitHub</span>
+            <span class="contact__link-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+          <a class="contact__link" [href]="links.linkedin" target="_blank" rel="noopener noreferrer">
+            <svg class="contact__link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>LinkedIn</span>
+            <span class="contact__link-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+          <a class="contact__link" [href]="links.resume" target="_blank" rel="noopener noreferrer">
+            <svg class="contact__link-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
+            <span>Resume</span>
+            <span class="contact__link-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
