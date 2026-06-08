@@ -13,5 +13,36 @@
 </head>
 <body>
   <app-root></app-root>
+
+  <!-- Custom cursor -->
+  <div class="cursor-magnifier" aria-hidden="true">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="17" cy="17" r="11" stroke="currentColor" stroke-width="2.5"/>
+      <path d="M25 25l10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <script>
+    (function() {
+      var el = document.querySelector('.cursor-magnifier');
+      if (!el) return;
+      var ox = -20, oy = -20;
+      var interactive = 'a, button, input, select, textarea, [role="button"], [role="link"], .grid-card, .project-card__body, .detail-back, .tag, .btn';
+
+      document.addEventListener('mousemove', function(e) {
+        el.style.transform = 'translate(' + (e.clientX + ox) + 'px,' + (e.clientY + oy) + 'px)';
+      });
+
+      document.addEventListener('mouseover', function(e) {
+        var t = e.target;
+        var isClickable = t.matches(interactive) || t.closest(interactive);
+        el.classList.toggle('is-hovering', !!isClickable);
+      });
+
+      document.addEventListener('mouseleave', function() { el.style.opacity = '0'; });
+      document.addEventListener('mouseenter', function() { el.style.opacity = ''; });
+
+      if ('ontouchstart' in window) el.style.display = 'none';
+    })();
+  </script>
 </body>
 </html>
