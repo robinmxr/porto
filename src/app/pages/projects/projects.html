@@ -1,18 +1,5 @@
 <div class="page" (keydown)="onKeydown($event)">
 
-  <!-- Background decor -->
-  <div class="bg-decor" aria-hidden="true">
-    <svg class="bg-decor__blob bg-decor__blob--1" viewBox="0 0 600 600" width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="300" cy="300" r="300" fill="currentColor"/>
-    </svg>
-    <svg class="bg-decor__blob bg-decor__blob--2" viewBox="0 0 500 500" width="500" height="500" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="250" cy="250" r="250" fill="currentColor"/>
-    </svg>
-    <svg class="bg-decor__blob bg-decor__blob--3" viewBox="0 0 400 400" width="400" height="400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="50" y="50" width="300" height="300" rx="60" fill="currentColor"/>
-    </svg>
-  </div>
-
   <!-- Navbar -->
   <header class="navbar">
     <div class="navbar__inner">
@@ -101,11 +88,33 @@
       <div class="status__block">
         <p class="status__label">Interested in</p>
         <div class="status__tags">
-          <span class="tag">backend engineering</span>
+          <span class="tag">full-stack development</span>
+          <span class="tag">backend &amp; API design</span>
           <span class="tag">healthcare systems</span>
-          <span class="tag">scalable applications</span>
-          <span class="tag">API-heavy products</span>
+          <span class="tag">fintech applications</span>
         </div>
+      </div>
+      <div class="status__resume">
+        <p class="status__label">resume</p>
+        <a class="status__resume-doc" [href]="links.resume" target="_blank" rel="noopener noreferrer" aria-label="Open resume (PDF)">
+          <span class="status__resume-doc-page">
+            <span class="status__resume-doc-header">
+              <span class="status__resume-doc-avatar">{{ profile.initials }}</span>
+              <span class="status__resume-doc-lines">
+                <span class="status__resume-doc-line status__resume-doc-line--strong"></span>
+                <span class="status__resume-doc-line"></span>
+              </span>
+            </span>
+            <span class="status__resume-doc-line"></span>
+            <span class="status__resume-doc-line status__resume-doc-line--short"></span>
+            <span class="status__resume-doc-line"></span>
+            <span class="status__resume-doc-line status__resume-doc-line--short"></span>
+          </span>
+          <span class="status__resume-doc-meta">
+            <span class="status__resume-doc-name">RobinResume.pdf</span>
+            <span class="status__resume-doc-open" aria-hidden="true">Open ↗</span>
+          </span>
+        </a>
       </div>
     </div>
 
@@ -128,11 +137,38 @@
       </div>
       <div class="about__section">
         <p class="status__label">listening to</p>
-        <a class="about__book" [href]="culture.music.url || '#'" target="_blank" rel="noopener noreferrer">
-          <strong>{{ culture.music.title }}</strong>
-          <small>{{ culture.music.artist }}</small>
-        </a>
-        <p class="about__note">{{ culture.music.note }}</p>
+        <div class="about__track">
+          <img class="about__track-art" [src]="culture.music.albumArtUrl" alt="Album art" loading="lazy" />
+          <div class="about__track-meta">
+            <a class="about__book" [href]="culture.music.url || '#'" target="_blank" rel="noopener noreferrer">
+              <strong>{{ culture.music.title }}</strong>
+              <small>{{ culture.music.artist }}</small>
+            </a>
+            <p class="about__note">{{ culture.music.note }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="about__section">
+        <p class="status__label">languages</p>
+        <div class="about__langs">
+          @for (lang of info.credentials.languages; track lang.name) {
+            <span class="tag">{{ lang.name }} · {{ lang.level }}</span>
+          }
+        </div>
+      </div>
+      <div class="about__section">
+        <p class="status__label">certifications</p>
+        <ul class="about__certs">
+          @for (cert of info.credentials.certifications; track cert.name) {
+            <li class="about__cert">
+              <span class="about__cert-dot" aria-hidden="true"></span>
+              <span class="about__cert-meta">
+                <strong>{{ cert.name }}</strong>
+                <small>{{ cert.issuer }}</small>
+              </span>
+            </li>
+          }
+        </ul>
       </div>
     </div>
 
@@ -303,7 +339,7 @@
             }
           </button>
           @if (formStatus() === 'sent') {
-            <span class="contact__success">Thanks! I'll get back to you soon.</span>
+            <span class="contact__success" role="status" aria-live="polite">Thanks! I'll get back to you soon.</span>
           }
         </div>
       </form>
@@ -316,6 +352,11 @@
         <a class="contact__link" [href]="links.github" target="_blank" rel="noopener noreferrer">
           <svg class="contact__link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
           <span>GitHub</span>
+          <span class="contact__link-arrow" aria-hidden="true">&#8599;</span>
+        </a>
+        <a class="contact__link" [href]="links.website" target="_blank" rel="noopener noreferrer">
+          <svg class="contact__link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zM4 12c0-.338.025-.67.074-.997L7.75 14.68A1.5 1.5 0 0 1 8.657 15H10a1 1 0 0 1 1 1v2.5c0 .356.19.686.5.866L13 20.5V21c0 .334-.022.663-.065.987A8 8 0 0 1 4 12zm16 0a8.002 8.002 0 0 1-6 7.748V19l-1.625-1.95A1 1 0 0 1 11.6 16.5H8.5v-2A1.5 1.5 0 0 1 10 13h3a1 1 0 0 1 .707.293l.5.5.237-1.663.906-3.625A1 1 0 0 1 16.32 7H20.06A7.98 7.98 0 0 1 20 12z"/></svg>
+          <span>Website</span>
           <span class="contact__link-arrow" aria-hidden="true">&#8599;</span>
         </a>
         <a class="contact__link" [href]="links.linkedin" target="_blank" rel="noopener noreferrer">

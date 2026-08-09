@@ -18,12 +18,19 @@ export interface PortfolioInfo {
   links: {
     github: string;
     linkedin: string;
+    website: string;
     resume: string;
   };
   skills: Record<string, string[]>;
   experience: ExperienceItem[];
   projects: ProjectCardData[];
   culture: Culture;
+  credentials: Credentials;
+}
+
+export interface Credentials {
+  languages: { name: string; level: string }[];
+  certifications: { name: string; issuer: string }[];
 }
 
 export interface ExperienceItem {
