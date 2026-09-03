@@ -4,9 +4,9 @@
     "shortName": "Robin Islam",
     "initials": "RI",
     "role": "Software Engineer",
-    "focus": ".NET · Distributed Backend Systems · Full-Stack Engineering",
-    "headline": "I build secure, distributed backend systems across fintech and healthcare domains, from clean architecture to message-driven infrastructure.",
-    "summary": "Software Engineer with 3 years building secure, distributed backend systems across fintech and healthcare domains, using Node.js, .NET Core, and Angular/React on PostgreSQL/SQL Server, Docker, and Kubernetes. Skilled in Domain-Driven Design, event-driven architecture, and message-driven systems (Kafka, RabbitMQ), with a track record of measurable performance and workflow improvements.",
+    "focus": "Full-Stack Engineering · Healthcare · Fintech · Distributed Systems",
+    "headline": "I build secure, scalable systems across fintech and healthcare — from clinical microservices to payment infrastructure.",
+    "summary": "Full-stack engineer with 3 years building secure, scalable systems using Angular, TypeScript, C#, .NET, and ASP.NET Core, backed by PostgreSQL/SQL Server and hands-on Docker/Kubernetes deployment experience. Delivered microservices for clinical workflows — prescriptions, appointments, and telemedicine — including real-time scheduling logic and secure video sessions, backed by xUnit test coverage. Skilled in Domain-Driven Design, RESTful API design, EF Core, and event-driven architecture (Kafka/RabbitMQ), with a track record of measurable performance and workflow improvements in regulated, data-sensitive environments (fintech PCI-DSS, healthcare).",
     "location": "Dhaka, Bangladesh",
     "status": "open to work",
     "mode": "remote friendly",
@@ -20,14 +20,17 @@
     "resume": "/RobinResume.pdf"
   },
   "skills": {
-    "Languages": ["C#", "JavaScript", "TypeScript", "PHP", "Python"],
-    "Frameworks & Libraries": ["Node.js", "Express", ".NET", "CQRS/MediatR", "Entity Framework", "React", "Angular", "Laravel", "Django"],
+    "Frontend": ["Angular", "TypeScript", "HTML5", "CSS/SCSS", "React"],
+    "Backend": ["C#", ".NET / ASP.NET Core", "CQRS/MediatR", "Entity Framework Core", "Node.js", "Express", "PHP", "Python", "Laravel", "Django"],
     "Database": ["PostgreSQL", "SQL Server", "MongoDB", "MySQL"],
-    "Cloud & DevOps": ["Microsoft Azure", "Docker", "Kubernetes", "Docker Swarm", "K3s", "GitLab CI/CD", "AWS"],
-    "Messaging & Observability": ["Kafka", "RabbitMQ", "Zipkin", "Serilog/NLog"],
-    "Payment Integrations": ["Visa", "TSYS", "BlueSnap", "SSLCommerz"],
-    "Tools": ["Git", "Redis", "WebSockets", "SSE", "Jira", "Postman", "Insomnia"],
-    "Methodologies": ["Agile (Scrum)", "Code Review", "Unit Testing"]
+    "APIs & Architecture": ["RESTful API Design", "Microservices", "Clean Architecture", "SOLID", "Event-driven Architecture"],
+    "Cloud & DevOps": ["Microsoft Azure", "Azure Key Vault", "Docker", "Kubernetes", "Docker Swarm", "K3s", "GitLab CI/CD", "AWS"],
+    "Auth & Access Control": ["OAuth 2.0", "OpenID Connect", "JWT", "RBAC", "Microsoft Identity", "Keycloak"],
+    "Messaging & Observability": ["Kafka", "RabbitMQ", "Serilog", "Graylog", "Zipkin"],
+    "Real-time & Payments": ["WebSockets", "SSE", "Visa", "TSYS", "BlueSnap", "SSLCommerz"],
+    "Tools": ["Git", "Redis", "Jira", "Postman", "Insomnia"],
+    "Testing": ["xUnit", "Unit Testing", "Integration Testing"],
+    "Methodologies": ["Agile (Scrum)", "Code Review", "Test-Driven Development"]
   },
   "experience": [
     {
@@ -35,29 +38,30 @@
       "company": "Adaptive Enterprise Ltd",
       "period": "Dec 2025 – Present",
       "status": "current",
-      "summary": "Building core healthcare microservices (Prescription, Appointment, Telemedicine) with .NET 8, Clean Architecture, and CQRS/MediatR, deployed on Docker Swarm/K3s with GitLab CI/CD.",
+      "summary": "Led development of the Appointment and Telemedicine services within a larger clinical/healthcare microservices platform spanning Payment, Prescription, User-Management, Content-Management, and other domains.",
       "achievements": [
-        "Designed and built core microservices (Prescription, Appointment, Telemedicine) using .NET 8, Clean Architecture, and CQRS/MediatR, backed by PostgreSQL/EF Core.",
-        "Designed the appointment booking domain with a slot-hold lifecycle supporting multiple convergent release mechanisms, resolving race conditions in concurrent booking flows with real-time updates via WebSockets/SSE.",
-        "Integrated SSLCommerz for payments with platform-aware redirects, and implemented per-participant Agora token minting for secure telemedicine video sessions.",
-        "Deployed services on Docker Swarm/K3s with GitLab CI/CD, and operated the platform's distributed messaging infrastructure (Kafka, RabbitMQ) with Zipkin tracing, including diagnosing a critical disk-space incident traced to Kafka's storage volume."
+        "Led development of the Appointment and Telemedicine services within a larger clinical/healthcare microservices platform built with .NET 8, Clean Architecture, and CQRS/MediatR, backed by PostgreSQL/EF Core, with xUnit unit and integration tests covering booking and payment logic.",
+        "Secured services with Keycloak-based OAuth 2.0/OIDC authentication and role-based access control (RBAC), applied PHI masking in logs and API responses, and implemented audit logging of sensitive patient-record access, with secrets managed via Azure Key Vault.",
+        "Designed the appointment scheduling and booking domain with a slot-hold lifecycle supporting multiple convergent release mechanisms, and resolved race conditions in concurrent booking flows with real-time updates via WebSockets/SSE.",
+        "Integrated SSLCommerz for payments with platform-aware redirects, and implemented per-participant Agora token minting for secure, access-controlled telemedicine video sessions handling sensitive patient interactions.",
+        "Containerized and deployed all microservices with Docker, orchestrating hands-on production deployments on Docker Swarm and K3s (Kubernetes) with GitLab CI/CD, and operated the platform's distributed messaging infrastructure (Kafka, RabbitMQ) with Serilog/Graylog centralized logging and Zipkin distributed tracing, including diagnosing a critical disk-space incident traced to Kafka's storage volume."
       ],
-      "stack": [".NET 8", "C#", "PostgreSQL", "EF Core", "CQRS/MediatR", "WebSockets/SSE", "SSLCommerz", "Agora", "Docker Swarm", "K3s", "GitLab CI/CD", "Kafka", "RabbitMQ", "Zipkin"]
+      "stack": [".NET 8", "C#", "PostgreSQL", "EF Core", "CQRS/MediatR", "Keycloak", "OAuth 2.0/OIDC", "RBAC", "Azure Key Vault", "xUnit", "WebSockets/SSE", "SSLCommerz", "Agora", "Docker", "Docker Swarm", "K3s", "GitLab CI/CD", "Kafka", "RabbitMQ", "Serilog", "Graylog", "Zipkin"]
     },
     {
       "role": "Software Engineer I",
-      "company": "Teton Private Ltd - ConnexPay (US fintech)",
+      "company": "Teton Private Ltd",
       "period": "Sep 2023 – Nov 2025",
       "status": "",
       "summary": "Built secure, high-throughput ASP.NET Core Web APIs on Microsoft SQL Server for ConnexPay, a mission-critical fintech platform, aligned with PCI-DSS standards.",
       "achievements": [
-        "Built secure, high-throughput ASP.NET Core Web APIs on Microsoft SQL Server for ConnexPay, a mission-critical fintech platform, aligned with PCI-DSS standards and robust exception handling.",
+        "Built secure, high-throughput ASP.NET Core Web APIs on Microsoft SQL Server for ConnexPay, a mission-critical fintech platform, aligned with PCI-DSS standards (a regulated-data compliance model closely paralleling HIPAA/PHI handling), securing endpoints with Microsoft Identity authentication and role-based authorization, with robust exception handling.",
         "Integrated third-party payment gateways including Visa, TSYS, and BlueSnap, implementing webhook/IPN handling, transaction validation, and ledger updates.",
-        "Applied Domain-Driven Design with layered service abstractions and Repository/Unit of Work patterns, optimizing query performance and helping modularize the monolith toward a microservices-ready architecture.",
+        "Applied Domain-Driven Design and layered service abstractions with Repository and Unit of Work patterns, optimizing query performance and helping modularize the monolith toward a microservices-ready architecture.",
         "Automated the client onboarding workflow by redesigning backend processes and database schema, cutting setup time by 30%.",
-        "Built Node.js/Express backend services and REST APIs for in-house MERN-stack applications using event-driven, asynchronous design patterns for concurrent, I/O-heavy workloads."
+        "Built Node.js/Express backend services and REST APIs for in-house MERN-stack applications, applying event-driven, asynchronous design patterns for concurrent, I/O-heavy workloads."
       ],
-      "stack": [".NET", "C#", "ASP.NET Core", "SQL Server", "Entity Framework", "DDD", "Node.js", "Express", "REST APIs"]
+      "stack": [".NET", "C#", "ASP.NET Core", "SQL Server", "Entity Framework", "Microsoft Identity", "DDD", "Node.js", "Express", "REST APIs"]
     }
   ],
   "projects": [
@@ -104,7 +108,7 @@
       "lightBorder": "#bbf7d0",
       "lightAccent": "#15803d",
       "lightText": "#14532d",
-      "stack": [".NET 8", "Angular", "PostgreSQL", "pgvector", "Docker", "Kubernetes", "Serilog", "Prometheus", "Grafana", "Ollama", "Gemini API"],
+      "stack": [".NET 8", "Angular", "PostgreSQL", "pgvector", "Docker", "Kubernetes", "Serilog", "Graylog", "Zipkin", "Ollama", "Gemini API"],
       "metrics": [
         { "label": "Stack", "value": "Full" },
         { "label": "Search", "value": "pgvector" },
@@ -112,7 +116,7 @@
       ],
       "highlights": [
         "Architected a modular monolith pet healthcare platform with .NET 8 and Angular, using PostgreSQL with pgvector for semantic search.",
-        "Migrated the monorepo from Docker Compose to Kubernetes, adding CI/CD pipelines and observability with Serilog, Prometheus, and Grafana.",
+        "Migrated the monorepo from Docker Compose to Kubernetes, hand-writing deployment manifests and adding CI/CD pipelines and observability with Serilog, Graylog, and Zipkin.",
         "Built a Retrieval-Augmented Generation (RAG) triage module combining Ollama embeddings and the Gemini API for symptom-based recommendations."
       ],
       "year": "2025",

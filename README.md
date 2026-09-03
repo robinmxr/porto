@@ -1,60 +1,61 @@
-# TactilePortfolio
+# Reajul Islam Robin
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+**Software Engineer** · Dhaka, Bangladesh  
+.NET · Distributed Backend Systems · Full-Stack Engineering
 
-## Development server
+---
 
-To start a local development server, run:
+## About
 
-```bash
-ng serve
-```
+Software Engineer with 3 years building secure, distributed backend systems across fintech and healthcare domains, using Node.js, .NET Core, and Angular/React on PostgreSQL/SQL Server, Docker, and Kubernetes. Skilled in Domain-Driven Design, event-driven architecture, and message-driven systems (Kafka, RabbitMQ), with a track record of measurable performance and workflow improvements.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+**Currently open to work** · Remote friendly
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Tech Stack
 
-```bash
-ng generate component component-name
-```
+| Category | Technologies |
+|---|---|
+| **Languages** | C#, JavaScript, TypeScript, PHP, Python |
+| **Frameworks** | .NET Core, ASP.NET Core, Node.js, Express, React, Angular, Laravel, Django |
+| **Databases** | PostgreSQL, SQL Server, MongoDB, MySQL |
+| **Cloud & DevOps** | Docker, Kubernetes, Docker Swarm, K3s, Azure, AWS, GitLab CI/CD |
+| **Messaging** | Kafka, RabbitMQ, Zipkin, Serilog/NLog |
+| **Tools** | Redis, Git, WebSockets, Jira, Postman |
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Experience
 
-## Building
+### Software Engineer — Adaptive Enterprise Ltd
+*Dec 2025 – Present*
 
-To build the project run:
+- Built core healthcare microservices (Prescription, Appointment, Telemedicine) using .NET 8, Clean Architecture, and CQRS/MediatR
+- Designed appointment booking with slot-hold lifecycle and concurrent flow resolution via WebSockets/SSE
+- Deployed on Docker Swarm/K3s with GitLab CI/CD, operated Kafka/RabbitMQ messaging infrastructure
 
-```bash
-ng build
-```
+### Software Engineer I — Teton Private Ltd (ConnexPay)
+*Sep 2023 – Nov 2025*
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Built secure, high-throughput ASP.NET Core Web APIs for ConnexPay (US fintech), aligned with PCI-DSS
+- Integrated Visa, TSYS, and BlueSnap payment gateways with webhook/IPN handling
+- Automated client onboarding workflow, cutting setup time by 30%
 
-## Running unit tests
+---
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Featured Projects
 
-```bash
-ng test
-```
+| Project | Description | Stack |
+|---|---|---|
+| **The Algomist** | DSA preparation tool with AI-generated topic breakdowns via Grok AI | React, TypeScript, Tailwind CSS |
+| **mypaw** | Modular monolith pet healthcare platform with pgvector semantic search and RAG triage | .NET 8, Angular, PostgreSQL, pgvector, Kubernetes |
+| **SNOMED CT Search API** | Clinical terminology search API with lexical and semantic autocomplete | .NET Core, PostgreSQL, pgvector, REST APIs |
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Connect
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/robin-mxr)
+[![Portfolio](https://img.shields.io/badge/Portfolio-000?style=flat&logo=vercel&logoColor=white)](https://robinislam.netlify.app)
+[![Email](https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white)](mailto:reajulbd786@gmail.com)
