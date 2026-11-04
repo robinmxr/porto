@@ -1,376 +1,212 @@
-<div class="page" (keydown)="onKeydown($event)">
-
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="navbar__inner">
-      <button type="button" class="navbar__brand" (click)="navClick('hero')">
-        <span class="navbar__brand-full">{{ profile.shortName }}</span>
-        <span class="navbar__brand-short">{{ profile.initials }}</span>
-      </button>
-      <nav class="navbar__links" aria-label="section navigation">
-        <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === null" (click)="navClick('hero')">Home</button>
-        <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === 'projects'" (click)="navClick('projects')">Projects</button>
-        <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === 'experience'" (click)="navClick('experience')">Experience</button>
-        <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === 'skills'" (click)="navClick('skills')">Skills</button>
-        <button type="button" class="navbar__link" [class.navbar__link--active]="activeView() === 'about'" (click)="navClick('about')">About</button>
-        <button type="button" class="navbar__link navbar__link--cta" [class.navbar__link--active]="activeView() === 'contact'" (click)="navClick('contact')">Contact</button>
-        <button type="button" class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
-          <span aria-hidden="true">{{ isDark() ? '☀' : '☾' }}</span>
+<header class="site-header" [class.is-scrolled]="scrolled()">
+  <div class="container site-header__inner">
+    <button type="button" class="site-header__brand" (click)="scrollTo('top')">
+      {{ profile.shortName }}
+    </button>
+    <nav class="site-nav" aria-label="Sections">
+      @for (s of sections; track s.id) {
+        <button type="button" class="site-nav__link" [class.is-active]="activeSection() === s.id" (click)="scrollTo(s.id)">
+          {{ s.label }}
         </button>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Mobile top bar -->
-  <header class="mobile-topbar">
-    <button type="button" class="mobile-topbar__name" (click)="navClick('hero')">{{ profile.shortName }}</button>
-    <div class="mobile-topbar__links">
-      <a [href]="links.github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-      </a>
-      <a [href]="links.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
-    </div>
-  </header>
-
-  <!-- Mobile nav -->
-  <div class="mobile-nav" [class.is-open]="mobileNavOpen()">
-    <div class="mobile-nav__backdrop" [class.is-visible]="mobileNavOpen()" (click)="closeMobileNav()"></div>
-    <div class="mobile-nav__links">
-      <button type="button" class="mobile-nav__link" [class.is-active]="activeView() === null" (click)="navClick('hero')">Home</button>
-      <button type="button" class="mobile-nav__link" [class.is-active]="activeView() === 'projects'" (click)="navClick('projects')">Projects</button>
-      <button type="button" class="mobile-nav__link" [class.is-active]="activeView() === 'experience'" (click)="navClick('experience')">Experience</button>
-      <button type="button" class="mobile-nav__link" [class.is-active]="activeView() === 'skills'" (click)="navClick('skills')">Skills</button>
-      <button type="button" class="mobile-nav__link" [class.is-active]="activeView() === 'about'" (click)="navClick('about')">About</button>
-      <button type="button" class="mobile-nav__link" [class.is-active]="activeView() === 'contact'" (click)="navClick('contact')">Contact</button>
-      <button type="button" class="mobile-nav__link mobile-nav__link--theme" (click)="toggleTheme(); closeMobileNav()">
-        {{ isDark() ? '☀' : '☾' }} Theme
-      </button>
-    </div>
-    <button type="button" class="mobile-nav__trigger" (click)="toggleMobileNav($event)" aria-label="Navigate">
-      <svg viewBox="0 0 20 20" width="20" height="20" fill="currentColor">
-        @if (mobileNavOpen()) {
-          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-        } @else {
-          <path d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/>
-        }
-      </svg>
+      }
+    </nav>
+    <button type="button" class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
+      <span class="theme-toggle__dot" aria-hidden="true"></span>
     </button>
   </div>
+</header>
 
-  <div class="grid" [class.is-filtering]="activeView() !== null">
+<main id="top" class="container">
 
-    <!-- Row 1: Hero (8) + Status (4) -->
-    <section id="hero" class="grid-card grid-card--hero"
-      [style.order]="sectionOrder('hero')" [class.is-visible]="isSectionVisible('hero')" [class.is-hidden]="!isSectionVisible('hero')">
-      <p class="hero__role">{{ profile.role }}</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__text">
+      <p class="eyebrow hero__eyebrow">
+        <span class="status-dot" aria-hidden="true"></span>
+        {{ profile.status }} · {{ profile.mode }}
+      </p>
       <h1 class="hero__name">{{ profile.name }}</h1>
-      <p class="hero__tagline">{{ profile.focus }}</p>
       <p class="hero__headline">{{ profile.headline }}</p>
-      <p class="hero__summary">{{ profile.summary }}</p>
-      <div class="hero__ctas">
-        <button type="button" class="btn btn--primary" (click)="navClick('projects')">View Projects</button>
-        <a class="btn btn--outline" [href]="links.resume" target="_blank" rel="noopener noreferrer">Download Resume</a>
+      <div class="hero__meta">
+        <span>{{ profile.role }}</span>
+        <span class="hero__meta-sep" aria-hidden="true"></span>
+        <span>{{ profile.location }}</span>
       </div>
-    </section>
-
-    <div id="status" class="grid-card grid-card--status"
-      [style.order]="sectionOrder('status')" [class.is-visible]="isSectionVisible('status')" [class.is-hidden]="!isSectionVisible('status')">
-      <p class="grid-card__eyebrow">availability</p>
-      <div class="status__badge">
-        <span class="status__dot" aria-hidden="true"></span>
-        <span>{{ profile.status }}</span>
-      </div>
-      <p class="status__location">{{ profile.location }}</p>
-      <p class="status__mode">{{ profile.mode }}</p>
-      <p class="status__education">{{ profile.education }}</p>
-      <div class="status__block">
-        <p class="status__label">Interested in</p>
-        <div class="status__tags">
-          <span class="tag">full-stack development</span>
-          <span class="tag">backend &amp; API design</span>
-          <span class="tag">healthcare systems</span>
-          <span class="tag">fintech applications</span>
-        </div>
-      </div>
-      <div class="status__resume">
-        <p class="status__label">resume</p>
-        <a class="status__resume-doc" [href]="links.resume" target="_blank" rel="noopener noreferrer" aria-label="Open resume (PDF)">
-          <span class="status__resume-doc-page">
-            <span class="status__resume-doc-header">
-              <span class="status__resume-doc-avatar">{{ profile.initials }}</span>
-              <span class="status__resume-doc-lines">
-                <span class="status__resume-doc-line status__resume-doc-line--strong"></span>
-                <span class="status__resume-doc-line"></span>
-              </span>
-            </span>
-            <span class="status__resume-doc-line"></span>
-            <span class="status__resume-doc-line status__resume-doc-line--short"></span>
-            <span class="status__resume-doc-line"></span>
-            <span class="status__resume-doc-line status__resume-doc-line--short"></span>
-          </span>
-          <span class="status__resume-doc-meta">
-            <span class="status__resume-doc-name">RobinResume.pdf</span>
-            <span class="status__resume-doc-open" aria-hidden="true">Open ↗</span>
-          </span>
-        </a>
+      <div class="hero__actions">
+        <button type="button" class="link-arrow" (click)="scrollTo('work')">Selected work <span aria-hidden="true">↓</span></button>
+        <a class="link-arrow" [href]="links.resume" target="_blank" rel="noopener noreferrer">Résumé <span aria-hidden="true">↗</span></a>
+        <a class="link-arrow" [href]="'mailto:' + profile.email">Email <span aria-hidden="true">→</span></a>
       </div>
     </div>
 
-    <!-- Row 2: About (4) + Experience (8) -->
-    <div id="about" class="grid-card grid-card--about"
-      [style.order]="sectionOrder('about')" [class.is-visible]="isSectionVisible('about')" [class.is-hidden]="!isSectionVisible('about')">
-      <p class="grid-card__eyebrow">currently reading</p>
-      <a class="about__book" [href]="culture.book.url || '#'" target="_blank" rel="noopener noreferrer">
-        <strong>{{ culture.book.title }}</strong>
-        <small>{{ culture.book.creator }}</small>
-      </a>
-      <p class="about__note">{{ culture.book.note }}</p>
-      <div class="about__section">
-        <p class="status__label">favorite movie</p>
-        <a class="about__book" [href]="culture.movie.url || '#'" target="_blank" rel="noopener noreferrer">
-          <strong>{{ culture.movie.title }}</strong>
-          <small>{{ culture.movie.creator }}</small>
-        </a>
-        <p class="about__note">{{ culture.movie.note }}</p>
+    <aside class="hero__aside" aria-label="At a glance">
+      <div class="glance">
+        <p class="eyebrow">Currently</p>
+        <p>{{ experience[0].role }}</p>
+        <p class="muted">{{ experience[0].company }}</p>
       </div>
-      <div class="about__section">
-        <p class="status__label">listening to</p>
-        <div class="about__track">
-          <img class="about__track-art" [src]="culture.music.albumArtUrl" alt="Album art" loading="lazy" />
-          <div class="about__track-meta">
-            <a class="about__book" [href]="culture.music.url || '#'" target="_blank" rel="noopener noreferrer">
-              <strong>{{ culture.music.title }}</strong>
-              <small>{{ culture.music.artist }}</small>
-            </a>
-            <p class="about__note">{{ culture.music.note }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="about__section">
-        <p class="status__label">languages</p>
-        <div class="about__langs">
-          @for (lang of info.credentials.languages; track lang.name) {
-            <span class="tag">{{ lang.name }} · {{ lang.level }}</span>
-          }
-        </div>
-      </div>
-      <div class="about__section">
-        <p class="status__label">certifications</p>
-        <ul class="about__certs">
-          @for (cert of info.credentials.certifications; track cert.name) {
-            <li class="about__cert">
-              <span class="about__cert-dot" aria-hidden="true"></span>
-              <span class="about__cert-meta">
-                <strong>{{ cert.name }}</strong>
-                <small>{{ cert.issuer }}</small>
-              </span>
-            </li>
-          }
-        </ul>
-      </div>
-    </div>
-
-    <div id="experience" class="grid-card grid-card--experience"
-      [style.order]="sectionOrder('experience')" [class.is-visible]="isSectionVisible('experience')" [class.is-hidden]="!isSectionVisible('experience')">
-      <p class="grid-card__eyebrow">career</p>
-      <h2 class="grid-card__title">Experience</h2>
-      <div class="experience__timeline">
-        @for (item of experience; track item.role + item.company; let i = $index; let last = $last) {
-          <div class="experience__entry">
-            <div class="experience__marker">
-              <span class="experience__dot" [class.experience__dot--primary]="i === 0"></span>
-              @if (!last) {
-                <span class="experience__line"></span>
-              }
-            </div>
-            <div class="experience__content">
-              <div class="experience__meta">
-                <span class="experience__period">{{ item.period }}</span>
-                @if (item.status) {
-                  <span class="experience__status">{{ item.status }}</span>
-                }
-              </div>
-              <h3 class="experience__role">{{ item.role }}</h3>
-              <p class="experience__company">{{ item.company }}</p>
-              <ul class="experience__achievements">
-                @for (achievement of item.achievements; track achievement) {
-                  <li>{{ achievement }}</li>
-                }
-              </ul>
-              <div class="experience__stack">
-                @for (tech of item.stack; track tech) {
-                  <span class="tag">{{ tech }}</span>
-                }
-              </div>
-            </div>
-          </div>
+      <div class="glance">
+        <p class="eyebrow">Focus</p>
+        @for (area of focusAreas; track area) {
+          <p>{{ area }}</p>
         }
       </div>
-    </div>
+    </aside>
+  </section>
 
-    <!-- Row 3: Projects (12, 3-column sub-grid) -->
-    <div id="projects" [style.order]="sectionOrder('projects')" [class.is-visible]="isSectionVisible('projects')" [class.is-hidden]="!isSectionVisible('projects')">
+  <!-- Work -->
+  <section id="work" class="section reveal">
+    <header class="section__head">
+      <span class="section__index">01</span>
+      <h2 class="section__title">Selected work</h2>
+    </header>
+    <ol class="work-list">
       @for (card of projectCards; track card.id) {
-        <article id="project-{{ card.id }}" class="grid-card grid-card--project">
-          <div class="project-card__body" (click)="openModal(card.id)">
-            <p class="project-card__type">{{ card.type }}</p>
-            <h3 class="project-card__name">{{ card.name }}</h3>
-            <p class="project-card__desc">{{ card.description }}</p>
-            <div class="project-card__focus">
-              @for (area of card.focusAreas; track area) {
-                <span class="project-card__pill">{{ area }}</span>
-              }
-            </div>
-            <div class="project-card__stack">
-              @for (tech of card.stack.slice(0, 4); track tech) {
-                <span class="tag">{{ tech }}</span>
-              }
-              @if (card.stack.length > 4) {
-                <span class="tag">+{{ card.stack.length - 4 }}</span>
-              }
-            </div>
-            <button type="button" class="project-card__cta" (click)="openModal(card.id)">View Details <span class="project-card__cta-arrow" aria-hidden="true">&#8599;</span></button>
-          </div>
-          <button type="button" class="project-card__expand" (click)="openModal(card.id)" aria-label="View project details">
-            <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor"><path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
-          </button>
-        </article>
+        <li>
+          <a class="work-row" [routerLink]="['/project', card.id]" [style.--row-accent]="accentFor(card)">
+            <span class="work-row__year">{{ card.year }}</span>
+            <span class="work-row__main">
+              <span class="work-row__name">{{ card.name }}</span>
+              <span class="work-row__desc">{{ card.description }}</span>
+              <span class="work-row__stack">{{ card.stack.slice(0, 5).join(' / ') }}</span>
+            </span>
+            <span class="work-row__type">{{ card.type.replace('Side Project - ', '') }}</span>
+            <span class="work-row__arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
       }
-    </div>
+    </ol>
+  </section>
 
-    <!-- Project Modal -->
-    @if (selectedCard(); as card) {
-      <div class="modal-backdrop" (click)="closeModal()">
-        <div class="modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" tabindex="-1">
-          <div class="modal__header">
-            <div>
-              <p class="modal__type">{{ card.type }}</p>
-              <h2 class="modal__title">{{ card.name }}</h2>
+  <!-- Experience -->
+  <section id="experience" class="section reveal">
+    <header class="section__head">
+      <span class="section__index">02</span>
+      <h2 class="section__title">Experience</h2>
+    </header>
+    <ol class="exp-list">
+      @for (item of experience; track item.role + item.company; let i = $index) {
+        <li class="exp" [class.is-open]="expandedRole() === i">
+          <div class="exp__period">
+            {{ item.period }}
+            @if (item.status) {
+              <span class="exp__current">{{ item.status }}</span>
+            }
+          </div>
+          <div class="exp__body">
+            <h3 class="exp__role">{{ item.role }} <span class="exp__at">at</span> {{ item.company }}</h3>
+            <p class="exp__summary">{{ item.summary }}</p>
+            <div class="exp__details">
+              <div class="exp__details-inner">
+                <ul class="exp__achievements">
+                  @for (a of item.achievements; track a) {
+                    <li>{{ a }}</li>
+                  }
+                </ul>
+                <p class="exp__stack">{{ item.stack.join(' · ') }}</p>
+              </div>
             </div>
-            <button type="button" class="modal__close" (click)="closeModal()" aria-label="Close">
-              <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            <button type="button" class="exp__toggle" (click)="toggleRole(i)" [attr.aria-expanded]="expandedRole() === i">
+              {{ expandedRole() === i ? 'Less' : 'Details' }}
+              <span class="exp__toggle-icon" aria-hidden="true"></span>
             </button>
           </div>
-          <p class="modal__desc">{{ card.description }}</p>
-          <div class="modal__metrics">
-            @for (metric of card.metrics; track metric.label) {
-              <div class="modal__metric">
-                <span class="modal__metric-value" [style.color]="isDark() ? card.accent : card.lightAccent">{{ metric.value }}</span>
-                <span class="modal__metric-label">{{ metric.label }}</span>
-              </div>
-            }
-          </div>
-          <ul class="modal__highlights">
-            @for (item of card.highlights; track item) {
-              <li>
-                <span class="modal__highlight-dot" [style.background]="isDark() ? card.accent : card.lightAccent" aria-hidden="true"></span>
-                {{ item }}
-              </li>
-            }
-          </ul>
-          <div class="modal__stack">
-            @for (tech of card.stack; track tech) {
-              <span class="modal__stack-tag">{{ tech }}</span>
-            }
-          </div>
-          <div class="modal__actions">
-            <button type="button" class="btn btn--primary" (click)="viewProject(card.id)">Full Details &nbsp;&#8594;</button>
-            @if (card.repoUrl) {
-              <a class="btn btn--outline" [href]="card.repoUrl" target="_blank" rel="noopener noreferrer">Source &#8599;</a>
-            }
-            @if (card.demoUrl) {
-              <a class="btn btn--outline" [href]="card.demoUrl" target="_blank" rel="noopener noreferrer">Demo &#8599;</a>
-            }
-          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section reveal">
+    <header class="section__head">
+      <span class="section__index">03</span>
+      <h2 class="section__title">Skills</h2>
+    </header>
+    <dl class="skills">
+      @for (group of skillGroups; track group.label) {
+        <div class="skills__row">
+          <dt>{{ group.label }}</dt>
+          <dd>{{ group.items.join(', ') }}</dd>
         </div>
-      </div>
-    }
+      }
+    </dl>
+  </section>
 
-    <!-- Row 4: Skills (12) -->
-    <div id="skills" class="grid-card grid-card--skills"
-      [style.order]="sectionOrder('skills')" [class.is-visible]="isSectionVisible('skills')" [class.is-hidden]="!isSectionVisible('skills')">
-      <p class="grid-card__eyebrow">toolkit</p>
-      <h2 class="grid-card__title">Skills</h2>
-      <div class="skills__grid">
-        @for (group of skillGroups; track group.label) {
-          <div class="skills__group">
-            <p class="skills__group-label">{{ group.label }}</p>
-            <div class="skills__tags">
-              @for (skill of group.items; track skill) {
-                <span class="tag">{{ skill }}</span>
-              }
-            </div>
-          </div>
-        }
-      </div>
-    </div>
+  <!-- About -->
+  <section id="about" class="section reveal">
+    <header class="section__head">
+      <span class="section__index">04</span>
+      <h2 class="section__title">About</h2>
+    </header>
+    <div class="about">
+      <p class="about__lead">{{ profile.summary }}</p>
 
-    <!-- Row 5: Contact (12) -->
-    <div id="contact" class="grid-card grid-card--contact"
-      [style.order]="sectionOrder('contact')" [class.is-visible]="isSectionVisible('contact')" [class.is-hidden]="!isSectionVisible('contact')">
-      <p class="grid-card__eyebrow">get in touch</p>
-      <h2 class="contact__headline">Let's build something together.</h2>
-
-      <form class="contact__form" (ngSubmit)="submitContact()" #contactForm="ngForm">
-        <div class="contact__form-row">
-          <label class="contact__field">
-            <span class="contact__label">Name</span>
-            <input class="contact__input" type="text" name="name" [(ngModel)]="formName" required placeholder="Your name" />
-          </label>
-          <label class="contact__field">
-            <span class="contact__label">Email</span>
-            <input class="contact__input" type="email" name="email" [(ngModel)]="formEmail" required placeholder="you@example.com" />
-          </label>
+      <div class="facts">
+        <div class="fact">
+          <p class="eyebrow">Education</p>
+          <p>{{ profile.education }}</p>
         </div>
-        <label class="contact__field">
-          <span class="contact__label">Message</span>
-          <textarea class="contact__input contact__textarea" name="message" [(ngModel)]="formMessage" required placeholder="What are you working on?" rows="4"></textarea>
-        </label>
-        <div class="contact__form-footer">
-          <button class="contact__submit" type="submit" [disabled]="!formName() || !formEmail() || !formMessage() || formStatus() === 'sending'">
-            @if (formStatus() === 'sending') {
-              Sending…
-            } @else if (formStatus() === 'sent') {
-              Sent!
-            } @else {
-              Send Message
-            }
-          </button>
-          @if (formStatus() === 'sent') {
-            <span class="contact__success" role="status" aria-live="polite">Thanks! I'll get back to you soon.</span>
+        <div class="fact">
+          <p class="eyebrow">Languages</p>
+          @for (lang of info.credentials.languages; track lang.name) {
+            <p>{{ lang.name }} <span class="muted">— {{ lang.level }}</span></p>
           }
         </div>
-      </form>
+        <div class="fact">
+          <p class="eyebrow">Certifications</p>
+          @for (cert of info.credentials.certifications; track cert.name) {
+            <p>{{ cert.name }} <span class="muted">— {{ cert.issuer }}</span></p>
+          }
+        </div>
+      </div>
 
-      <div class="contact__links">
-        <a class="contact__link" [href]="'mailto:' + profile.email">
-          <svg class="contact__link-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.003 5.884 10 9.882l7.997-3.998A2 2 0 0 0 16 4H4a2 2 0 0 0-1.997 1.884z"/><path d="m18 8.118-8 4-8-4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.118z"/></svg>
-          <span>{{ profile.email }}</span>
-        </a>
-        <a class="contact__link" [href]="links.github" target="_blank" rel="noopener noreferrer">
-          <svg class="contact__link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          <span>GitHub</span>
-          <span class="contact__link-arrow" aria-hidden="true">&#8599;</span>
-        </a>
-        <a class="contact__link" [href]="links.website" target="_blank" rel="noopener noreferrer">
-          <svg class="contact__link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zM4 12c0-.338.025-.67.074-.997L7.75 14.68A1.5 1.5 0 0 1 8.657 15H10a1 1 0 0 1 1 1v2.5c0 .356.19.686.5.866L13 20.5V21c0 .334-.022.663-.065.987A8 8 0 0 1 4 12zm16 0a8.002 8.002 0 0 1-6 7.748V19l-1.625-1.95A1 1 0 0 1 11.6 16.5H8.5v-2A1.5 1.5 0 0 1 10 13h3a1 1 0 0 1 .707.293l.5.5.237-1.663.906-3.625A1 1 0 0 1 16.32 7H20.06A7.98 7.98 0 0 1 20 12z"/></svg>
-          <span>Website</span>
-          <span class="contact__link-arrow" aria-hidden="true">&#8599;</span>
-        </a>
-        <a class="contact__link" [href]="links.linkedin" target="_blank" rel="noopener noreferrer">
-          <svg class="contact__link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          <span>LinkedIn</span>
-          <span class="contact__link-arrow" aria-hidden="true">&#8599;</span>
-        </a>
-        <a class="contact__link" [href]="links.resume" target="_blank" rel="noopener noreferrer">
-          <svg class="contact__link-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
-          <span>Resume</span>
-          <span class="contact__link-arrow" aria-hidden="true">&#8599;</span>
-        </a>
+      <div class="off-clock">
+        <p class="eyebrow">Off the clock</p>
+        <div class="off-clock__grid">
+          <figure class="taste">
+            <figcaption class="taste__kind">Reading</figcaption>
+            <p class="taste__title">{{ culture.book.title }}</p>
+            <p class="taste__by">{{ culture.book.creator }}</p>
+            <p class="taste__note">{{ culture.book.note }}</p>
+          </figure>
+          <figure class="taste">
+            <figcaption class="taste__kind">Watching</figcaption>
+            <p class="taste__title">{{ culture.movie.title }}</p>
+            <p class="taste__by">{{ culture.movie.creator }}</p>
+            <p class="taste__note">{{ culture.movie.note }}</p>
+          </figure>
+          <figure class="taste">
+            <figcaption class="taste__kind">Listening</figcaption>
+            <p class="taste__title">{{ culture.music.title }}</p>
+            <p class="taste__by">{{ culture.music.artist }}</p>
+            <p class="taste__note">{{ culture.music.note }}</p>
+          </figure>
+        </div>
       </div>
     </div>
+  </section>
 
-  </div>
-</div>
+  <!-- Contact -->
+  <section id="contact" class="section section--contact reveal">
+    <header class="section__head">
+      <span class="section__index">05</span>
+      <h2 class="section__title">Contact</h2>
+    </header>
+    <div class="contact">
+      <p class="contact__lead">Have a system that needs to be <em>secure</em>, <em>fast</em> and <em>boringly reliable</em>? Let's talk.</p>
+      <a class="contact__email" [href]="'mailto:' + profile.email">{{ profile.email }}</a>
+      <ul class="contact__links">
+        <li><a [href]="links.github" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
+        <li><a [href]="links.linkedin" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>
+        <li><a [href]="links.website" target="_blank" rel="noopener noreferrer">Website <span aria-hidden="true">↗</span></a></li>
+        <li><a [href]="links.resume" target="_blank" rel="noopener noreferrer">Résumé <span aria-hidden="true">↗</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="container site-footer">
+  <span>© {{ year }} {{ profile.name }}</span>
+  <span>{{ profile.location }}</span>
+</footer>

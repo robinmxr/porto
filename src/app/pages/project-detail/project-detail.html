@@ -1,85 +1,90 @@
 @if (project(); as p) {
-  <div class="detail-page" [style.--accent]="p.accent" [style.--project-bg]="p.background" [style.--project-border]="p.border">
+  <div class="detail" [style.--row-accent]="p.accent">
 
-    <!-- Topbar -->
-    <header class="detail-topbar">
-      <div class="detail-topbar-inner">
-        <button type="button" class="detail-back" (click)="goBack()">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
-          Back to home
+    <header class="site-header is-scrolled">
+      <div class="container site-header__inner">
+        <a class="site-header__brand" routerLink="/">{{ profile.shortName }}</a>
+        <button type="button" class="link-arrow link-arrow--back" (click)="goBack()">
+          <span aria-hidden="true">←</span> All work
         </button>
-        <span class="detail-breadcrumb">{{ p.name }} · {{ p.year }}</span>
       </div>
     </header>
 
-    <main class="detail-shell">
-
-      <!-- Hero -->
-      <section class="detail-hero" [style.background]="p.background" [style.borderColor]="p.border">
-        <div class="detail-hero__glow" [style.background]="p.accent"></div>
-        <div class="detail-hero__content">
-          <p class="detail-type">{{ p.type }}</p>
-          <h1 class="detail-title" [style.color]="p.text">{{ p.name }}</h1>
-          <p class="detail-description" [style.color]="p.text">{{ p.description }}</p>
-        </div>
-      </section>
-
-      <!-- Metrics -->
-      <section class="detail-metrics">
-        @for (metric of p.metrics; track metric.label) {
-          <div class="detail-metric">
-            <span class="detail-metric__value" [style.color]="p.accent">{{ metric.value }}</span>
-            <span class="detail-metric__label">{{ metric.label }}</span>
+    <main class="container">
+      <section class="detail__hero">
+        <p class="eyebrow">
+          <span class="detail__swatch" aria-hidden="true"></span>
+          {{ p.type.replace('Side Project - ', '') }} · {{ p.year }}
+        </p>
+        <h1 class="detail__title">{{ p.name }}</h1>
+        <p class="detail__desc">{{ p.description }}</p>
+        @if (p.repoUrl || p.demoUrl) {
+          <div class="hero__actions">
+            @if (p.demoUrl) {
+              <a class="link-arrow" [href]="p.demoUrl" target="_blank" rel="noopener noreferrer">Live demo <span aria-hidden="true">↗</span></a>
+            }
+            @if (p.repoUrl) {
+              <a class="link-arrow" [href]="p.repoUrl" target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">↗</span></a>
+            }
           </div>
         }
       </section>
 
-      <!-- Body grid -->
-      <div class="detail-body">
-
-        <!-- Highlights -->
-        <section class="detail-section detail-section--highlights">
-          <h2 class="detail-section__title">What was built</h2>
-          <ul class="detail-highlights">
-            @for (item of p.highlights; track item) {
-              <li class="detail-highlight">
-                <span class="detail-highlight__dot" [style.background]="p.accent" aria-hidden="true"></span>
-                {{ item }}
-              </li>
-            }
-          </ul>
-        </section>
-
-        <!-- Stack -->
-        <section class="detail-section detail-section--stack">
-          <h2 class="detail-section__title">Tech stack</h2>
-          <div class="detail-stack">
-            @for (tech of p.stack; track tech) {
-              <span class="detail-stack__tag" [style.borderColor]="p.border" [style.color]="p.text">{{ tech }}</span>
-            }
+      <dl class="metrics">
+        @for (metric of p.metrics; track metric.label) {
+          <div class="metric">
+            <dt class="eyebrow">{{ metric.label }}</dt>
+            <dd>{{ metric.value }}</dd>
           </div>
+        }
+      </dl>
 
-          <div class="detail-cta-block">
-            <p class="detail-cta-block__label">Interested in working together?</p>
-            <a class="detail-cta-btn" [href]="'mailto:' + profile.email" [style.background]="p.accent" [style.color]="p.background">
-              Get in touch →
-            </a>
-            @if (p.repoUrl) {
-              <a class="detail-cta-link" [href]="p.repoUrl" target="_blank" rel="noopener noreferrer">View repo ↗</a>
-            }
-            @if (p.demoUrl) {
-              <a class="detail-cta-link" [href]="p.demoUrl" target="_blank" rel="noopener noreferrer">Live demo ↗</a>
-            }
-            <a class="detail-cta-link" routerLink="/">← All projects</a>
-          </div>
-        </section>
+      <section class="section is-revealed">
+        <header class="section__head">
+          <span class="section__index">01</span>
+          <h2 class="section__title">What was built</h2>
+        </header>
+        <ol class="highlights">
+          @for (item of p.highlights; track item) {
+            <li>{{ item }}</li>
+          }
+        </ol>
+      </section>
 
-      </div>
+      <section class="section is-revealed">
+        <header class="section__head">
+          <span class="section__index">02</span>
+          <h2 class="section__title">Stack</h2>
+        </header>
+        <div>
+          <p class="detail__stack">{{ p.stack.join(' · ') }}</p>
+          @if (p.focusAreas.length) {
+            <p class="eyebrow detail__focus-label">Focus</p>
+            <p class="muted">{{ p.focusAreas.join(', ') }}</p>
+          }
+        </div>
+      </section>
+
+      <section class="section section--contact is-revealed">
+        <header class="section__head">
+          <span class="section__index">03</span>
+          <h2 class="section__title">Next</h2>
+        </header>
+        <div class="contact">
+          <p class="contact__lead">Interested in working together?</p>
+          <a class="contact__email" [href]="'mailto:' + profile.email">{{ profile.email }}</a>
+        </div>
+      </section>
     </main>
+
+    <footer class="container site-footer">
+      <a routerLink="/">← Back to home</a>
+      <span>{{ profile.name }}</span>
+    </footer>
   </div>
 } @else {
-  <div class="detail-not-found">
+  <div class="container detail-not-found">
     <p>Project not found.</p>
-    <a routerLink="/">← Back to home</a>
+    <a class="link-arrow" routerLink="/">← Back to home</a>
   </div>
 }
