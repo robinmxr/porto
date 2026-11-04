@@ -28,12 +28,12 @@
       <h1 class="hero__name">{{ profile.name }}</h1>
       <p class="hero__headline">{{ profile.headline }}</p>
       <div class="hero__meta">
-        <span>{{ profile.role }}</span>
         <span class="hero__meta-sep" aria-hidden="true"></span>
-        <span>{{ profile.location }}</span>
+        <span>{{ profile.credibility }}</span>
       </div>
       <div class="hero__actions">
-        <button type="button" class="link-arrow" (click)="scrollTo('work')">Selected work <span aria-hidden="true">↓</span></button>
+        <button type="button" class="link-arrow" (click)="scrollTo('experience')">Experience <span aria-hidden="true">↓</span></button>
+        <button type="button" class="link-arrow" (click)="scrollTo('studies')">Case studies <span aria-hidden="true">↓</span></button>
         <a class="link-arrow" [href]="links.resume" target="_blank" rel="noopener noreferrer">Résumé <span aria-hidden="true">↗</span></a>
         <a class="link-arrow" [href]="'mailto:' + profile.email">Email <span aria-hidden="true">→</span></a>
       </div>
@@ -46,6 +46,10 @@
         <p class="muted">{{ experience[0].company }}</p>
       </div>
       <div class="glance">
+        <p class="eyebrow">Based in</p>
+        <p>{{ profile.location }}</p>
+      </div>
+      <div class="glance">
         <p class="eyebrow">Focus</p>
         @for (area of focusAreas; track area) {
           <p>{{ area }}</p>
@@ -54,34 +58,10 @@
     </aside>
   </section>
 
-  <!-- Work -->
-  <section id="work" class="section reveal">
-    <header class="section__head">
-      <span class="section__index">01</span>
-      <h2 class="section__title">Selected work</h2>
-    </header>
-    <ol class="work-list">
-      @for (card of projectCards; track card.id) {
-        <li>
-          <a class="work-row" [routerLink]="['/project', card.id]" [style.--row-accent]="accentFor(card)">
-            <span class="work-row__year">{{ card.year }}</span>
-            <span class="work-row__main">
-              <span class="work-row__name">{{ card.name }}</span>
-              <span class="work-row__desc">{{ card.description }}</span>
-              <span class="work-row__stack">{{ card.stack.slice(0, 5).join(' / ') }}</span>
-            </span>
-            <span class="work-row__type">{{ card.type.replace('Side Project - ', '') }}</span>
-            <span class="work-row__arrow" aria-hidden="true">→</span>
-          </a>
-        </li>
-      }
-    </ol>
-  </section>
-
   <!-- Experience -->
   <section id="experience" class="section reveal">
     <header class="section__head">
-      <span class="section__index">02</span>
+      <span class="section__index">01</span>
       <h2 class="section__title">Experience</h2>
     </header>
     <ol class="exp-list">
@@ -96,20 +76,102 @@
           <div class="exp__body">
             <h3 class="exp__role">{{ item.role }} <span class="exp__at">at</span> {{ item.company }}</h3>
             <p class="exp__summary">{{ item.summary }}</p>
+            <dl class="figures">
+              @for (f of item.figures; track f.label) {
+                <div class="figure">
+                  <dt>{{ f.value }}</dt>
+                  <dd>{{ f.label }}</dd>
+                </div>
+              }
+            </dl>
             <div class="exp__details">
               <div class="exp__details-inner">
-                <ul class="exp__achievements">
-                  @for (a of item.achievements; track a) {
-                    <li>{{ a }}</li>
-                  }
-                </ul>
-                <p class="exp__stack">{{ item.stack.join(' · ') }}</p>
+                <div class="exp__panel">
+                  <p class="eyebrow exp__panel-label">Key contributions</p>
+                  <ol class="exp__achievements">
+                    @for (a of item.achievements; track a.lead) {
+                      <li>
+                        <p><strong class="exp__lead">{{ a.lead }}.</strong> {{ a.detail }}</p>
+                      </li>
+                    }
+                  </ol>
+                  <p class="eyebrow exp__panel-label">Stack</p>
+                  <ul class="exp__stack">
+                    @for (tech of item.stack; track tech) {
+                      <li>{{ tech }}</li>
+                    }
+                  </ul>
+                </div>
               </div>
             </div>
             <button type="button" class="exp__toggle" (click)="toggleRole(i)" [attr.aria-expanded]="expandedRole() === i">
-              {{ expandedRole() === i ? 'Less' : 'Details' }}
+              {{ expandedRole() === i ? 'Hide details' : 'View details' }}
               <span class="exp__toggle-icon" aria-hidden="true"></span>
             </button>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <!-- Case studies -->
+  <section id="studies" class="section reveal">
+    <header class="section__head">
+      <span class="section__index">02</span>
+      <h2 class="section__title">Case studies</h2>
+    </header>
+    <ol class="work-list">
+      @for (cs of caseStudies; track cs.id; let i = $index) {
+        <li class="work-row">
+          <span class="work-row__year">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <div class="work-row__main">
+            <h3 class="work-row__name">
+              <a class="work-row__link" [routerLink]="['/work', cs.id]">{{ cs.title }}</a>
+            </h3>
+            <p class="work-row__desc">{{ cs.tagline }}</p>
+            <p class="work-row__stack">{{ cs.concepts.slice(0, 4).join(' / ') }}</p>
+            <div class="work-row__links">
+              <span class="link-arrow">Read case study <span aria-hidden="true">→</span></span>
+            </div>
+          </div>
+          <div class="work-row__proof">
+            <span class="work-row__proof-value">{{ cs.figures[0].value }}</span>
+            <span class="work-row__proof-label">{{ cs.figures[0].label }}</span>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <!-- Projects -->
+  <section id="work" class="section reveal">
+    <header class="section__head">
+      <span class="section__index">03</span>
+      <h2 class="section__title">Projects</h2>
+    </header>
+    <ol class="work-list">
+      @for (card of projectCards; track card.id) {
+        <li class="work-row">
+          <span class="work-row__year">{{ card.year }}</span>
+          <div class="work-row__main">
+            <h3 class="work-row__name">
+              <a class="work-row__link" [routerLink]="['/project', card.id]">{{ card.name }}</a>
+            </h3>
+            <p class="work-row__desc">{{ card.description }}</p>
+            <p class="work-row__stack">{{ card.stack.slice(0, 5).join(' / ') }}</p>
+            <div class="work-row__links">
+              <span class="link-arrow">Case study <span aria-hidden="true">→</span></span>
+              @if (card.demoUrl) {
+                <a class="link-arrow" [href]="card.demoUrl" target="_blank" rel="noopener noreferrer">Live <span aria-hidden="true">↗</span></a>
+              }
+              @if (card.repoUrl) {
+                <a class="link-arrow" [href]="card.repoUrl" target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">↗</span></a>
+              }
+            </div>
+          </div>
+          <div class="work-row__proof">
+            <span class="work-row__proof-value">{{ card.proof.value }}</span>
+            <span class="work-row__proof-label">{{ card.proof.label }}</span>
           </div>
         </li>
       }
@@ -119,23 +181,31 @@
   <!-- Skills -->
   <section id="skills" class="section reveal">
     <header class="section__head">
-      <span class="section__index">03</span>
+      <span class="section__index">04</span>
       <h2 class="section__title">Skills</h2>
     </header>
-    <dl class="skills">
-      @for (group of skillGroups; track group.label) {
-        <div class="skills__row">
-          <dt>{{ group.label }}</dt>
-          <dd>{{ group.items.join(', ') }}</dd>
-        </div>
-      }
-    </dl>
+    <div>
+      <dl class="skills">
+        @for (group of skillGroups; track group.label) {
+          <div class="skills__row">
+            <dt>{{ group.label }}</dt>
+            <dd>
+              <span class="skills__core">{{ group.core.join(', ') }}</span>@if (group.more.length) {<span class="skills__more">, {{ group.more.join(', ') }}</span>}
+            </dd>
+          </div>
+        }
+      </dl>
+      <p class="skills__secondary">
+        <span class="eyebrow">{{ secondarySkills.label }}</span>
+        {{ secondarySkills.items.join(', ') }}
+      </p>
+    </div>
   </section>
 
   <!-- About -->
   <section id="about" class="section reveal">
     <header class="section__head">
-      <span class="section__index">04</span>
+      <span class="section__index">05</span>
       <h2 class="section__title">About</h2>
     </header>
     <div class="about">
@@ -189,7 +259,7 @@
   <!-- Contact -->
   <section id="contact" class="section section--contact reveal">
     <header class="section__head">
-      <span class="section__index">05</span>
+      <span class="section__index">06</span>
       <h2 class="section__title">Contact</h2>
     </header>
     <div class="contact">

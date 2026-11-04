@@ -1,0 +1,59 @@
+<figure class="diagram">
+  <div class="diagram__scroll">
+    <svg class="diagram__svg" [attr.viewBox]="'0 0 ' + size().w + ' ' + size().h" [style.max-width.px]="size().w" role="img" [attr.aria-label]="ariaLabel()">
+      <defs>
+        <marker [attr.id]="markerId" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" class="diagram__arrowhead" />
+        </marker>
+      </defs>
+
+      @for (e of edges(); track $index) {
+        <line class="diagram__edge" [class.is-dashed]="e.dashed"
+          [attr.x1]="e.x1" [attr.y1]="e.y1" [attr.x2]="e.x2" [attr.y2]="e.y2"
+          [attr.marker-end]="'url(#' + markerId + ')'" />
+      }
+
+      @for (n of nodes(); track n.id) {
+        <g class="diagram__node diagram__node--{{ n.kind }}" [class.is-highlight]="n.highlight" [attr.transform]="'translate(' + n.x + ',' + n.y + ')'">
+          <rect class="diagram__box" [attr.width]="box.w" [attr.height]="box.h" [attr.rx]="n.kind === 'client' || isState(n) ? 12 : 3" />
+          @if (n.kind === 'terminal') {
+            <rect class="diagram__inner" x="3" y="3" [attr.width]="box.w - 6" [attr.height]="box.h - 6" rx="9" />
+          }
+          @if (n.kind === 'store') {
+            <line class="diagram__detail" x1="0" y1="7" [attr.x2]="box.w" y2="7" />
+          }
+          @if (n.kind === 'queue') {
+            <line class="diagram__detail" [attr.x1]="box.w - 12" y1="10" [attr.x2]="box.w - 12" [attr.y2]="box.h - 10" />
+            <line class="diagram__detail" [attr.x1]="box.w - 7" y1="10" [attr.x2]="box.w - 7" [attr.y2]="box.h - 10" />
+          }
+
+          @if (isState(n)) {
+            <text class="diagram__label" [attr.x]="box.w / 2" y="29" text-anchor="middle">{{ n.label }}</text>
+            @if (n.sub) {
+              <text class="diagram__sub" [attr.x]="box.w / 2" y="46" text-anchor="middle">{{ n.sub }}</text>
+            }
+          } @else {
+            <text class="diagram__kind" x="12" y="17">{{ kindLabel(n) }}</text>
+            <text class="diagram__label" x="12" y="35">{{ n.label }}</text>
+            @if (n.sub) {
+              <text class="diagram__sub" x="12" y="51">{{ n.sub }}</text>
+            }
+          }
+        </g>
+      }
+
+      @for (e of edges(); track $index) {
+        @if (e.label) {
+          <g class="diagram__edge-label" [attr.transform]="'translate(' + e.lx + ',' + e.ly + ')'">
+            <rect [attr.x]="-e.lw / 2" y="-8" [attr.width]="e.lw" height="16" rx="8" />
+            <text x="0" y="3.5" text-anchor="middle">{{ e.label }}</text>
+          </g>
+        }
+      }
+    </svg>
+  </div>
+  <figcaption class="diagram__caption">
+    <span class="eyebrow">{{ diagram().title }}</span>
+    {{ diagram().caption }}
+  </figcaption>
+</figure>

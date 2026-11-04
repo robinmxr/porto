@@ -4,14 +4,15 @@
     "shortName": "Robin Islam",
     "initials": "RI",
     "role": "Software Engineer",
-    "focus": "Full-Stack Engineering · Healthcare · Fintech · Distributed Systems",
-    "headline": "I build secure, scalable systems across fintech and healthcare — from clinical microservices to payment infrastructure.",
-    "summary": "Full-stack engineer with 3 years building secure, scalable systems using Angular, TypeScript, C#, .NET, and ASP.NET Core, backed by PostgreSQL/SQL Server and hands-on Docker/Kubernetes deployment experience. Delivered microservices for clinical workflows — prescriptions, appointments, and telemedicine — including real-time scheduling logic and secure video sessions, backed by xUnit test coverage. Skilled in Domain-Driven Design, RESTful API design, EF Core, and event-driven architecture (Kafka/RabbitMQ), with a track record of measurable performance and workflow improvements in regulated, data-sensitive environments (fintech PCI-DSS, healthcare).",
+    "focus": "Distributed Systems · Concurrency & Consistency · Payments · Healthcare",
+    "headline": "I build backend systems that stay correct under concurrency, retries and failure — from race-free booking to forgery-safe payments.",
+    "summary": "I'm a backend engineer in Dhaka building distributed systems for healthcare and fintech. Most of my work lives where correctness is non-negotiable: scarce appointment slots, payments, and medical records. I like problems that look simple until two requests arrive at once — and I prove the answers with tests that actually race. Before healthcare I built PCI-DSS-aligned payment APIs for a fintech payments platform.",
     "location": "Dhaka, Bangladesh",
     "status": "open to work",
     "mode": "remote friendly",
     "email": "reajulbd786@gmail.com",
-    "education": "B.Sc.(Engg.) Computer Science & Engineering · Mawlana Bhashani Science & Technology University (2017–2021)"
+    "education": "B.Sc.(Engg.) Computer Science & Engineering · Mawlana Bhashani Science & Technology University (2017–2021)",
+    "credibility": "Backend engineer · .NET & PostgreSQL · 3 years building distributed systems for healthcare and payments"
   },
   "links": {
     "github": "https://github.com/robinmxr",
@@ -19,49 +20,231 @@
     "website": "https://robinislam.netlify.app",
     "resume": "/RobinResume.pdf"
   },
-  "skills": {
-    "Frontend": ["Angular", "TypeScript", "HTML5", "CSS/SCSS", "React"],
-    "Backend": ["C#", ".NET / ASP.NET Core", "CQRS/MediatR", "Entity Framework Core", "Node.js", "Express", "PHP", "Python", "Laravel", "Django"],
-    "Database": ["PostgreSQL", "SQL Server", "MongoDB", "MySQL"],
-    "APIs & Architecture": ["RESTful API Design", "Microservices", "Clean Architecture", "SOLID", "Event-driven Architecture"],
-    "Cloud & DevOps": ["Microsoft Azure", "Azure Key Vault", "Docker", "Kubernetes", "Docker Swarm", "K3s", "GitLab CI/CD", "AWS"],
-    "Auth & Access Control": ["OAuth 2.0", "OpenID Connect", "JWT", "RBAC", "Microsoft Identity", "Keycloak"],
-    "Messaging & Observability": ["Kafka", "RabbitMQ", "Serilog", "Graylog", "Zipkin"],
-    "Real-time & Payments": ["WebSockets", "SSE", "Visa", "TSYS", "BlueSnap", "SSLCommerz"],
-    "Tools": ["Git", "Redis", "Jira", "Postman", "Insomnia"],
-    "Testing": ["xUnit", "Unit Testing", "Integration Testing"],
-    "Methodologies": ["Agile (Scrum)", "Code Review", "Test-Driven Development"]
-  },
+  "skills": [
+    {
+      "label": "Concurrency & consistency",
+      "core": [
+        "Optimistic concurrency",
+        "Advisory locks",
+        "DB-enforced invariants",
+        "State machines"
+      ],
+      "more": [
+        "SKIP LOCKED work queues",
+        "Serialisable sections"
+      ]
+    },
+    {
+      "label": "Reliability & messaging",
+      "core": [
+        "Idempotency",
+        "Transactional outbox",
+        "Retries & circuit breakers"
+      ],
+      "more": [
+        "Kafka",
+        "RabbitMQ",
+        "Delivery semantics",
+        "Dead-lettering"
+      ]
+    },
+    {
+      "label": "API & service design",
+      "core": [
+        "ASP.NET Core / .NET 8",
+        "REST",
+        "Clean Architecture",
+        "CQRS / MediatR"
+      ],
+      "more": [
+        "DDD",
+        "Contract-first design",
+        "RFC 7807",
+        "Service extraction"
+      ]
+    },
+    {
+      "label": "Data",
+      "core": [
+        "PostgreSQL",
+        "EF Core",
+        "SQL Server"
+      ],
+      "more": [
+        "pgvector",
+        "tsvector",
+        "pg_trgm",
+        "Redis",
+        "MongoDB"
+      ]
+    },
+    {
+      "label": "Security",
+      "core": [
+        "OAuth 2.0 / OIDC",
+        "Keycloak",
+        "RBAC",
+        "AES-GCM encryption"
+      ],
+      "more": [
+        "PCI-DSS-aligned APIs",
+        "PHI-safe logging",
+        "Microsoft Identity"
+      ]
+    },
+    {
+      "label": "Testing",
+      "core": [
+        "xUnit",
+        "Testcontainers",
+        "Integration testing"
+      ],
+      "more": [
+        "WireMock",
+        "Race / concurrency tests",
+        "TDD"
+      ]
+    },
+    {
+      "label": "Infrastructure & ops",
+      "core": [
+        "Docker",
+        "Kubernetes / K3s",
+        "GitLab CI/CD"
+      ],
+      "more": [
+        "Docker Swarm",
+        "Graylog",
+        "OpenTelemetry / Zipkin",
+        "Azure",
+        "AWS"
+      ]
+    }
+  ],
   "experience": [
     {
       "role": "Software Engineer",
       "company": "Adaptive Enterprise Ltd",
       "period": "Dec 2025 – Present",
       "status": "current",
-      "summary": "Led development of the Appointment and Telemedicine services within a larger clinical/healthcare microservices platform spanning Payment, Prescription, User-Management, Content-Management, and other domains.",
+      "summary": "Designed and built the appointment, payment and telemedicine services of a national telehealth platform — .NET 8 microservices with Clean Architecture and CQRS on PostgreSQL.",
       "achievements": [
-        "Led development of the Appointment and Telemedicine services within a larger clinical/healthcare microservices platform built with .NET 8, Clean Architecture, and CQRS/MediatR, backed by PostgreSQL/EF Core, with xUnit unit and integration tests covering booking and payment logic.",
-        "Secured services with Keycloak-based OAuth 2.0/OIDC authentication and role-based access control (RBAC), applied PHI masking in logs and API responses, and implemented audit logging of sensitive patient-record access, with secrets managed via Azure Key Vault.",
-        "Designed the appointment scheduling and booking domain with a slot-hold lifecycle supporting multiple convergent release mechanisms, and resolved race conditions in concurrent booking flows with real-time updates via WebSockets/SSE.",
-        "Integrated SSLCommerz for payments with platform-aware redirects, and implemented per-participant Agora token minting for secure, access-controlled telemedicine video sessions handling sensitive patient interactions.",
-        "Containerized and deployed all microservices with Docker, orchestrating hands-on production deployments on Docker Swarm and K3s (Kubernetes) with GitLab CI/CD, and operated the platform's distributed messaging infrastructure (Kafka, RabbitMQ) with Serilog/Graylog centralized logging and Zipkin distributed tracing, including diagnosing a critical disk-space incident traced to Kafka's storage volume."
+        {
+          "lead": "Designed race-free booking",
+          "detail": "Slot-hold lifecycle with a 5-minute hold, a fresh 10-minute payment window and eight convergent release paths; first-come-first-served enforced by a partial unique index, row-version optimistic concurrency and Postgres advisory locks, proven by real-database race tests (8 concurrent patients → 1 booking)."
+        },
+        {
+          "lead": "Made payments exactly-once and forgery-safe",
+          "detail": "Extracted SSLCommerz into its own service; every callback re-validated with the provider, validity and ownership reported as separate signals so a forged callback can't release another patient's slot, and layered idempotency (natural keys, unique-index backstops, receiver dedupe)."
+        },
+        {
+          "lead": "Secured video consultations",
+          "detail": "Appointment-scoped Agora video, signalling and screen-share tokens with server-derived channels, party and join-window checks, and expiry pinned to the end of the slot."
+        },
+        {
+          "lead": "Turned consultations into an encrypted medical record",
+          "detail": "Append-only, undeletable transcripts encrypted with AES-256-GCM (purpose-bound, key rotation), PHI-safe logging verified by tests, event-driven sealing re-verified at the source, and LLM-generated summaries for long calls."
+        },
+        {
+          "lead": "Built reliable messaging without losing atomicity",
+          "detail": "Transactional outbox with per-channel delivery semantics, backoff and dead-lettering; Kafka-ready event contracts; live availability over SSE fanned out with Postgres LISTEN/NOTIFY."
+        },
+        {
+          "lead": "Ran the platform in production",
+          "detail": "Docker and Kubernetes (K3s) deployments via GitLab CI, Kafka and RabbitMQ operations — including diagnosing a disk-space incident on Kafka's storage volume — with Graylog logging and OpenTelemetry/Zipkin tracing."
+        }
       ],
-      "stack": [".NET 8", "C#", "PostgreSQL", "EF Core", "CQRS/MediatR", "Keycloak", "OAuth 2.0/OIDC", "RBAC", "Azure Key Vault", "xUnit", "WebSockets/SSE", "SSLCommerz", "Agora", "Docker", "Docker Swarm", "K3s", "GitLab CI/CD", "Kafka", "RabbitMQ", "Serilog", "Graylog", "Zipkin"]
+      "stack": [
+        ".NET 8",
+        "C#",
+        "PostgreSQL",
+        "EF Core",
+        "CQRS/MediatR",
+        "Polly",
+        "Keycloak (OIDC, RBAC)",
+        "SSLCommerz",
+        "Agora",
+        "SSE",
+        "xUnit",
+        "Testcontainers",
+        "WireMock",
+        "Docker",
+        "K3s",
+        "GitLab CI/CD",
+        "Kafka",
+        "RabbitMQ",
+        "Serilog/Graylog",
+        "OpenTelemetry/Zipkin"
+      ],
+      "figures": [
+        {
+          "value": "1,400+",
+          "label": "automated tests across 3 services"
+        },
+        {
+          "value": "8 → 1",
+          "label": "concurrent patients, exactly one booking"
+        },
+        {
+          "value": "8",
+          "label": "convergent hold-release paths"
+        }
+      ]
     },
     {
       "role": "Software Engineer I",
       "company": "Teton Private Ltd",
       "period": "Sep 2023 – Nov 2025",
       "status": "",
-      "summary": "Built secure, high-throughput ASP.NET Core Web APIs on Microsoft SQL Server for ConnexPay, a mission-critical fintech platform, aligned with PCI-DSS standards.",
+      "summary": "Built PCI-DSS-aligned ASP.NET Core payment APIs on SQL Server for ConnexPay, a fintech payments platform.",
       "achievements": [
-        "Built secure, high-throughput ASP.NET Core Web APIs on Microsoft SQL Server for ConnexPay, a mission-critical fintech platform, aligned with PCI-DSS standards (a regulated-data compliance model closely paralleling HIPAA/PHI handling), securing endpoints with Microsoft Identity authentication and role-based authorization, with robust exception handling.",
-        "Integrated third-party payment gateways including Visa, TSYS, and BlueSnap, implementing webhook/IPN handling, transaction validation, and ledger updates.",
-        "Applied Domain-Driven Design and layered service abstractions with Repository and Unit of Work patterns, optimizing query performance and helping modularize the monolith toward a microservices-ready architecture.",
-        "Automated the client onboarding workflow by redesigning backend processes and database schema, cutting setup time by 30%.",
-        "Built Node.js/Express backend services and REST APIs for in-house MERN-stack applications, applying event-driven, asynchronous design patterns for concurrent, I/O-heavy workloads."
+        {
+          "lead": "Built PCI-DSS-aligned payment APIs",
+          "detail": "Secure, high-throughput ASP.NET Core Web APIs with Microsoft Identity authentication, role-based authorization and consistent error handling."
+        },
+        {
+          "lead": "Integrated three payment gateways",
+          "detail": "Visa, TSYS and BlueSnap — webhook/IPN handling, transaction validation and ledger updates."
+        },
+        {
+          "lead": "Modularised a fintech monolith",
+          "detail": "Domain-Driven Design with layered service abstractions, Repository and Unit of Work; optimised query performance and moved the codebase toward a microservices-ready architecture."
+        },
+        {
+          "lead": "Cut client onboarding time by 30%",
+          "detail": "Automated the onboarding workflow by redesigning the backend process and database schema."
+        },
+        {
+          "lead": "Built event-driven Node.js services",
+          "detail": "Node.js/Express services and REST APIs for in-house applications, using asynchronous, event-driven patterns for concurrent, I/O-heavy workloads."
+        }
       ],
-      "stack": [".NET", "C#", "ASP.NET Core", "SQL Server", "Entity Framework", "Microsoft Identity", "DDD", "Node.js", "Express", "REST APIs"]
+      "stack": [
+        ".NET",
+        "C#",
+        "ASP.NET Core",
+        "SQL Server",
+        "Entity Framework",
+        "Microsoft Identity",
+        "DDD",
+        "Node.js",
+        "Express",
+        "REST APIs"
+      ],
+      "figures": [
+        {
+          "value": "30%",
+          "label": "faster client onboarding"
+        },
+        {
+          "value": "3",
+          "label": "payment gateways integrated"
+        },
+        {
+          "value": "PCI-DSS",
+          "label": "aligned APIs"
+        }
+      ]
     }
   ],
   "projects": [
@@ -70,7 +253,13 @@
       "name": "The Algomist - DSA Journey",
       "type": "Side Project - Educational",
       "description": "A personal DSA preparation tool focused on organizing data structures and algorithms practice into a structured learning routine, with AI-generated topic breakdowns via Grok AI.",
-      "focusAreas": ["Structured Learning", "AI Content", "Progress Tracking", "Difficulty Progression", "Frontend"],
+      "focusAreas": [
+        "Structured Learning",
+        "AI Content",
+        "Progress Tracking",
+        "Difficulty Progression",
+        "Frontend"
+      ],
       "background": "#1c0f02",
       "border": "#78350f",
       "accent": "#f59e0b",
@@ -79,11 +268,24 @@
       "lightBorder": "#fde68a",
       "lightAccent": "#b45309",
       "lightText": "#78350f",
-      "stack": ["React", "TypeScript", "Tailwind CSS"],
+      "stack": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
       "metrics": [
-        { "label": "Platform", "value": "Web" },
-        { "label": "AI", "value": "Grok" },
-        { "label": "Focus", "value": "DSA Prep" }
+        {
+          "label": "Platform",
+          "value": "Web"
+        },
+        {
+          "label": "AI",
+          "value": "Grok"
+        },
+        {
+          "label": "Focus",
+          "value": "DSA Prep"
+        }
       ],
       "highlights": [
         "Developed a personal DSA preparation tool that organizes practice into a structured learning routine.",
@@ -92,14 +294,24 @@
       ],
       "year": "2025",
       "repoUrl": "",
-      "demoUrl": "https://thealgomist.netlify.app/"
+      "demoUrl": "https://thealgomist.netlify.app/",
+      "proof": {
+        "value": "Live",
+        "label": "public web app"
+      }
     },
     {
       "id": "mypaw-petcare",
       "name": "mypaw - Pet Healthcare Platform",
       "type": "Side Project - Full Stack / AI",
       "description": "A modular monolith pet healthcare platform built with .NET 8 and Angular, using PostgreSQL with pgvector for semantic search and a RAG triage module for symptom-based recommendations.",
-      "focusAreas": ["Modular Monolith", "Semantic Search", "RAG Pipeline", "Kubernetes", "Observability"],
+      "focusAreas": [
+        "Modular Monolith",
+        "Semantic Search",
+        "RAG Pipeline",
+        "Kubernetes",
+        "Observability"
+      ],
       "background": "#052e16",
       "border": "#166534",
       "accent": "#4ade80",
@@ -108,11 +320,32 @@
       "lightBorder": "#bbf7d0",
       "lightAccent": "#15803d",
       "lightText": "#14532d",
-      "stack": [".NET 8", "Angular", "PostgreSQL", "pgvector", "Docker", "Kubernetes", "Serilog", "Graylog", "Zipkin", "Ollama", "Gemini API"],
+      "stack": [
+        ".NET 8",
+        "Angular",
+        "PostgreSQL",
+        "pgvector",
+        "Docker",
+        "Kubernetes",
+        "Serilog",
+        "Graylog",
+        "Zipkin",
+        "Ollama",
+        "Gemini API"
+      ],
       "metrics": [
-        { "label": "Stack", "value": "Full" },
-        { "label": "Search", "value": "pgvector" },
-        { "label": "Triage", "value": "RAG" }
+        {
+          "label": "Stack",
+          "value": "Full"
+        },
+        {
+          "label": "Search",
+          "value": "pgvector"
+        },
+        {
+          "label": "Triage",
+          "value": "RAG"
+        }
       ],
       "highlights": [
         "Architected a modular monolith pet healthcare platform with .NET 8 and Angular, using PostgreSQL with pgvector for semantic search.",
@@ -121,14 +354,24 @@
       ],
       "year": "2025",
       "repoUrl": "",
-      "demoUrl": ""
+      "demoUrl": "",
+      "proof": {
+        "value": "K8s",
+        "label": "hand-written manifests"
+      }
     },
     {
       "id": "snomed-search-api",
       "name": "SNOMED CT Clinical Search API",
       "type": "Side Project - Search / Clinical Data",
-      "description": "A clinical terminology search API exposing lexical and semantic autocomplete endpoints over the SNOMED CT dataset, with sub-second lookup using tsvector and pgvector.",
-      "focusAreas": ["Lexical Search", "Semantic Search", "Clinical Data", "API Design", "pgvector"],
+      "description": "A clinical-terminology search API over the SNOMED CT release: word-order-independent ranked search with a trigram fuzzy fallback, concept details, and IS-A hierarchy browsing — written directly against PostgreSQL.",
+      "focusAreas": [
+        "Ranked lexical search",
+        "Trigram fuzzy matching",
+        "IS-A hierarchy traversal",
+        "Raw SQL with EF Core",
+        "Clinical terminology"
+      ],
       "background": "#0f172a",
       "border": "#1e3a5f",
       "accent": "#38bdf8",
@@ -137,20 +380,174 @@
       "lightBorder": "#bae6fd",
       "lightAccent": "#0284c7",
       "lightText": "#0c4a6e",
-      "stack": [".NET Core", "EF Core", "PostgreSQL", "pgvector", "tsvector", "REST APIs"],
+      "stack": [
+        ".NET 10",
+        "ASP.NET Core",
+        "EF Core 10",
+        "Npgsql",
+        "PostgreSQL",
+        "pg_trgm",
+        "SNOMED CT RF2"
+      ],
       "metrics": [
-        { "label": "Dataset", "value": "SNOMED CT" },
-        { "label": "Search", "value": "Lexical + Semantic" },
-        { "label": "Lookup", "value": "Sub-second" }
+        {
+          "label": "Dataset",
+          "value": "SNOMED CT RF2"
+        },
+        {
+          "label": "Matching",
+          "value": "Exact → prefix → fuzzy"
+        },
+        {
+          "label": "Hierarchy",
+          "value": "IS-A graph"
+        }
       ],
       "highlights": [
-        "Built a clinical terminology search API exposing lexical and semantic autocomplete endpoints over the SNOMED CT dataset.",
-        "Designed a denormalized search table with generated tsvector columns and word-similarity matching for fast, accurate lexical search.",
-        "Delivered sub-second semantic concept lookup using pgvector embeddings alongside the lexical search path."
+        "Word-order-independent search: every query word must appear in a description, results ranked exact → prefix → contains and then by term length, and deduplicated to one row per concept with DISTINCT ON.",
+        "Typo tolerance without a search engine: when nothing matches, the query falls back to pg_trgm trigram similarity (the % operator with a 0.3 similarity floor), ranked by score.",
+        "Clinically sensible results: only active concepts and descriptions, filtered by semantic tag (findings by default, for chief complaints), with the shortest active synonym chosen as the preferred term.",
+        "Hierarchy browsing over SNOMED's IS-A relationships — parents, children and child counts — so a UI can drill from a symptom down to more specific findings.",
+        "A paged search endpoint with a separate total-count query, plus an interactive console client for exploring concepts and their definitions."
       ],
       "year": "2024",
       "repoUrl": "",
-      "demoUrl": ""
+      "demoUrl": "",
+      "proof": {
+        "value": "3-tier",
+        "label": "ranking + fuzzy fallback"
+      },
+      "diagrams": [
+        {
+          "title": "Search pipeline",
+          "caption": "Every query word must match; results are ranked and collapsed to one row per concept. Only when nothing matches does the query fall back to trigram similarity — so exact intent wins, and typos still find something.",
+          "nodes": [
+            {
+              "id": "q",
+              "label": "Query",
+              "kind": "state",
+              "col": 0,
+              "row": 0,
+              "sub": "split into words"
+            },
+            {
+              "id": "exact",
+              "label": "All words match",
+              "kind": "state",
+              "col": 1,
+              "row": 0,
+              "sub": "ILIKE · active only"
+            },
+            {
+              "id": "rank",
+              "label": "Rank",
+              "kind": "state",
+              "col": 2,
+              "row": 0,
+              "sub": "exact → prefix → contains"
+            },
+            {
+              "id": "dedupe",
+              "label": "One per concept",
+              "kind": "terminal",
+              "col": 3,
+              "row": 0,
+              "sub": "DISTINCT ON · preferred term",
+              "highlight": true
+            },
+            {
+              "id": "fuzzy",
+              "label": "Trigram fallback",
+              "kind": "state",
+              "col": 1.5,
+              "row": 1.3,
+              "sub": "pg_trgm · similarity ≥ 0.3"
+            }
+          ],
+          "edges": [
+            {
+              "from": "q",
+              "to": "exact"
+            },
+            {
+              "from": "exact",
+              "to": "rank",
+              "label": "matches"
+            },
+            {
+              "from": "rank",
+              "to": "dedupe"
+            },
+            {
+              "from": "exact",
+              "to": "fuzzy",
+              "label": "no match",
+              "dashed": true
+            },
+            {
+              "from": "fuzzy",
+              "to": "dedupe",
+              "label": "by score"
+            }
+          ]
+        },
+        {
+          "title": "Architecture",
+          "caption": "A thin ASP.NET Core API and a console client share one repository that issues hand-written SQL against the SNOMED CT release tables — concepts, descriptions, relationships and definitions.",
+          "nodes": [
+            {
+              "id": "api",
+              "label": "Search API",
+              "kind": "service",
+              "col": 0,
+              "row": 0,
+              "sub": "ASP.NET Core · paging"
+            },
+            {
+              "id": "cli",
+              "label": "Console client",
+              "kind": "client",
+              "col": 0,
+              "row": 1,
+              "sub": "explore concepts"
+            },
+            {
+              "id": "repo",
+              "label": "Search repository",
+              "kind": "service",
+              "col": 1,
+              "row": 0.5,
+              "sub": "raw SQL via EF Core",
+              "highlight": true
+            },
+            {
+              "id": "pg",
+              "label": "PostgreSQL",
+              "kind": "store",
+              "col": 2,
+              "row": 0.5,
+              "sub": "SNOMED CT RF2 · pg_trgm"
+            }
+          ],
+          "edges": [
+            {
+              "from": "api",
+              "to": "repo",
+              "label": "search"
+            },
+            {
+              "from": "cli",
+              "to": "repo",
+              "label": "details"
+            },
+            {
+              "from": "repo",
+              "to": "pg",
+              "label": "ranked SQL"
+            }
+          ]
+        }
+      ]
     }
   ],
   "culture": {
@@ -176,12 +573,739 @@
   },
   "credentials": {
     "languages": [
-      { "name": "Bengali", "level": "Native" },
-      { "name": "English", "level": "Proficient · IELTS 7.5" }
+      {
+        "name": "Bengali",
+        "level": "Native"
+      },
+      {
+        "name": "English",
+        "level": "Proficient · IELTS 7.5"
+      }
     ],
     "certifications": [
-      { "name": "Foundational C# with Microsoft", "issuer": "freeCodeCamp" },
-      { "name": "Microsoft Azure for .NET Developers", "issuer": "Pluralsight · Cloud Patterns and Architecture" }
+      {
+        "name": "Foundational C# with Microsoft",
+        "issuer": "freeCodeCamp"
+      },
+      {
+        "name": "Microsoft Azure for .NET Developers",
+        "issuer": "Pluralsight · Cloud Patterns and Architecture"
+      }
     ]
-  }
+  },
+  "secondarySkills": {
+    "label": "Also comfortable with",
+    "items": [
+      "Angular",
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Python",
+      "PHP"
+    ]
+  },
+  "principles": [
+    {
+      "title": "Make invariants the database's job",
+      "detail": "If two requests can race, a check in application code will eventually lose. Uniqueness and ownership rules live in constraints and locks the database enforces.",
+      "caseStudies": [
+        "race-free-booking"
+      ]
+    },
+    {
+      "title": "Assume every message arrives twice",
+      "detail": "Providers retry, clients double-submit, networks duplicate. Every write that matters carries an idempotency key, with a unique index as the backstop.",
+      "caseStudies": [
+        "verified-payments",
+        "race-free-booking"
+      ]
+    },
+    {
+      "title": "Model lifecycles explicitly; make cleanup converge",
+      "detail": "State machines with terminal states, and several independent paths to clean up — so a stalled background job can never strand a resource.",
+      "caseStudies": [
+        "race-free-booking"
+      ]
+    },
+    {
+      "title": "Trust identifiers, verify everything else",
+      "detail": "Inbound callbacks and headers are claims, not facts. Re-fetch the truth from its owner and derive access identifiers on the server.",
+      "caseStudies": [
+        "verified-payments",
+        "secure-consultations"
+      ]
+    },
+    {
+      "title": "Commit state and intent together",
+      "detail": "A state change and the events it causes are written in one transaction, then delivered with semantics chosen per channel.",
+      "caseStudies": [
+        "race-free-booking",
+        "secure-consultations"
+      ]
+    },
+    {
+      "title": "Prove concurrency with real races",
+      "detail": "Mocks can't reproduce a race. Tests spin up a real Postgres and send concurrent requests at the same slot, payment or record.",
+      "caseStudies": [
+        "race-free-booking",
+        "verified-payments"
+      ]
+    }
+  ],
+  "caseStudies": [
+    {
+      "id": "race-free-booking",
+      "title": "Race-free appointment booking",
+      "kicker": "Concurrency · state machines · reliable events",
+      "summary": "A booking service for a national telehealth platform where patients compete for limited doctor slots — and a slot can never be sold twice, even when payments are slow, fail or call back twice.",
+      "problem": "Patients race for scarce slots, and every booking waits on an external payment provider that can be slow, fail or deliver its callback twice. A slot must never be sold twice, abandoned checkouts must free slots quickly, and no outcome may depend on a background job running on time.",
+      "figures": [
+        {
+          "value": "8 → 1",
+          "label": "concurrent patients, exactly one booking"
+        },
+        {
+          "value": "1,052",
+          "label": "automated tests"
+        },
+        {
+          "value": "8",
+          "label": "convergent release paths"
+        }
+      ],
+      "diagrams": [
+        {
+          "title": "Architecture",
+          "caption": "The appointment service owns the booking lifecycle. Postgres enforces first-come-first-served; payment reports outcomes, booking decides; events leave through an outbox written in the same transaction.",
+          "nodes": [
+            {
+              "id": "client",
+              "label": "Patient & doctor apps",
+              "kind": "client",
+              "col": 0,
+              "row": 1,
+              "sub": "web · mobile"
+            },
+            {
+              "id": "idp",
+              "label": "Identity provider",
+              "kind": "external",
+              "col": 1,
+              "row": 0,
+              "sub": "Keycloak · OIDC"
+            },
+            {
+              "id": "gw",
+              "label": "API gateway",
+              "kind": "service",
+              "col": 1,
+              "row": 1,
+              "sub": "JWT · RBAC"
+            },
+            {
+              "id": "appt",
+              "label": "Appointment service",
+              "kind": "service",
+              "col": 2,
+              "row": 1,
+              "sub": "CQRS · state machine",
+              "highlight": true
+            },
+            {
+              "id": "jobs",
+              "label": "Hold jobs",
+              "kind": "service",
+              "col": 2,
+              "row": 2,
+              "sub": "sweep · purge · reminders"
+            },
+            {
+              "id": "pay",
+              "label": "Payment service",
+              "kind": "service",
+              "col": 3,
+              "row": 0,
+              "sub": "verifies payments"
+            },
+            {
+              "id": "pg",
+              "label": "PostgreSQL",
+              "kind": "store",
+              "col": 3,
+              "row": 1,
+              "sub": "unique index · xmin · NOTIFY"
+            },
+            {
+              "id": "outbox",
+              "label": "Outbox dispatcher",
+              "kind": "queue",
+              "col": 3,
+              "row": 2,
+              "sub": "same-transaction events"
+            },
+            {
+              "id": "tele",
+              "label": "Telemedicine",
+              "kind": "service",
+              "col": 4,
+              "row": 1,
+              "sub": "video consultations"
+            },
+            {
+              "id": "notif",
+              "label": "Notifications",
+              "kind": "service",
+              "col": 4,
+              "row": 2,
+              "sub": "in-app · push · SMS"
+            }
+          ],
+          "edges": [
+            {
+              "from": "client",
+              "to": "idp",
+              "label": "sign in"
+            },
+            {
+              "from": "client",
+              "to": "gw",
+              "label": "REST · SSE"
+            },
+            {
+              "from": "gw",
+              "to": "appt",
+              "label": "claim"
+            },
+            {
+              "from": "appt",
+              "to": "pay",
+              "label": "checkout"
+            },
+            {
+              "from": "pay",
+              "to": "appt",
+              "label": "outcome"
+            },
+            {
+              "from": "appt",
+              "to": "pg",
+              "label": "hold"
+            },
+            {
+              "from": "jobs",
+              "to": "pg",
+              "label": "expire"
+            },
+            {
+              "from": "appt",
+              "to": "outbox",
+              "label": "same txn"
+            },
+            {
+              "from": "outbox",
+              "to": "notif",
+              "label": "deliver"
+            },
+            {
+              "from": "outbox",
+              "to": "tele",
+              "label": "visit ended"
+            }
+          ]
+        },
+        {
+          "title": "Slot-hold lifecycle",
+          "caption": "A claim holds a slot for 5 minutes; checkout opens a fresh 10-minute payment window. Eight independent paths converge on Expired — lazy expiry on read and reclaim-on-conflict guarantee correctness on their own, so the sweep is only housekeeping.",
+          "nodes": [
+            {
+              "id": "claimed",
+              "label": "Claimed",
+              "kind": "state",
+              "col": 0,
+              "row": 0,
+              "sub": "5-min hold"
+            },
+            {
+              "id": "pending",
+              "label": "PaymentPending",
+              "kind": "state",
+              "col": 1.3,
+              "row": 0,
+              "sub": "fresh 10-min window",
+              "highlight": true
+            },
+            {
+              "id": "booked",
+              "label": "Booked",
+              "kind": "state",
+              "col": 2.6,
+              "row": 0,
+              "sub": "serial assigned"
+            },
+            {
+              "id": "done",
+              "label": "Completed / NoShow",
+              "kind": "terminal",
+              "col": 3.9,
+              "row": 0,
+              "sub": "visit outcome"
+            },
+            {
+              "id": "expired",
+              "label": "Expired",
+              "kind": "terminal",
+              "col": 0.65,
+              "row": 1.5,
+              "sub": "never revived"
+            },
+            {
+              "id": "cancelled",
+              "label": "Cancelled",
+              "kind": "terminal",
+              "col": 3.25,
+              "row": 1.5,
+              "sub": "before deadline"
+            }
+          ],
+          "edges": [
+            {
+              "from": "claimed",
+              "to": "pending",
+              "label": "checkout"
+            },
+            {
+              "from": "pending",
+              "to": "booked",
+              "label": "paid"
+            },
+            {
+              "from": "booked",
+              "to": "done",
+              "label": "visit"
+            },
+            {
+              "from": "claimed",
+              "to": "expired",
+              "label": "lazy · reclaim · sweep"
+            },
+            {
+              "from": "pending",
+              "to": "expired",
+              "label": "failed · auto-release"
+            },
+            {
+              "from": "booked",
+              "to": "cancelled",
+              "label": "cancel"
+            },
+            {
+              "from": "claimed",
+              "to": "cancelled",
+              "label": "cancel",
+              "dashed": true
+            }
+          ]
+        }
+      ],
+      "decisions": [
+        {
+          "choice": "Fairness as a database constraint, not application code",
+          "why": "Check-then-insert loses races. A partial unique index over doctor, venue, date and start time decides the winner atomically — and writing it exposed a gap in the original key: NULLs never collide in a unique index, so online slots would have been unprotected."
+        },
+        {
+          "choice": "Row-version optimistic concurrency plus advisory locks",
+          "why": "Most conflicts are rare and cheap to retry, so Postgres row versions with bounded retries handle them. Cross-row rules — one live claim per patient per doctor, sequential queue numbers — use transaction-scoped advisory locks, because in-process locks silently break at two replicas."
+        },
+        {
+          "choice": "Eight convergent ways to release a hold",
+          "why": "Lazy expiry on read and reclaim-on-conflict at insert guarantee correctness on their own; a SKIP LOCKED sweep, explicit release, verified payment failure, checkout auto-release, cancel and purge are housekeeping. A stalled job can never strand a slot."
+        },
+        {
+          "choice": "Reset, don't extend, the payment window",
+          "why": "A 5-minute review hold, then a fresh 10-minute window per checkout attempt (max 3) gives patients a predictable deadline and bounds how long a slot can be tied up."
+        },
+        {
+          "choice": "Expired is terminal",
+          "why": "Once the interface has told a patient the slot was lost, a late payment is refunded rather than silently reviving the booking."
+        },
+        {
+          "choice": "Transactional outbox for every event",
+          "why": "Notifications are written in the same transaction as the state change, so a rolled-back booking notifies nobody. Delivery semantics are chosen per channel: at-most-once for SMS and feeds that aren't idempotent, at-least-once for services that dedupe. Contracts are Kafka-ready."
+        }
+      ],
+      "results": [
+        "1,052 automated tests, including real-Postgres race tests: eight patients racing for one slot get exactly one booking; a three-seat session gets exactly three; duplicate payment callbacks confirm once and notify once; a payment racing the sweep never confirms an expired hold.",
+        "40 API endpoints and 7 background jobs, each single-run across replicas.",
+        "Live availability pushed over Server-Sent Events and fanned out across pods with Postgres LISTEN/NOTIFY — real-time without adding a broker."
+      ],
+      "concepts": [
+        "Database-enforced invariants",
+        "Optimistic concurrency",
+        "Advisory locks",
+        "State machines",
+        "Transactional outbox",
+        "Real-database race tests"
+      ],
+      "tagline": "Slots are never sold twice — even when payments are slow, fail or call back twice."
+    },
+    {
+      "id": "verified-payments",
+      "title": "Exactly-once, forgery-safe payments",
+      "kicker": "Idempotency · trust boundaries · resilience",
+      "summary": "A payment service that turns an external provider's public, retrying, forgeable callbacks into exactly one trustworthy outcome per booking.",
+      "problem": "Payment callbacks hit public, unauthenticated routes. They can be duplicated, arrive out of order, or be forged — and the booking must be confirmed exactly once, or released only when the payment genuinely failed.",
+      "figures": [
+        {
+          "value": "2",
+          "label": "independent idempotency layers"
+        },
+        {
+          "value": "154",
+          "label": "payment tests across both services"
+        },
+        {
+          "value": "0",
+          "label": "client-visible changes during extraction"
+        }
+      ],
+      "diagrams": [
+        {
+          "title": "Verification flow",
+          "caption": "Callbacks arrive on public routes, so the payment service treats them as claims: it re-fetches the result from the provider, records it idempotently, and reports validity and ownership as two separate signals. The booking service makes the decision.",
+          "nodes": [
+            {
+              "id": "client",
+              "label": "Patient app",
+              "kind": "client",
+              "col": 0,
+              "row": 0,
+              "sub": "web · in-app WebView"
+            },
+            {
+              "id": "psp",
+              "label": "SSLCommerz",
+              "kind": "external",
+              "col": 3,
+              "row": 0,
+              "sub": "checkout · validation API"
+            },
+            {
+              "id": "appt",
+              "label": "Appointment service",
+              "kind": "service",
+              "col": 1,
+              "row": 1,
+              "sub": "decides"
+            },
+            {
+              "id": "pay",
+              "label": "Payment service",
+              "kind": "service",
+              "col": 2,
+              "row": 1,
+              "sub": "isValid + tranIdMatches",
+              "highlight": true
+            },
+            {
+              "id": "retry",
+              "label": "Retry sweeper",
+              "kind": "service",
+              "col": 1,
+              "row": 2,
+              "sub": "every 60 s · max 20"
+            },
+            {
+              "id": "paydb",
+              "label": "Payment store",
+              "kind": "store",
+              "col": 2,
+              "row": 2,
+              "sub": "anchor · idempotency keys"
+            }
+          ],
+          "edges": [
+            {
+              "from": "client",
+              "to": "appt",
+              "label": "checkout"
+            },
+            {
+              "from": "appt",
+              "to": "pay",
+              "label": "session"
+            },
+            {
+              "from": "client",
+              "to": "psp",
+              "label": "hosted checkout"
+            },
+            {
+              "from": "pay",
+              "to": "psp",
+              "label": "init · re-verify"
+            },
+            {
+              "from": "psp",
+              "to": "pay",
+              "label": "IPN (public route)"
+            },
+            {
+              "from": "pay",
+              "to": "appt",
+              "label": "outcome"
+            },
+            {
+              "from": "pay",
+              "to": "paydb",
+              "label": "dedupe"
+            },
+            {
+              "from": "paydb",
+              "to": "retry",
+              "label": "unreported"
+            },
+            {
+              "from": "retry",
+              "to": "appt",
+              "label": "re-report",
+              "dashed": true
+            }
+          ]
+        }
+      ],
+      "decisions": [
+        {
+          "choice": "Trust lookup keys only; re-fetch the facts",
+          "why": "A callback body is attacker-controlled. Only the transaction and validation ids are used, to look the payment up; status and amount are always re-fetched server-to-server from the provider, failing closed if nothing matches."
+        },
+        {
+          "choice": "Report validity and ownership as two signals",
+          "why": "Merging \"is the payment valid\" with \"does it belong to this booking\" would let a forged callback — a fake transaction id paired with someone else's real validation id — release another patient's slot. Caught while implementing the service contract."
+        },
+        {
+          "choice": "Payment reports, booking decides",
+          "why": "Only the booking service knows the booking's state and fee, so it makes every state decision. An amount mismatch is flagged for manual reconciliation and the booking is left untouched."
+        },
+        {
+          "choice": "Layered idempotency with typed no-ops",
+          "why": "A natural key is checked before writing and backed by a unique index for concurrent duplicates; a violation becomes a typed duplicate that returns 200, so the provider stops retrying. The receiving service dedupes again."
+        },
+        {
+          "choice": "Advisory-locked session creation",
+          "why": "Double clicks and two open tabs must yield one checkout session. A Postgres advisory lock per booking serialises creation across replicas; an existing pending session is reused."
+        },
+        {
+          "choice": "HTTP plus a retry sweeper instead of a broker",
+          "why": "Because the receiver dedupes, outcome delivery can be at-least-once without new infrastructure: a sweeper re-sends unreported outcomes from a partial index, and the provider's callback stays the authoritative path while the browser redirect is a best-effort fast path."
+        }
+      ],
+      "results": [
+        "110 tests in the payment service and 44 payment-related tests in the booking service, plus an 11-scenario edge-case suite: double-session races, duplicate and malformed callbacks, retry after decline, cancel-versus-pay.",
+        "Extracted from the booking service as a lift-and-shift with no client-visible change, then hardened in place.",
+        "Timeouts, retries with backoff and circuit breakers on every outbound call; raw provider payloads kept at every stage for reconciliation."
+      ],
+      "concepts": [
+        "Idempotency",
+        "Trust boundaries",
+        "Advisory locks",
+        "Retries & circuit breakers",
+        "Service extraction"
+      ],
+      "tagline": "Public, retrying, forgeable callbacks become exactly one trusted outcome per booking."
+    },
+    {
+      "id": "secure-consultations",
+      "title": "Secure video consultations with an encrypted record",
+      "kicker": "Access control · encryption · event-driven workflows",
+      "summary": "A telemedicine service that lets only the booked doctor and patient into a call, only around the appointment, and keeps what was said as an encrypted, append-only medical record with an AI summary.",
+      "problem": "Only the booked doctor and patient may join, only around the appointment time — and what's said becomes part of a medical record that must be private, tamper-resistant, never leaked through logs, and summarised for follow-up.",
+      "figures": [
+        {
+          "value": "AES-256-GCM",
+          "label": "encrypted at rest, with key rotation"
+        },
+        {
+          "value": "240",
+          "label": "automated tests"
+        },
+        {
+          "value": "0",
+          "label": "client-chosen channels or ids"
+        }
+      ],
+      "diagrams": [
+        {
+          "title": "Access & record",
+          "caption": "Rooms are derived from the appointment, never stored. Tokens are minted only for the booked doctor and patient, inside the join window, and expire at slot end. Transcripts are encrypted, append-only and sealed by the server; a summary is generated once sealed.",
+          "nodes": [
+            {
+              "id": "dp",
+              "label": "Doctor portal",
+              "kind": "client",
+              "col": 0,
+              "row": 0,
+              "sub": "video · speech-to-text"
+            },
+            {
+              "id": "video",
+              "label": "Agora RTC / RTM",
+              "kind": "external",
+              "col": 0,
+              "row": 1,
+              "sub": "media · signalling"
+            },
+            {
+              "id": "pp",
+              "label": "Patient app",
+              "kind": "client",
+              "col": 0,
+              "row": 2,
+              "sub": "video"
+            },
+            {
+              "id": "gw",
+              "label": "API gateway",
+              "kind": "service",
+              "col": 1,
+              "row": 1,
+              "sub": "JWT · RBAC"
+            },
+            {
+              "id": "tele",
+              "label": "Telemedicine service",
+              "kind": "service",
+              "col": 2,
+              "row": 1,
+              "sub": "tokens · transcripts",
+              "highlight": true
+            },
+            {
+              "id": "appt",
+              "label": "Appointment service",
+              "kind": "service",
+              "col": 3,
+              "row": 0,
+              "sub": "room access"
+            },
+            {
+              "id": "db",
+              "label": "Transcript store",
+              "kind": "store",
+              "col": 3,
+              "row": 1,
+              "sub": "AES-256-GCM · append-only"
+            },
+            {
+              "id": "jobs",
+              "label": "Seal & summary jobs",
+              "kind": "service",
+              "col": 2,
+              "row": 2,
+              "sub": "sweep · on event"
+            },
+            {
+              "id": "llm",
+              "label": "Summariser (LLM)",
+              "kind": "external",
+              "col": 3,
+              "row": 2,
+              "sub": "map-reduce for long calls"
+            }
+          ],
+          "edges": [
+            {
+              "from": "dp",
+              "to": "gw",
+              "label": "token · turns"
+            },
+            {
+              "from": "pp",
+              "to": "gw",
+              "label": "token · summary"
+            },
+            {
+              "from": "dp",
+              "to": "video",
+              "label": "join"
+            },
+            {
+              "from": "pp",
+              "to": "video",
+              "label": "join"
+            },
+            {
+              "from": "gw",
+              "to": "tele",
+              "label": "identity"
+            },
+            {
+              "from": "tele",
+              "to": "appt",
+              "label": "access check"
+            },
+            {
+              "from": "appt",
+              "to": "tele",
+              "label": "visit ended",
+              "dashed": true
+            },
+            {
+              "from": "tele",
+              "to": "db",
+              "label": "append"
+            },
+            {
+              "from": "jobs",
+              "to": "db",
+              "label": "seal"
+            },
+            {
+              "from": "jobs",
+              "to": "llm",
+              "label": "summarise"
+            }
+          ]
+        }
+      ],
+      "decisions": [
+        {
+          "choice": "Derive rooms; assign identifiers on the server",
+          "why": "The channel and participant ids are computed from the appointment, never taken from the request — nothing to store and nothing to forge. Moving tokens behind the gateway's authentication closed a path where a forged identity header could mint a token for any call."
+        },
+        {
+          "choice": "A join window tied to the booking",
+          "why": "Tokens are issued only to the booking's doctor or patient, from ten minutes before the start until ten minutes after the end, and expire exactly at window close. Clients offer a slightly tighter window to the patient so the doctor arrives first."
+        },
+        {
+          "choice": "Treat events as hints",
+          "why": "When the booking service reports that a visit ended, the transcript is sealed only after re-checking the status at the source — a forged event can't end a live call. Handlers are idempotent instead of needing an inbox table."
+        },
+        {
+          "choice": "Application-layer AES-256-GCM with purpose-bound data",
+          "why": "Each value carries its key id for rotation, and associated data binds the purpose, so ciphertext moved between columns fails to decrypt. The record is append-only and undeletable in three layers."
+        },
+        {
+          "choice": "Append, don't replace",
+          "why": "Replacing the whole transcript every ten seconds meant hundreds of large rewrites an hour and a risk of truncation. An append endpoint dedupes turns by id and retries cleanly on version races."
+        },
+        {
+          "choice": "PHI-safe logging, enforced by tests",
+          "why": "Identifiers are logged as short hashes, content is never logged or echoed in errors, and tests assert it — so observability never becomes a leak."
+        }
+      ],
+      "results": [
+        "240 automated tests, including real-Postgres tests and assertions that logs never contain patient data.",
+        "Consultation summaries generated within minutes of a call ending, with chunked map-reduce summarisation for long conversations.",
+        "A focused service: scheduling was moved out to the booking service, leaving telemedicine with one table and no session state."
+      ],
+      "concepts": [
+        "Server-derived identifiers",
+        "Encryption at rest",
+        "Event-driven workflows",
+        "Optimistic concurrency",
+        "PHI-safe observability"
+      ],
+      "tagline": "Only the booked doctor and patient get in; what's said becomes an encrypted, append-only record."
+    }
+  ]
 }

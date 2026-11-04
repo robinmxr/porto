@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { PROJECT_CARDS, ProjectCardData } from './project-cards.data';
 import { INFO } from '../../data/info';
 
-type SectionId = 'work' | 'experience' | 'skills' | 'about' | 'contact';
+type SectionId = 'experience' | 'studies' | 'work' | 'skills' | 'about' | 'contact';
 
 @Component({
   selector: 'app-projects',
@@ -21,14 +21,17 @@ export class Projects {
   protected readonly links = INFO.links;
   protected readonly culture = INFO.culture;
   protected readonly projectCards: ProjectCardData[] = PROJECT_CARDS;
-  protected readonly skillGroups = Object.entries(INFO.skills).map(([label, items]) => ({ label, items }));
+  protected readonly skillGroups = INFO.skills;
+  protected readonly secondarySkills = INFO.secondarySkills;
   protected readonly experience = INFO.experience;
   protected readonly focusAreas = INFO.profile.focus.split('·').map(s => s.trim());
+  protected readonly caseStudies = INFO.caseStudies;
   protected readonly year = new Date().getFullYear();
 
   protected readonly sections: { id: SectionId; label: string }[] = [
-    { id: 'work', label: 'Work' },
     { id: 'experience', label: 'Experience' },
+    { id: 'studies', label: 'Case studies' },
+    { id: 'work', label: 'Projects' },
     { id: 'skills', label: 'Skills' },
     { id: 'about', label: 'About' },
     { id: 'contact', label: 'Contact' },
@@ -92,9 +95,5 @@ export class Projects {
 
   protected toggleRole(index: number): void {
     this.expandedRole.update(current => (current === index ? null : index));
-  }
-
-  protected accentFor(card: ProjectCardData): string {
-    return this.isDark() ? card.accent : card.lightAccent;
   }
 }

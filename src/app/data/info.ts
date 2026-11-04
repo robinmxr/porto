@@ -14,6 +14,7 @@ export interface PortfolioInfo {
     mode: string;
     email: string;
     education: string;
+    credibility: string;
   };
   links: {
     github: string;
@@ -21,16 +22,35 @@ export interface PortfolioInfo {
     website: string;
     resume: string;
   };
-  skills: Record<string, string[]>;
+  skills: SkillGroup[];
+  secondarySkills: { label: string; items: string[] };
   experience: ExperienceItem[];
   projects: ProjectCardData[];
   culture: Culture;
   credentials: Credentials;
+  principles: Principle[];
+  caseStudies: CaseStudy[];
 }
 
 export interface Credentials {
   languages: { name: string; level: string }[];
   certifications: { name: string; issuer: string }[];
+}
+
+export interface SkillGroup {
+  label: string;
+  core: string[];
+  more: string[];
+}
+
+export interface Figure {
+  value: string;
+  label: string;
+}
+
+export interface Achievement {
+  lead: string;
+  detail: string;
 }
 
 export interface ExperienceItem {
@@ -39,7 +59,8 @@ export interface ExperienceItem {
   period: string;
   status: string;
   summary: string;
-  achievements: string[];
+  figures: Figure[];
+  achievements: Achievement[];
   stack: string[];
 }
 
@@ -60,6 +81,8 @@ export interface ProjectCardData {
   focusAreas: string[];
   metrics: { label: string; value: string }[];
   highlights: string[];
+  proof: Figure;
+  diagrams?: Diagram[];
   year: string;
   repoUrl: string;
   demoUrl: string;
@@ -82,6 +105,59 @@ export interface CultureItem {
   creator: string;
   url: string;
   note: string;
+}
+
+export type DiagramNodeKind = 'client' | 'service' | 'store' | 'queue' | 'external' | 'state' | 'terminal';
+
+export interface DiagramNode {
+  id: string;
+  label: string;
+  kind: DiagramNodeKind;
+  /** Grid position; fractional values are allowed for fine placement. */
+  col: number;
+  row: number;
+  sub?: string;
+  highlight?: boolean;
+}
+
+export interface DiagramEdge {
+  from: string;
+  to: string;
+  label?: string;
+  dashed?: boolean;
+}
+
+export interface Diagram {
+  title: string;
+  caption: string;
+  nodes: DiagramNode[];
+  edges: DiagramEdge[];
+}
+
+export interface Decision {
+  choice: string;
+  why: string;
+}
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  kicker: string;
+  tagline: string;
+  summary: string;
+  problem: string;
+  figures: Figure[];
+  diagrams: Diagram[];
+  decisions: Decision[];
+  results: string[];
+  concepts: string[];
+}
+
+export interface Principle {
+  title: string;
+  detail: string;
+  /** Case studies where this principle is shown in practice. */
+  caseStudies: string[];
 }
 
 export const INFO = info as PortfolioInfo;

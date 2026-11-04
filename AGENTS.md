@@ -40,7 +40,8 @@ src/
       experience/                        # Timeline page
       bio/                               # Profile + contact form (mock only, no backend)
       project-detail/                    # Single project view
-    components/                          # Empty — shared components go here when created
+    components/
+      architecture-diagram/              # SVG boxes-and-arrows diagram rendered from `Diagram` data
     services/                            # Empty — services go here when created
 ```
 
@@ -49,10 +50,14 @@ src/
 All portfolio data is in `src/app/data/info.json`. Types are in `src/app/data/info.ts`. Key interfaces:
 
 - `PortfolioInfo` — top-level shape
-- `Profile` — name, initials, role, headline, summary, location, status, email
-- `ExperienceItem` — role, company, period, achievements[], stack[]
-- `ProjectCardData` — id, name, type, description, stack[], metrics[], highlights[], background/accent/border/text colors, repoUrl, demoUrl
+- `Profile` — name, initials, role, headline, credibility (one-line hero proof), summary, location, status, email
+- `ExperienceItem` — role, company, period, summary, figures[] (`{value, label}` headline numbers), achievements[] (`{lead, detail}`), stack[]
+- `SkillGroup` — label, core[] (emphasised), more[]; `secondarySkills` holds the de-emphasised frontend line
+- `ProjectCardData` — id, name, type, description, stack[], metrics[], highlights[], proof (`{value, label}` shown on the home list), background/accent/border/text colors, repoUrl, demoUrl
 - `Culture` — music, book, movie (optional taste section)
+- `CaseStudy` — work case study for `/work/:id`: problem, figures[], diagrams[] (`Diagram`: nodes on a col/row grid + edges), decisions[] (`{choice, why}`), results[], concepts[]
+- `CaseStudy.tagline` — one-liner shown in the home page's Case studies list (with `figures[0]` as the proof figure)
+- `Principle` — engineering principle shown under "In practice" on each case study listed in its `caseStudies[]`
 
 The file exports `INFO` (typed) and `PROJECT_CARDS`.
 
@@ -75,7 +80,8 @@ The file exports `INFO` (typed) and `PROJECT_CARDS`.
 
 ## Notes
 
-- The `src/app/components/` and `src/app/services/` directories exist but are empty — agents should add files there when creating reusable components/services
+- `src/app/services/` is empty — add services there when needed
+- Work case studies are generalised descriptions of employer work: never add client/product names, internal hostnames or code to `caseStudies`
 - Contact form on `/bio` is mock only (`setTimeout` + reset) — no real email backend
 - Placeholder repo URLs in `info.json` (`https://github.com/your-username/...`) — replace with real URLs
 - `album-art/` path in `info.json` resolves from `public/` — `public/album-art/placeholder.svg` should exist

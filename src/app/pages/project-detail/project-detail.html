@@ -5,7 +5,7 @@
       <div class="container site-header__inner">
         <a class="site-header__brand" routerLink="/">{{ profile.shortName }}</a>
         <button type="button" class="link-arrow link-arrow--back" (click)="goBack()">
-          <span aria-hidden="true">←</span> All work
+          <span aria-hidden="true">←</span> All projects
         </button>
       </div>
     </header>
@@ -39,9 +39,23 @@
         }
       </dl>
 
+      @if (p.diagrams?.length) {
+        <section class="section section--wide is-revealed">
+          <header class="section__head">
+            <span class="section__index">01</span>
+            <h2 class="section__title">How it works</h2>
+          </header>
+          <div class="detail__diagrams">
+            @for (d of p.diagrams; track d.title) {
+              <app-architecture-diagram [diagram]="d" />
+            }
+          </div>
+        </section>
+      }
+
       <section class="section is-revealed">
         <header class="section__head">
-          <span class="section__index">01</span>
+          <span class="section__index">{{ index(1) }}</span>
           <h2 class="section__title">What was built</h2>
         </header>
         <ol class="highlights">
@@ -53,7 +67,7 @@
 
       <section class="section is-revealed">
         <header class="section__head">
-          <span class="section__index">02</span>
+          <span class="section__index">{{ index(2) }}</span>
           <h2 class="section__title">Stack</h2>
         </header>
         <div>
@@ -67,7 +81,7 @@
 
       <section class="section section--contact is-revealed">
         <header class="section__head">
-          <span class="section__index">03</span>
+          <span class="section__index">{{ index(3) }}</span>
           <h2 class="section__title">Next</h2>
         </header>
         <div class="contact">

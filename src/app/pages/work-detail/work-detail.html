@@ -1,0 +1,134 @@
+@if (study(); as s) {
+  <div class="detail">
+
+    <header class="site-header is-scrolled">
+      <div class="container site-header__inner">
+        <a class="site-header__brand" routerLink="/">{{ profile.shortName }}</a>
+        <button type="button" class="link-arrow link-arrow--back" (click)="goBack()">
+          <span aria-hidden="true">←</span> Case studies
+        </button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="detail__hero">
+        <p class="eyebrow">
+          <span class="detail__swatch" aria-hidden="true"></span>
+          Engineering work · {{ company }}
+        </p>
+        <h1 class="detail__title">{{ s.title }}</h1>
+        <p class="detail__desc">{{ s.summary }}</p>
+        <p class="detail__kicker">{{ s.kicker }}</p>
+      </section>
+
+      <dl class="metrics">
+        @for (f of s.figures; track f.label) {
+          <div class="metric">
+            <dt class="eyebrow">{{ f.label }}</dt>
+            <dd>{{ f.value }}</dd>
+          </div>
+        }
+      </dl>
+
+      <section class="section is-revealed">
+        <header class="section__head">
+          <span class="section__index">01</span>
+          <h2 class="section__title">The problem</h2>
+        </header>
+        <p class="detail__problem">{{ s.problem }}</p>
+      </section>
+
+      <section class="section section--wide is-revealed">
+        <header class="section__head">
+          <span class="section__index">02</span>
+          <h2 class="section__title">Architecture</h2>
+        </header>
+        <div class="detail__diagrams">
+          @for (d of s.diagrams; track d.title) {
+            <app-architecture-diagram [diagram]="d" />
+          }
+        </div>
+      </section>
+
+      <section class="section is-revealed">
+        <header class="section__head">
+          <span class="section__index">03</span>
+          <h2 class="section__title">Key decisions</h2>
+        </header>
+        <ol class="decisions">
+          @for (dec of s.decisions; track dec.choice) {
+            <li class="decision">
+              <h3 class="decision__choice">{{ dec.choice }}</h3>
+              <p class="decision__why">{{ dec.why }}</p>
+            </li>
+          }
+        </ol>
+      </section>
+
+      <section class="section is-revealed">
+        <header class="section__head">
+          <span class="section__index">04</span>
+          <h2 class="section__title">Results</h2>
+        </header>
+        <ol class="highlights">
+          @for (r of s.results; track r) {
+            <li>{{ r }}</li>
+          }
+        </ol>
+      </section>
+
+      <section class="section is-revealed">
+        <header class="section__head">
+          <span class="section__index">05</span>
+          <h2 class="section__title">In practice</h2>
+        </header>
+        <div>
+          @if (principles().length) {
+            <p class="eyebrow practice__label">Principles in practice</p>
+            <ul class="practice">
+              @for (pr of principles(); track pr.title) {
+                <li class="practice__item">
+                  <h3 class="practice__title">{{ pr.title }}</h3>
+                  <p class="practice__detail">{{ pr.detail }}</p>
+                </li>
+              }
+            </ul>
+            <p class="eyebrow practice__label">Concepts</p>
+          }
+          <ul class="exp__stack">
+            @for (c of s.concepts; track c) {
+              <li>{{ c }}</li>
+            }
+          </ul>
+          <p class="detail__note">
+            Built at {{ company }}. Details are generalised and no proprietary code is shown —
+            happy to go deeper on a call.
+          </p>
+        </div>
+      </section>
+
+      @if (next(); as n) {
+        <section class="section is-revealed">
+          <header class="section__head">
+            <span class="section__index">→</span>
+            <h2 class="section__title">Next</h2>
+          </header>
+          <a class="next-study" [routerLink]="['/work', n.id]">
+            <span class="eyebrow">{{ n.kicker }}</span>
+            <span class="next-study__title">{{ n.title }} <span aria-hidden="true">→</span></span>
+          </a>
+        </section>
+      }
+    </main>
+
+    <footer class="container site-footer">
+      <a routerLink="/">← Back to home</a>
+      <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>
+    </footer>
+  </div>
+} @else {
+  <div class="container detail-not-found">
+    <p>Case study not found.</p>
+    <a class="link-arrow" routerLink="/">← Back to home</a>
+  </div>
+}
