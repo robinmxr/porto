@@ -1,18 +1,23 @@
 {
   "profile": {
     "name": "Reajul Islam Robin",
-    "shortName": "Robin Islam",
+    "shortName": "Reajul Islam",
     "initials": "RI",
     "role": "Software Engineer",
     "focus": "Distributed Systems · Concurrency & Consistency · Payments · Healthcare",
-    "headline": "I build backend systems that stay correct under concurrency, retries and failure — from race-free booking to forgery-safe payments.",
-    "summary": "I'm a backend engineer in Dhaka building distributed systems for healthcare and fintech. Most of my work lives where correctness is non-negotiable: scarce appointment slots, payments, and medical records. I like problems that look simple until two requests arrive at once — and I prove the answers with tests that actually race. Before healthcare I built PCI-DSS-aligned payment APIs for a fintech payments platform.",
+    "headline": "I build backend systems that stay correct under concurrency, retries and failure, from race-free booking to forgery-safe payments.",
+    "summary": "I'm a backend engineer in Dhaka building distributed systems for healthcare and fintech. Most of my work lives where correctness is non-negotiable: scarce appointment slots, payments, and medical records. I like problems that look simple until two requests arrive at once, and I prove the answers with tests that actually race. Before healthcare I built PCI-DSS-aligned payment APIs for a fintech payments platform.",
     "location": "Dhaka, Bangladesh",
     "status": "open to work",
     "mode": "remote friendly",
     "email": "reajulbd786@gmail.com",
     "education": "B.Sc.(Engg.) Computer Science & Engineering · Mawlana Bhashani Science & Technology University (2017–2021)",
-    "credibility": "Backend engineer · .NET & PostgreSQL · 3 years building distributed systems for healthcare and payments"
+    "credibility": "Backend engineer · .NET & PostgreSQL · 3 years building distributed systems for healthcare and payments",
+    "degree": "B.Sc. in Computer Science & Engineering",
+    "school": "Mawlana Bhashani Science & Technology University, 2017 to 2021",
+    "timezone": "UTC+6",
+    "notice": "1 month notice period",
+    "authorization": "Authorized to work in Bangladesh and remotely"
   },
   "links": {
     "github": "https://github.com/robinmxr",
@@ -127,7 +132,7 @@
       "company": "Adaptive Enterprise Ltd",
       "period": "Dec 2025 – Present",
       "status": "current",
-      "summary": "Designed and built the appointment, payment and telemedicine services of a national telehealth platform — .NET 8 microservices with Clean Architecture and CQRS on PostgreSQL.",
+      "summary": "Designed and built the appointment, payment and telemedicine services of a new healthcare platform, and also worked on its prescription service: .NET 8 microservices with Clean Architecture and CQRS on PostgreSQL. The product is a new v1 that is still growing its user base. I work in a small team handling the microservices, so I took on broad ownership from the start.",
       "achievements": [
         {
           "lead": "Designed race-free booking",
@@ -151,7 +156,7 @@
         },
         {
           "lead": "Ran the platform in production",
-          "detail": "Docker and Kubernetes (K3s) deployments via GitLab CI, Kafka and RabbitMQ operations — including diagnosing a disk-space incident on Kafka's storage volume — with Graylog logging and OpenTelemetry/Zipkin tracing."
+          "detail": "Docker and Kubernetes (K3s) deployments via GitLab CI, Kafka and RabbitMQ operations (including diagnosing a disk-space incident on Kafka's storage volume), with Graylog logging and OpenTelemetry/Zipkin tracing."
         }
       ],
       "stack": [
@@ -204,7 +209,7 @@
         },
         {
           "lead": "Integrated three payment gateways",
-          "detail": "Visa, TSYS and BlueSnap — webhook/IPN handling, transaction validation and ledger updates."
+          "detail": "Visa, TSYS and BlueSnap: webhook/IPN handling, transaction validation and ledger updates."
         },
         {
           "lead": "Modularised a fintech monolith",
@@ -248,58 +253,6 @@
     }
   ],
   "projects": [
-    {
-      "id": "algomist-dsa",
-      "name": "The Algomist - DSA Journey",
-      "type": "Side Project - Educational",
-      "description": "A personal DSA preparation tool focused on organizing data structures and algorithms practice into a structured learning routine, with AI-generated topic breakdowns via Grok AI.",
-      "focusAreas": [
-        "Structured Learning",
-        "AI Content",
-        "Progress Tracking",
-        "Difficulty Progression",
-        "Frontend"
-      ],
-      "background": "#1c0f02",
-      "border": "#78350f",
-      "accent": "#f59e0b",
-      "text": "#fcd34d",
-      "lightBackground": "#fffbeb",
-      "lightBorder": "#fde68a",
-      "lightAccent": "#b45309",
-      "lightText": "#78350f",
-      "stack": [
-        "React",
-        "TypeScript",
-        "Tailwind CSS"
-      ],
-      "metrics": [
-        {
-          "label": "Platform",
-          "value": "Web"
-        },
-        {
-          "label": "AI",
-          "value": "Grok"
-        },
-        {
-          "label": "Focus",
-          "value": "DSA Prep"
-        }
-      ],
-      "highlights": [
-        "Developed a personal DSA preparation tool that organizes practice into a structured learning routine.",
-        "Features AI-generated topic breakdowns via Grok AI.",
-        "Includes difficulty progression and progress tracking."
-      ],
-      "year": "2025",
-      "repoUrl": "",
-      "demoUrl": "https://thealgomist.netlify.app/",
-      "proof": {
-        "value": "Live",
-        "label": "public web app"
-      }
-    },
     {
       "id": "mypaw-petcare",
       "name": "mypaw - Pet Healthcare Platform",
@@ -364,7 +317,7 @@
       "id": "snomed-search-api",
       "name": "SNOMED CT Clinical Search API",
       "type": "Side Project - Search / Clinical Data",
-      "description": "A clinical-terminology search API over the SNOMED CT release: word-order-independent ranked search with a trigram fuzzy fallback, concept details, and IS-A hierarchy browsing — written directly against PostgreSQL.",
+      "description": "A clinical-terminology search service over the SNOMED CT International release on PostgreSQL: word-order-independent autocomplete, typo fallback, keyset paging, and subtree filters through a precomputed IS-A closure. Semantic and hybrid modes are built and tested, with the embedding model comparison still pending.",
       "focusAreas": [
         "Ranked lexical search",
         "Trigram fuzzy matching",
@@ -386,41 +339,44 @@
         "EF Core 10",
         "Npgsql",
         "PostgreSQL",
+        "tsvector",
         "pg_trgm",
+        "pgvector",
         "SNOMED CT RF2"
       ],
       "metrics": [
         {
-          "label": "Dataset",
-          "value": "SNOMED CT RF2"
+          "label": "Searchable descriptions",
+          "value": "547k"
         },
         {
-          "label": "Matching",
-          "value": "Exact → prefix → fuzzy"
+          "label": "Autocomplete p95, one client",
+          "value": "9.5 ms"
         },
         {
-          "label": "Hierarchy",
-          "value": "IS-A graph"
+          "label": "IS-A closure pairs",
+          "value": "7.6M"
         }
       ],
       "highlights": [
-        "Word-order-independent search: every query word must appear in a description, results ranked exact → prefix → contains and then by term length, and deduplicated to one row per concept with DISTINCT ON.",
-        "Typo tolerance without a search engine: when nothing matches, the query falls back to pg_trgm trigram similarity (the % operator with a 0.3 similarity floor), ranked by score.",
-        "Clinically sensible results: only active concepts and descriptions, filtered by semantic tag (findings by default, for chief complaints), with the shortest active synonym chosen as the preferred term.",
-        "Hierarchy browsing over SNOMED's IS-A relationships — parents, children and child counts — so a UI can drill from a symptom down to more specific findings.",
-        "A paged search endpoint with a separate total-count query, plus an interactive console client for exploring concepts and their definitions."
+        "A denormalized search table with a generated tsvector column, a GIN index and a trigram index. The query plans, kept in the repo, show the indexes being used.",
+        "Word-order-independent matching ranked exact, then prefix, then the rest, with one row per concept. Only when nothing matches does a typo fallback using trigram word similarity run.",
+        "Autocomplete p95 of 9.5 ms with one client and 18.7 ms with 16 concurrent clients over 547k searchable descriptions, measured on a laptop with the API and database on the same machine. The method, hardware and date are in the repo.",
+        "A transitive-closure table of 7.6M IS-A pairs built at load time. It powers all-descendants queries and subtree-restricted search, which is the basis for clinical value sets.",
+        "An RF2 loader that reads your own licensed release, a compose file, and 80+ tests against a real PostgreSQL using a synthetic fixture, so no SNOMED data lives in the repo.",
+        "Semantic and hybrid modes (pgvector HNSW with reciprocal rank fusion) are built and tested. The embedding model comparison has not run yet, so no accuracy claim is made for them."
       ],
       "year": "2024",
-      "repoUrl": "",
+      "repoUrl": "https://github.com/robinmxr/snomed",
       "demoUrl": "",
       "proof": {
-        "value": "3-tier",
-        "label": "ranking + fuzzy fallback"
+        "value": "9.5 ms",
+        "label": "autocomplete p95, measured on a laptop"
       },
       "diagrams": [
         {
           "title": "Search pipeline",
-          "caption": "Every query word must match; results are ranked and collapsed to one row per concept. Only when nothing matches does the query fall back to trigram similarity — so exact intent wins, and typos still find something.",
+          "caption": "Every query word must match through a full-text index; results are ranked and collapsed to one row per concept. Only when nothing matches does the query fall back to trigram word similarity, so exact intent wins, and typos still find something.",
           "nodes": [
             {
               "id": "q",
@@ -436,7 +392,7 @@
               "kind": "state",
               "col": 1,
               "row": 0,
-              "sub": "ILIKE · active only"
+              "sub": "tsvector · GIN index"
             },
             {
               "id": "rank",
@@ -444,7 +400,7 @@
               "kind": "state",
               "col": 2,
               "row": 0,
-              "sub": "exact → prefix → contains"
+              "sub": "exact → prefix → rest"
             },
             {
               "id": "dedupe",
@@ -452,16 +408,16 @@
               "kind": "terminal",
               "col": 3,
               "row": 0,
-              "sub": "DISTINCT ON · preferred term",
+              "sub": "best description",
               "highlight": true
             },
             {
               "id": "fuzzy",
-              "label": "Trigram fallback",
+              "label": "Typo fallback",
               "kind": "state",
               "col": 1.5,
               "row": 1.3,
-              "sub": "pg_trgm · similarity ≥ 0.3"
+              "sub": "trigram word similarity"
             }
           ],
           "edges": [
@@ -493,7 +449,7 @@
         },
         {
           "title": "Architecture",
-          "caption": "A thin ASP.NET Core API and a console client share one repository that issues hand-written SQL against the SNOMED CT release tables — concepts, descriptions, relationships and definitions.",
+          "caption": "A thin ASP.NET Core API and a console client share one repository that issues hand-written SQL. Search runs against a denormalized search table, and hierarchy queries run against a precomputed closure of IS-A pairs.",
           "nodes": [
             {
               "id": "api",
@@ -501,7 +457,7 @@
               "kind": "service",
               "col": 0,
               "row": 0,
-              "sub": "ASP.NET Core · paging"
+              "sub": "ASP.NET Core · keyset paging"
             },
             {
               "id": "cli",
@@ -509,7 +465,7 @@
               "kind": "client",
               "col": 0,
               "row": 1,
-              "sub": "explore concepts"
+              "sub": "explore · bench · eval"
             },
             {
               "id": "repo",
@@ -526,7 +482,7 @@
               "kind": "store",
               "col": 2,
               "row": 0.5,
-              "sub": "SNOMED CT RF2 · pg_trgm"
+              "sub": "search table · closure · pgvector"
             }
           ],
           "edges": [
@@ -547,28 +503,123 @@
             }
           ]
         }
-      ]
+      ],
+      "context": {
+        "what": "SNOMED CT is the most comprehensive clinical terminology in the world, maintained by the non-profit SNOMED International. It gives every clinical idea, such as a symptom, a diagnosis, a procedure or a body part, one unique numeric code, together with the many everyday and professional phrasings that mean it. Concepts are linked in an IS-A hierarchy, so software knows that viral pneumonia is a kind of pneumonia and a kind of lung disease. The release loaded in this project has 378,553 active concepts.",
+        "why": [
+          {
+            "lead": "One meaning, many words",
+            "detail": "Heart attack, MI and myocardial infarction are written differently by different clinicians. Free text keeps them apart. One code makes them a single thing that software can count, compare and share."
+          },
+          {
+            "lead": "Systems can exchange meaning",
+            "detail": "When two systems pass a SNOMED code they pass the meaning, not just a string. That is why health data standards such as HL7 FHIR use it for diagnoses, symptoms and procedures."
+          },
+          {
+            "lead": "Queries that understand medicine",
+            "detail": "Because concepts form a hierarchy, one query for any kidney disease also finds every more specific kind. A hand-written list of codes misses cases and goes stale."
+          },
+          {
+            "lead": "Safer rules and alerts",
+            "detail": "Decision support needs exact, unambiguous input. A coded diagnosis or allergy lets a rule fire for the whole family of related conditions, not for one spelling of it."
+          }
+        ],
+        "uses": [
+          {
+            "lead": "Capturing a complaint or diagnosis",
+            "detail": "In a consultation screen the clinician types tummy ache and picks a coded finding instead of writing free text. This service is the autocomplete behind that picker."
+          },
+          {
+            "lead": "Problem lists and patient records",
+            "detail": "Coded symptoms and diagnoses on a record that other systems and later visits can read without guessing what was meant."
+          },
+          {
+            "lead": "Cohorts, registries and reports",
+            "detail": "Count every patient with any kind of diabetes by asking for one concept and all of its descendants. The closure table in this project exists to make that fast."
+          },
+          {
+            "lead": "Value sets",
+            "detail": "Teams define a named group of codes, such as all cardiac disorders, for quality measures, reporting and alerts. Subtree-restricted search is how such a group is built and checked."
+          },
+          {
+            "lead": "Mapping to billing and international codes",
+            "detail": "SNOMED codes map to classifications such as ICD-10, so one clinical entry can serve both care and reporting."
+          }
+        ]
+      }
+    },
+    {
+      "id": "algomist-dsa",
+      "name": "The Algomist - DSA Journey",
+      "type": "Side Project - Educational",
+      "description": "A personal DSA preparation tool focused on organizing data structures and algorithms practice into a structured learning routine, with AI-generated topic breakdowns via Grok AI.",
+      "focusAreas": [
+        "Structured Learning",
+        "AI Content",
+        "Progress Tracking",
+        "Difficulty Progression",
+        "Frontend"
+      ],
+      "background": "#1c0f02",
+      "border": "#78350f",
+      "accent": "#f59e0b",
+      "text": "#fcd34d",
+      "lightBackground": "#fffbeb",
+      "lightBorder": "#fde68a",
+      "lightAccent": "#b45309",
+      "lightText": "#78350f",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
+      "metrics": [
+        {
+          "label": "Platform",
+          "value": "Web"
+        },
+        {
+          "label": "AI",
+          "value": "Grok"
+        },
+        {
+          "label": "Focus",
+          "value": "DSA Prep"
+        }
+      ],
+      "highlights": [
+        "Developed a personal DSA preparation tool that organizes practice into a structured learning routine.",
+        "Features AI-generated topic breakdowns via Grok AI.",
+        "Includes difficulty progression and progress tracking."
+      ],
+      "year": "2025",
+      "repoUrl": "",
+      "demoUrl": "https://thealgomist.netlify.app/",
+      "proof": {
+        "value": "Live",
+        "label": "public web app"
+      }
     }
   ],
   "culture": {
     "music": {
-      "title": "Giorgio by Moroder",
-      "artist": "Daft Punk",
+      "title": "Santa's Real",
+      "artist": "Sasha Sloan",
       "albumArtUrl": "album-art/placeholder.svg",
       "url": "",
-      "note": "Long-form, patient, systems-brain music for deep work."
+      "note": "A favourite track."
     },
     "book": {
-      "title": "Designing Data-Intensive Applications",
-      "creator": "Martin Kleppmann",
+      "title": "Digital Fortress",
+      "creator": "Dan Brown",
       "url": "",
-      "note": "A grounding book for thinking clearly about data, tradeoffs, and reliability."
+      "note": "A cryptography thriller about a code that cannot be broken."
     },
     "movie": {
-      "title": "The Social Network",
-      "creator": "David Fincher",
+      "title": "Now You See Me",
+      "creator": "Louis Leterrier",
       "url": "",
-      "note": "Sharp, fast, and a reminder that software is always tangled with people."
+      "note": "A heist thriller about stage illusionists."
     }
   },
   "credentials": {
@@ -622,7 +673,7 @@
     },
     {
       "title": "Model lifecycles explicitly; make cleanup converge",
-      "detail": "State machines with terminal states, and several independent paths to clean up — so a stalled background job can never strand a resource.",
+      "detail": "State machines with terminal states, and several independent paths to clean up, so a stalled background job can never strand a resource.",
       "caseStudies": [
         "race-free-booking"
       ]
@@ -657,7 +708,7 @@
       "id": "race-free-booking",
       "title": "Race-free appointment booking",
       "kicker": "Concurrency · state machines · reliable events",
-      "summary": "A booking service for a national telehealth platform where patients compete for limited doctor slots — and a slot can never be sold twice, even when payments are slow, fail or call back twice.",
+      "summary": "A booking service for a healthcare platform where patients compete for limited doctor slots, and a slot can never be sold twice, even when payments are slow, fail or call back twice.",
       "problem": "Patients race for scarce slots, and every booking waits on an external payment provider that can be slow, fail or deliver its callback twice. A slot must never be sold twice, abandoned checkouts must free slots quickly, and no outcome may depend on a background job running on time.",
       "figures": [
         {
@@ -815,7 +866,7 @@
         },
         {
           "title": "Slot-hold lifecycle",
-          "caption": "A claim holds a slot for 5 minutes; checkout opens a fresh 10-minute payment window. Eight independent paths converge on Expired — lazy expiry on read and reclaim-on-conflict guarantee correctness on their own, so the sweep is only housekeeping.",
+          "caption": "A claim holds a slot for 5 minutes; checkout opens a fresh 10-minute payment window. Eight independent paths converge on Expired. Lazy expiry on read and reclaim-on-conflict guarantee correctness on their own, so the sweep is only housekeeping.",
           "nodes": [
             {
               "id": "claimed",
@@ -910,15 +961,19 @@
       "decisions": [
         {
           "choice": "Fairness as a database constraint, not application code",
-          "why": "Check-then-insert loses races. A partial unique index over doctor, venue, date and start time decides the winner atomically — and writing it exposed a gap in the original key: NULLs never collide in a unique index, so online slots would have been unprotected."
+          "why": "Check-then-insert loses races. A partial unique index over doctor, venue, date and start time decides the winner atomically, and writing it exposed a gap in the original key: NULLs never collide in a unique index, so online slots would have been unprotected."
         },
         {
           "choice": "Row-version optimistic concurrency plus advisory locks",
-          "why": "Most conflicts are rare and cheap to retry, so Postgres row versions with bounded retries handle them. Cross-row rules — one live claim per patient per doctor, sequential queue numbers — use transaction-scoped advisory locks, because in-process locks silently break at two replicas."
+          "why": "Most conflicts are rare and cheap to retry, so Postgres row versions with bounded retries handle them. Cross-row rules (one live claim per patient per doctor, sequential queue numbers) use transaction-scoped advisory locks, because in-process locks silently break at two replicas."
         },
         {
           "choice": "Eight convergent ways to release a hold",
           "why": "Lazy expiry on read and reclaim-on-conflict at insert guarantee correctness on their own; a SKIP LOCKED sweep, explicit release, verified payment failure, checkout auto-release, cancel and purge are housekeeping. A stalled job can never strand a slot."
+        },
+        {
+          "choice": "An orchestrated saga, owned by the booking service",
+          "why": "Claim, checkout, payment outcome and confirm-or-expire form one long-running transaction across services. A single service owns the state machine and applies the compensations (expiry and release), while the payment service only reports facts. Choreographing it through events would scatter that logic and make the failure paths harder to prove."
         },
         {
           "choice": "Reset, don't extend, the payment window",
@@ -936,7 +991,7 @@
       "results": [
         "1,052 automated tests, including real-Postgres race tests: eight patients racing for one slot get exactly one booking; a three-seat session gets exactly three; duplicate payment callbacks confirm once and notify once; a payment racing the sweep never confirms an expired hold.",
         "40 API endpoints and 7 background jobs, each single-run across replicas.",
-        "Live availability pushed over Server-Sent Events and fanned out across pods with Postgres LISTEN/NOTIFY — real-time without adding a broker."
+        "Live availability pushed over Server-Sent Events and fanned out across pods with Postgres LISTEN/NOTIFY: real-time without adding a broker."
       ],
       "concepts": [
         "Database-enforced invariants",
@@ -946,14 +1001,52 @@
         "Transactional outbox",
         "Real-database race tests"
       ],
-      "tagline": "Slots are never sold twice — even when payments are slow, fail or call back twice."
+      "tagline": "Slots are never sold twice, even when payments are slow, fail or call back twice.",
+      "failureModes": [
+        {
+          "choice": "Two patients claim the same slot at the same instant",
+          "why": "A unique index decides the winner atomically. The loser gets a typed conflict, and a dead hold in the way is reclaimed on conflict instead of blocking the slot."
+        },
+        {
+          "choice": "The service crashes after a claim, before checkout",
+          "why": "The hold simply runs out after five minutes. Lazy expiry on read and the background sweep both release it, so no cleanup request is ever needed."
+        },
+        {
+          "choice": "Payment succeeds just as the hold expires",
+          "why": "The outcome goes through the same concurrency checks as everything else. A payment racing the sweep never confirms an expired hold, and the mismatch is flagged for manual reconciliation."
+        },
+        {
+          "choice": "The payment callback is delivered twice",
+          "why": "The second delivery is a no-op: one confirmation, one set of notifications."
+        },
+        {
+          "choice": "The process dies between saving a booking and notifying",
+          "why": "Events are outbox rows written in the same transaction as the state change. The dispatcher retries with backoff, dead-letters after bounded attempts, and an alert fires on delivery lag."
+        },
+        {
+          "choice": "A second replica starts, or one restarts",
+          "why": "Background jobs are single-run across replicas through advisory locks. Live-availability clients reconnect, and fall back to polling if the stream is unavailable."
+        }
+      ],
+      "nonGuarantees": [
+        "Notifications are at-most-once on purpose, because the downstream SMS and feed channels are not idempotent.",
+        "Live availability is a hint, never a promise. The claim is the only authority on who gets a slot.",
+        "Refunds are not automated. Late or duplicate payments are flagged for manual handling.",
+        "One PostgreSQL primary is the arbiter. There is no multi-primary or multi-region story."
+      ],
+      "atScale": [
+        "Partition by doctor. Every invariant here is scoped to one doctor, so a shard-by-doctor design keeps each decision inside a single shard.",
+        "Replace the polling outbox dispatcher with log-based change data capture, to cut delivery lag and database polling load.",
+        "Serve availability from read replicas and keep claims on the primary. Replica lag is acceptable because availability is only a hint.",
+        "Rate-limit claim attempts per patient, and watch for hot slots when one popular doctor concentrates the load."
+      ]
     },
     {
       "id": "verified-payments",
       "title": "Exactly-once, forgery-safe payments",
       "kicker": "Idempotency · trust boundaries · resilience",
       "summary": "A payment service that turns an external provider's public, retrying, forgeable callbacks into exactly one trustworthy outcome per booking.",
-      "problem": "Payment callbacks hit public, unauthenticated routes. They can be duplicated, arrive out of order, or be forged — and the booking must be confirmed exactly once, or released only when the payment genuinely failed.",
+      "problem": "Payment callbacks hit public, unauthenticated routes. They can be duplicated, arrive out of order, or be forged, and the booking must be confirmed exactly once, or released only when the payment genuinely failed.",
       "figures": [
         {
           "value": "2",
@@ -1080,7 +1173,7 @@
         },
         {
           "choice": "Report validity and ownership as two signals",
-          "why": "Merging \"is the payment valid\" with \"does it belong to this booking\" would let a forged callback — a fake transaction id paired with someone else's real validation id — release another patient's slot. Caught while implementing the service contract."
+          "why": "Merging \"is the payment valid\" with \"does it belong to this booking\" would let a forged callback (a fake transaction id paired with someone else's real validation id) release another patient's slot. Caught while implementing the service contract."
         },
         {
           "choice": "Payment reports, booking decides",
@@ -1111,14 +1204,51 @@
         "Retries & circuit breakers",
         "Service extraction"
       ],
-      "tagline": "Public, retrying, forgeable callbacks become exactly one trusted outcome per booking."
+      "tagline": "Public, retrying, forgeable callbacks become exactly one trusted outcome per booking.",
+      "failureModes": [
+        {
+          "choice": "The provider calls the callback twice, or concurrently",
+          "why": "A natural key is checked first, and a unique index backstops concurrent twins. The duplicate becomes a typed no-op that still answers 200, so the provider stops retrying."
+        },
+        {
+          "choice": "A forged callback arrives with someone else's identifiers",
+          "why": "Only lookup keys are trusted. The facts are re-fetched from the provider server to server, and validity and ownership are reported as separate signals, so a fake cannot release another patient's slot. If nothing is found, it fails closed."
+        },
+        {
+          "choice": "The provider is slow or down",
+          "why": "Every call has a timeout, bounded retries with backoff and a circuit breaker. Session creation answers 503 instead of hanging a checkout."
+        },
+        {
+          "choice": "The outcome cannot reach the booking service",
+          "why": "A retry sweeper resends it every minute with a bounded attempt count, then escalates to manual intervention."
+        },
+        {
+          "choice": "The customer pays but never returns to the site",
+          "why": "The server-to-server notification is authoritative. The browser redirect is only a best-effort fast path."
+        },
+        {
+          "choice": "Two checkout sessions race for one booking",
+          "why": "An advisory lock on the booking serialises creation, and an existing pending session is reused."
+        }
+      ],
+      "nonGuarantees": [
+        "No automated refunds or settlement reconciliation yet. Late, duplicate and cancelled-booking payments are flagged for manual refund.",
+        "There is no broker. Outcomes reach the booking service over HTTP with retries, so delivery is at-least-once and the receiver dedupes.",
+        "One provider is live. The receipt schema is gateway-neutral, but a second provider is designed for, not built."
+      ],
+      "atScale": [
+        "Move outcome reporting onto a durable event stream using the outbox pattern once more services need payment outcomes. Keep the sweeper as the backstop.",
+        "Partition transactions by booking id. Every invariant is scoped to one booking, and the partial indexes already keep the sweeper cheap.",
+        "Make rate limits per source and shared across replicas, instead of one global bucket.",
+        "Add settlement reconciliation against the provider's own reports, so the audit trail is checked, not just kept."
+      ]
     },
     {
       "id": "secure-consultations",
       "title": "Secure video consultations with an encrypted record",
       "kicker": "Access control · encryption · event-driven workflows",
       "summary": "A telemedicine service that lets only the booked doctor and patient into a call, only around the appointment, and keeps what was said as an encrypted, append-only medical record with an AI summary.",
-      "problem": "Only the booked doctor and patient may join, only around the appointment time — and what's said becomes part of a medical record that must be private, tamper-resistant, never leaked through logs, and summarised for follow-up.",
+      "problem": "Only the booked doctor and patient may join, only around the appointment time, and what's said becomes part of a medical record that must be private, tamper-resistant, never leaked through logs, and summarised for follow-up.",
       "figures": [
         {
           "value": "AES-256-GCM",
@@ -1270,7 +1400,7 @@
       "decisions": [
         {
           "choice": "Derive rooms; assign identifiers on the server",
-          "why": "The channel and participant ids are computed from the appointment, never taken from the request — nothing to store and nothing to forge. Moving tokens behind the gateway's authentication closed a path where a forged identity header could mint a token for any call."
+          "why": "The channel and participant ids are computed from the appointment, never taken from the request: nothing to store and nothing to forge. Moving tokens behind the gateway's authentication closed a path where a forged identity header could mint a token for any call."
         },
         {
           "choice": "A join window tied to the booking",
@@ -1278,7 +1408,7 @@
         },
         {
           "choice": "Treat events as hints",
-          "why": "When the booking service reports that a visit ended, the transcript is sealed only after re-checking the status at the source — a forged event can't end a live call. Handlers are idempotent instead of needing an inbox table."
+          "why": "When the booking service reports that a visit ended, the transcript is sealed only after re-checking the status at the source, so a forged event can't end a live call. Handlers are idempotent instead of needing an inbox table."
         },
         {
           "choice": "Application-layer AES-256-GCM with purpose-bound data",
@@ -1290,7 +1420,7 @@
         },
         {
           "choice": "PHI-safe logging, enforced by tests",
-          "why": "Identifiers are logged as short hashes, content is never logged or echoed in errors, and tests assert it — so observability never becomes a leak."
+          "why": "Identifiers are logged as short hashes, content is never logged or echoed in errors, and tests assert it, so observability never becomes a leak."
         }
       ],
       "results": [
@@ -1305,7 +1435,44 @@
         "Optimistic concurrency",
         "PHI-safe observability"
       ],
-      "tagline": "Only the booked doctor and patient get in; what's said becomes an encrypted, append-only record."
+      "tagline": "Only the booked doctor and patient get in; what's said becomes an encrypted, append-only record.",
+      "failureModes": [
+        {
+          "choice": "Someone who is not a party tries to join, or guess a room",
+          "why": "Rooms and identifiers are derived from the appointment on the server. Non-parties get a not-found, and tokens are only issued inside the join window."
+        },
+        {
+          "choice": "The doctor's connection drops mid-call",
+          "why": "A hang-up does not seal the record, so the call can be rejoined. Transcript turns are appended in batches, deduplicated by turn id, with retries on version races."
+        },
+        {
+          "choice": "The call-ended event is lost, duplicated or forged",
+          "why": "Handlers are idempotent and re-check the status at the source before sealing. A one-minute sweep seals anyway as a backstop."
+        },
+        {
+          "choice": "The summariser is slow or down",
+          "why": "The job backs off at one, five, fifteen and sixty minutes. The sealed record stays readable the whole time."
+        },
+        {
+          "choice": "A conversation is too long for one model call",
+          "why": "It is summarised in chunks, and the chunk summaries are summarised again."
+        },
+        {
+          "choice": "The booking service is briefly unavailable when a token is requested",
+          "why": "The access check is protected by retries, a circuit breaker and a short cache, and unknown parties are still refused."
+        }
+      ],
+      "nonGuarantees": [
+        "Transcripts are append-only and cannot be deleted by design.",
+        "Summaries are generated by a language model and are advisory. The sealed transcript is the record.",
+        "Transcripts have hard size limits per turn and per consultation."
+      ],
+      "atScale": [
+        "Partition on appointment id. There is one transcript per appointment, so scaling out needs no cross-row coordination.",
+        "Replace the polling summary job with a queue and leased workers, so summarisation scales independently of the API.",
+        "Move event intake from HTTP to a Kafka consumer using the envelope that is already defined, mapping outcomes to commit, dead-letter or retry.",
+        "Keep encryption keys in a managed key service with scheduled rotation, so key custody is separate from the application."
+      ]
     }
   ]
 }

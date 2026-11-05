@@ -4,11 +4,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 import { ArchitectureDiagram } from '../../components/architecture-diagram/architecture-diagram';
 import { INFO } from '../../data/info';
+import { HeroArt } from '../../components/hero-art/hero-art';
 
 @Component({
   selector: 'app-work-detail',
   templateUrl: './work-detail.html',
-  imports: [RouterLink, ArchitectureDiagram],
+  imports: [RouterLink, ArchitectureDiagram, HeroArt],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkDetail {

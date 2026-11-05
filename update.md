@@ -1,6 +1,6 @@
 # Hi there, I'm Robin 👋  
 
-💻 **Software Engineer | Backend Systems | Full-Stack**  
+💻 **Backend Engineer | Distributed Systems | .NET & PostgreSQL**  
 
 Software Engineer from Dhaka, Bangladesh, building secure, distributed backend systems across fintech and healthcare domains.  
 Currently focusing on **.NET Core, React, Angular, and System Design** — with interests in **AI/ML** and developer productivity tools.  
@@ -63,8 +63,8 @@ Currently focusing on **.NET Core, React, Angular, and System Design** — with 
   `.NET 8` `Angular` `PostgreSQL` `pgvector` `Kubernetes`  
 - 🧠 **The Algomist** — DSA preparation tool with AI-generated topic breakdowns via Grok AI  
   `React` `TypeScript` `Tailwind CSS`  
-- 🏥 **SNOMED CT Search API** — Clinical terminology search API with lexical and semantic autocomplete  
-  `.NET Core` `PostgreSQL` `pgvector` `REST APIs`  
+- 🏥 **SNOMED CT Search API** — Postgres full-text and trigram search, an IS-A closure for value sets, and optional pgvector hybrid search in progress  
+  `.NET 10` `PostgreSQL` `pg_trgm` `pgvector`  
 
 ---
 

@@ -47,13 +47,17 @@
       </div>
       <div class="glance">
         <p class="eyebrow">Based in</p>
-        <p>{{ profile.location }}</p>
+        <p>{{ profile.location }} <span class="muted">· {{ profile.timezone }}</span></p>
       </div>
       <div class="glance">
-        <p class="eyebrow">Focus</p>
-        @for (area of focusAreas; track area) {
-          <p>{{ area }}</p>
-        }
+        <p class="eyebrow">Availability</p>
+        <p>{{ profile.notice }}</p>
+        <p class="muted">{{ profile.authorization }}</p>
+      </div>
+      <div class="glance">
+        <p class="eyebrow">Education</p>
+        <p>{{ profile.degree }}</p>
+        <p class="muted">{{ profile.school }}</p>
       </div>
     </aside>
   </section>
@@ -213,19 +217,15 @@
 
       <div class="facts">
         <div class="fact">
-          <p class="eyebrow">Education</p>
-          <p>{{ profile.education }}</p>
-        </div>
-        <div class="fact">
           <p class="eyebrow">Languages</p>
           @for (lang of info.credentials.languages; track lang.name) {
-            <p>{{ lang.name }} <span class="muted">— {{ lang.level }}</span></p>
+            <p>{{ lang.name }} <span class="muted">· {{ lang.level }}</span></p>
           }
         </div>
         <div class="fact">
           <p class="eyebrow">Certifications</p>
           @for (cert of info.credentials.certifications; track cert.name) {
-            <p>{{ cert.name }} <span class="muted">— {{ cert.issuer }}</span></p>
+            <p>{{ cert.name }} <span class="muted">· {{ cert.issuer }}</span></p>
           }
         </div>
       </div>

@@ -18,6 +18,8 @@
 3. **Building a diagram or case study?** Use §6 (diagram specs) and §8 (case studies). §5 has the details behind them.
 4. **Need to justify a claim?** Look it up in §3 (claims ledger). If it isn't there, don't publish it.
 5. **Re-checking a fact in the work code?** §12 has the source map (private paths, for your eyes only).
+6. **Want to grow your credibility as a distributed-systems engineer?** §13 has the gap analysis, quick wins on existing
+   projects, and ranked new projects to build.
 
 ---
 
@@ -25,7 +27,7 @@
 
 ### 1.1 One-liner
 > **Backend engineer who builds distributed systems that stay correct under concurrency, retries and failure —
-> race-free booking, forgery-safe payments, and secure, encrypted video consultations for a national telehealth platform.**
+> race-free booking, forgery-safe payments, and secure, encrypted video consultations for a healthcare platform.**
 
 ### 1.2 The story in three sentences
 1. I design and build backend services where correctness matters more than features: money, medical records, and
@@ -56,7 +58,7 @@ is rare. Recruiters for senior backend roles screen for the second kind.
 ## 2. Rules for anything public
 
 ### 2.1 Naming
-- **Never name the client or product.** Describe it as *"a national telehealth platform"* or *"a healthcare
+- **Never name the client or product.** Describe it as *"a healthcare platform"* or *"a healthcare
   marketplace for online and in-person doctor visits"*.
 - The **employer** (Adaptive Enterprise Ltd) is fine to name: it's already on the CV.
 - **No colleague names.** Say "my manager" or "the team" if needed.
@@ -184,12 +186,17 @@ Phrase these as *"Ran the platform in production: …"*, as one bullet or one su
 
 
 ### 3.4 Side projects (verified separately)
-- **SNOMED CT search** (`~/Work/robin/datamapping`, personal, public GitHub repo): ✅ ranked lexical search (ILIKE all
-  words; exact → prefix → contains; DISTINCT ON per concept), ✅ pg_trgm fuzzy fallback (similarity ≥ 0.3), ✅ IS-A
-  hierarchy (parents/children/counts), ✅ semantic-tag filtering, ✅ paged endpoint + console client, .NET 10 / EF Core 10
-  raw SQL. ❌ pgvector / embeddings / semantic search — not present anywhere. ❌ tsvector table — that is in the **work**
-  prescription service, not this project. ❌ "sub-second" — never measured. ⚠️ The repo tracks a `.env` with DB
-  credentials and client-named values → clean before linking (todo.md Phase 1.6 §0).
+- **SNOMED CT search** (`~/Work/robin/datamapping`, personal, GitHub repo). **Re-verified 2026-11-05** on branch
+  `feature/credible-snomed-search` (phases 0 to 6; **merged to `main` via PR #1 and public at github.com/robinmxr/snomed**):
+  - ✅ denormalized `search_term` table with a generated `tsvector` column, GIN and trigram indexes; plans in `docs/query-plans.md`
+  - ✅ word-order-independent ranked search, typo fallback by trigram word similarity, keyset paging, page-past-the-end bug fixed
+  - ✅ transitive IS-A closure (7,611,410 pairs, depth 22) with descendants and subtree-filtered search
+  - ✅ RF2 loader, compose file, CI, README; tests against a real Postgres on a synthetic fixture (84 discovered by `--list-tests`; the session reported 88, so write "80+" until `dotnet test` is run)
+  - ✅ measured on an M1 Pro, API and Postgres on the same machine: suggest p95 9.5 ms at 1 client and 18.7 ms at 16 over 546,786 searchable descriptions (`docs/benchmarks.md`). Lexical search p95 is 62.8 ms and 121.2 ms
+  - ⚠️ "Searchable" means the finding and disorder tags only. The release has 1,693,873 descriptions and 378,553 active concepts, so never say "the full release is searchable"
+  - 🟡 semantic and hybrid modes (pgvector HNSW, reciprocal rank fusion) are built and tested but **no embeddings are stored and no model has been compared**. Never claim semantic accuracy or semantic latency yet. The lexical baseline on 54 everyday phrases is recall@10 0.43, and it misses "belly pain", "tummy ache" and "runny nose", which is the gap semantic search must close
+  - ❌ the old résumé lines are still false until reworded: "semantic autocomplete", "tsvector columns", "sub-second semantic lookup using pgvector". Use the sanctioned wording in §13.8
+  - 🔴 **owner actions still open:** the credentials file is gone from current files but **still exists in two older commits of the public repo** (checked 2026-11-05 via the commit API), so run `docs/history-purge.md` on a fresh clone and force push, and rotate the database password if it was ever real. The repo URL is already on the portfolio card. Also fix the build warning for a known high-severity advisory on `Microsoft.OpenApi` 2.4.1
 - **mypaw, Algomist:** not yet verified (todo.md Phase 1.6 A/B).
 
 ---
@@ -654,7 +661,7 @@ Annotate the delivery semantics on each channel.
 ### 7.2 Experience: Adaptive Enterprise Ltd (Software Engineer, Dec 2025 – Present)
 
 **Summary:**
-> Designed and built the appointment, payment and telemedicine services of a national telehealth platform — .NET 8
+> Designed and built the appointment, payment and telemedicine services of a healthcare platform, and also worked on its prescription service — .NET 8
 > microservices with Clean Architecture and CQRS on PostgreSQL.
 
 **Figures** (`experience[0].figures`):
@@ -810,6 +817,7 @@ pseudo-code only if needed.
       idempotent webhook endpoint, transactional outbox, and a test that races 8 clients for 1 seat.
       **Write it fresh — never copy work code.** Link it from CS1/CS2 as "a public reimplementation of the patterns".
 - [ ] Notes section + first 2 posts from §9 (#1 and #2 are short)
+- [ ] Extend the demo repo and add follow-up projects per §13 (fault injection, measured numbers, job queue, CDC, Raft)
 
 ### Phase D: align every channel (1 session)
 - [ ] **Résumé:** same six bullets as §7.2, same figures, headline "Backend Engineer — Distributed Systems"
@@ -834,7 +842,10 @@ pseudo-code only if needed.
 3. **Azure Key Vault:** where was it used, if anywhere? Otherwise drop it from the CV.
 4. **Production numbers** (any ballpark the team is comfortable sharing): bookings per day, consultations per week, payment success rate, p95 claim/checkout latency, outbox delivery lag, summary turnaround.
 5. **Teton/ConnexPay:** any numbers beyond the 30% onboarding cut? Transactions per day, gateways, query speed-ups?
-6. Is it OK to say *"national telehealth platform"*, or should it be vaguer ("a healthcare platform")?
+6. ~~Is it OK to say "national telehealth platform"?~~ **Resolved 2026-11-05:** no. The platform is a new product at roughly v1 that is still growing its user base, so public copy says *"a healthcare platform"* and describes it as a new v1 still growing its user base. Never use "national" and do not call it an MVP.
+7. ~~Production numbers (Q4)~~ **Resolved 2026-11-05:** there are none to share yet, because the user base is still small. Do not invent any. Capacity evidence comes from load tests you run yourself (P1 in §13.3) and from the 10x reasoning on the case studies.
+8. **Team context (for interviews, and already on the site):** a small team handles the microservices of a new product, so scope per developer was broad. Be ready to say exactly which services and decisions you owned.
+9. **Logistics (now on the site):** 1 month notice period; authorized to work in Bangladesh and remotely.
 
 ---
 
@@ -863,3 +874,227 @@ pseudo-code only if needed.
 | PHI logging tests | `telemedicine-service/tests/…/Domain/TranscriptPhiLoggingTests.cs` |
 | Telemedicine contract | `telemedicine-service/docs/contract-*.md` |
 | Gateway RBAC rows | `gateway/src/main/resources/db/changelog/*` |
+
+---
+
+## 13. Credibility upgrades: projects and additions (added 2026-11-05)
+
+Goal: close the gap between "correct on one Postgres" (already strong, see §3.1 and §4) and what a senior
+distributed-systems interviewer probes next. Everything here is **proposed, not done**. Nothing in this section may be
+published as a claim until the work exists and the evidence is recorded in §3 (same rule as §3.3).
+
+### 13.1 Gap analysis: what interviewers probe vs. what you can show today
+
+| Probe | What you can answer today | Gap | How to close it |
+|---|---|---|---|
+| "How do you stop two requests double-booking?" | Fully: C1, C2, C3, 87 real-Postgres race tests | none | already your headline |
+| "Exactly-once?" | Fully: C4 layered idempotency | none | already your headline |
+| "Outbox, and what about consumers?" | Producer side built (C7). Consumer side is "Kafka-ready", not run | no hands-on partitions, consumer groups, rebalancing, offsets, DLQ | P3 (CDC to Kafka) |
+| "What happens when a worker dies mid-job?" | Sweepers and convergent cleanup (C5) | no leases or fencing tokens shown | P2 (Postgres job queue) |
+| "How does consensus / leader election work?" | Advisory locks only (C3). That is single-node coordination | no consensus, replication or quorum work | P4 (Raft), P8 (Dynamo-style) |
+| "How would it scale 100x?" | Nothing written down | no partitioning or sharding story, no capacity numbers | §13.3 "10x section" plus P1 load numbers |
+| "How do you know it survives failure?" | Race tests. Edge-case suite | no fault injection, no crash or partition testing | P1 (Toxiproxy), P5 (Jepsen-lite) |
+| "What is your p99 under load?" | Nothing measured. "Sub-second" was removed in §3.4 | no benchmarks anywhere | §13.2 item 1, P1 |
+| "Read-your-writes, replica lag, isolation anomalies (write skew)?" | Implicit in C1/C2, never stated | vocabulary and a demo are missing | P6 plus a write-skew post (§13.4) |
+| "What are your SLOs?" | Health checks, alert-on-absence (C13) | no SLIs, SLOs or error budgets | §13.3 "SLO page" |
+| "Time and ordering?" | Windows and expiry (C14) | no logical clocks, no ordering argument | P4/P8 force this naturally |
+
+**Read the table as:** your correctness story is complete. The missing pieces are **replication/consensus,
+partitioning, fault injection and measurement**. Pick projects that add those, not a fifth variation on locking.
+
+### 13.2 Quick wins on what already exists (hours to days, high return)
+
+1. **Measure something, anything, and publish the method.** One honest table beats ten adjectives.
+   - Booking: p50/p95/p99 claim latency and conflict rate at 8, 64 and 256 concurrent clients (k6 or NBomber against
+     the public demo repo, not the work service).
+   - SNOMED API: run `EXPLAIN ANALYZE` on the lexical, trigram and hierarchy queries; add the GIN trigram index if
+     missing; report p95 at a stated QPS on stated hardware. This also converts the dropped "sub-second" claim (§3.4)
+     into a real ✅.
+2. **Fix the SNOMED claim mismatch.** `update.md` (the GitHub profile README) still says *"lexical and semantic
+   autocomplete"* with a `pgvector` tag. §3.4 verified there is **no pgvector or embeddings** in that repo. Either build
+   hybrid search (see 4 below) or delete the claim. Do this before anyone reads it.
+3. **mypaw: verify before you tout.** The README line lists Kubernetes, pgvector and RAG triage, and §3.4 says it is not
+   yet verified. Read the repo once and record what is real in §3.4. Then upgrade it (item 5).
+4. **SNOMED: add one real distributed-systems feature.** Hybrid search: pgvector embeddings + the existing lexical
+   rank, merged with reciprocal rank fusion, with an offline relevance check (a small labelled query set, report
+   recall@10). Also add keyset pagination, single-flight caching to stop stampedes on hot queries, and
+   OpenTelemetry traces. Each one is a day and each is a talking point.
+5. **mypaw: make the "modular monolith" claim provable.**
+   - Architecture tests (NetArchTest) that fail the build if a module reaches into another module's internals.
+   - A transactional outbox between modules, so splitting a module into a service later is a transport swap (this is
+     your C7 pattern applied to your own code).
+   - The embedding/RAG ingestion as an idempotent background job with retries, backoff and a dead-letter table.
+   - K8s manifests with liveness/readiness probes, resource limits and an HPA, plus a load test that shows it scaling.
+6. **Algomist: leave it small.** It is the least relevant project to this positioning. If touched at all: queue the AI
+   topic generation with retries, backoff and cached responses keyed by request hash. Otherwise demote it to the
+   bottom of the list and let the backend work carry the page.
+7. **Add three sections to each work case study (no new code, no NDA risk):**
+   - **Failure modes:** a table of "what happens if…" (crash after the provider confirms but before we do; duplicate
+     callback; sweeper races a live request; DB failover mid-claim) and which mechanism handles each.
+   - **Non-guarantees:** what the design deliberately does *not* promise (for example, notifications are at-most-once
+     on purpose). Stating limits reads as seniority.
+   - **At 10x scale:** partition by doctor id so contention stays inside one shard; move the polling outbox to log-tail
+     CDC; serve availability from replicas; rate-limit claim attempts per patient; watch for hot slots. Write it as
+     reasoning, not as something you built.
+8. **Frame the booking flow as a saga.** The slot-hold → checkout → payment-outcome → confirm/expire lifecycle (C5, §5.1)
+   *is* a process manager with compensations. Say so, and name orchestration vs. choreography and why you picked
+   the first. No new code, just the right vocabulary.
+9. **SLO page.** Define 3 SLIs from things you already emit: claim success latency, outbox delivery lag, payment
+   confirmation lag. Add a target and an error-budget sentence for each. It is one page and shows operational maturity.
+
+### 13.3 New projects, ranked by credibility per hour
+
+Each entry: what it is, what it proves, a minimum scope, the proof artefact, effort, and the honest claim it unlocks.
+Build **fresh on a toy domain**. Never copy work code (§2.3).
+
+#### Tier 1: do these first
+
+**P1. `seat-hold-lab`, the flagship (already in Phase C; upgrade the scope)**
+- **Proves:** C1/C2/C3/C4/C5/C7 as a runnable, public artefact instead of a description.
+- **Add to the existing plan:**
+  - Toxiproxy between the app and Postgres: inject latency, connection resets and timeouts.
+  - `kill -9` the app mid-claim and assert that no hold is stuck once the sweeper runs.
+  - Invariant checks after every run: at most one active claim per slot; every confirmed payment has a confirmed
+    booking; no orphan holds.
+  - k6 or NBomber results table at 8, 64, 256 clients (success, conflict ratio, p50/p95/p99).
+  - `docker compose up` runs everything. CI badge. An ADR for each of the 5 key decisions.
+- **Effort:** 2 weekends. **Claim unlocked:** *"Public reference implementation of race-free booking, verified under
+  injected network faults and process crashes, with published latency numbers."*
+
+**P2. `pg-jobs`: a durable job queue on Postgres**
+- **Proves:** leases, fencing tokens, at-least-once with idempotent handlers. It generalises your outbox dispatcher.
+- **MVP:** `FOR UPDATE SKIP LOCKED` dequeue; lease with heartbeat; an attempt counter used as a **fencing token** so a
+  zombie worker cannot commit stale results; exponential backoff with jitter; dead-letter table; unique keys for
+  idempotent enqueue; a cron scheduler where the leader is chosen by an advisory lock; `LISTEN/NOTIFY` wake-ups.
+- **Tests:** kill a worker mid-job; two workers race for one job; pause a worker past its lease and let it resume.
+- **Proof:** jobs/second against worker count; duplicate-execution rate (should be zero effects, some re-runs).
+- **Effort:** 1 to 2 weeks. **Claim unlocked:** *"Built a Postgres-backed job queue with leases and fencing tokens;
+  verified no double effects when workers crash or stall."*
+
+**P3. Outbox → CDC → Kafka pipeline**
+- **Proves:** hands-on Kafka *development* (you have only operated it so far, §3.2).
+- **MVP:** Postgres logical decoding with Debezium's outbox event router into Kafka; 3 partitions keyed by aggregate
+  id; consumer group with an idempotent consumer table; retry topic and DLQ; show per-key ordering survives a
+  consumer rebalance.
+- **Proof:** end-to-end lag (commit → consumed) vs. your 2-second polling dispatcher, measured and charted.
+- **Effort:** 1 to 2 weeks. **Claim unlocked:** *"Replaced polling outbox with log-tailing CDC into Kafka, with
+  per-key ordering and idempotent consumers; measured lag."*
+
+#### Tier 2: the credibility step-change (harder, rarer)
+
+**P4. Raft consensus in C# (or Go), with a deterministic simulator**
+- **Proves:** consensus, replication, quorums, time. This is the single biggest gap in §13.1.
+- **MVP:** leader election, log replication, persistence, a replicated KV on top. A simulator owns the clock and
+  the network (drop, delay, reorder, partition) so every failure is reproducible from a seed. Property checks for
+  election safety, log matching and state-machine safety.
+- **Bonus that fits your skills:** a small Angular page that visualises terms, elections and log replication. It
+  doubles as a portfolio showpiece.
+- **Warning:** do **not** publish solutions to MIT 6.5840 labs (the course asks students not to). Build from the Raft
+  paper and Ongaro's thesis with your own structure and tests.
+- **Effort:** 3 to 5 weeks. **Claim unlocked:** *"Implemented Raft leader election and log replication; verified safety
+  properties under simulated partitions, delays and message loss."*
+
+**P5. Jepsen-lite for your own booking service (builds on P1)**
+- **Proves:** you test the way the field tests. Almost no portfolio has this.
+- **MVP:** many concurrent clients record a history of operations; faults are injected (DB partition, `kill -9`,
+  clock jump); a checker verifies invariants and a simple linearizability model for a slot (claimed/free).
+- **Effort:** 1 to 2 weeks after P1. **Claim unlocked:** *"Verified booking invariants under partitions and crashes
+  with a history checker."*
+
+**P6. Event-sourced ledger with rebuildable projections**
+- **Proves:** append-only logs, optimistic concurrency on streams, CQRS read models, reconciliation. Fits your fintech
+  background directly.
+- **MVP:** double-entry postings in Postgres; unique `(stream_id, version)`; idempotent commands; snapshots; a
+  projection you can drop and rebuild from the log; a reconciliation job comparing projection to ledger.
+- **Effort:** 2 to 3 weeks. **Claim unlocked:** *"Event-sourced double-entry ledger with idempotent commands and
+  provably rebuildable read models."*
+
+**P7. Distributed rate limiter**
+- **Proves:** shared state under contention, failure policy, clock handling.
+- **MVP:** token bucket and GCRA in Redis Lua, a sliding window for comparison, ASP.NET middleware; decide and
+  document fail-open vs fail-closed when Redis is down; use Redis `TIME`, not app clocks; benchmark across 3 app
+  instances.
+- **Effort:** 3 to 5 days. **Claim unlocked:** *"Distributed rate limiter with atomic Lua scripts and a documented
+  failure policy; benchmarked across instances."*
+
+#### Tier 3: only if you want to go deep
+
+**P8. Dynamo-style key-value store.** Consistent hash ring with virtual nodes, N/R/W quorums, hinted handoff, read
+repair, last-write-wins or vector clocks, Merkle-tree anti-entropy; kill nodes in a simulator and show convergence.
+3 to 4 weeks. Pairs well with P4 (CP vs AP contrast, which is a great interview answer).
+
+**P9. LSM-tree / write-ahead-log store.** Memtable, WAL with a configurable fsync policy, SSTables, bloom filters,
+compaction; a crash-recovery test that truncates the WAL at every byte offset. 2 to 3 weeks. Shows storage internals
+and crash consistency.
+
+**P10. Durable saga / process manager.** Booking → payment → notification with compensations, timeouts and persisted
+state, compared against a Temporal or MassTransit saga. 1 to 2 weeks. Lower priority because §13.2 item 8 already
+claims the vocabulary for the flow you built.
+
+### 13.4 Credibility that is not code
+
+- **ADRs** (architecture decision records) in each public repo: context, options, decision, consequences. Five short
+  ones are worth more than a long README.
+- **One real postmortem** (§9 #7, the Kafka disk incident): detection, root cause, fix, prevention, no hostnames.
+  Needs your answers to §11 Q1.
+- **A write-skew post:** show two transactions that each pass a check and together break an invariant under
+  READ COMMITTED and REPEATABLE READ, and fix it with SERIALIZABLE or a constraint. It is one of the most-asked
+  interview topics and C1 gives you the real-world hook.
+- **Small open-source contributions** to tools you already use: Testcontainers for .NET, Npgsql, Polly, MassTransit,
+  Wolverine, Debezium docs. Even a docs fix or a reproducible bug report with a failing test shows you read other
+  people's distributed code.
+- **A reading log in public** (Notes section): the Raft paper, the Dynamo paper, Spanner, *Designing
+  Data-Intensive Applications* chapters 5 to 9, and 3 Jepsen analyses. One paragraph each on "what this means for my
+  booking service". It signals depth without needing a new project.
+- **Talk at a local meetup or a recorded walkthrough** of CS1 (race-free booking). A 10-minute screen recording of the
+  8-client race is a very strong LinkedIn asset.
+
+### 13.5 What makes a repo count as evidence
+
+Every public project should have:
+
+- [ ] A **guarantees / non-guarantees table** at the top of the README (what it promises, what it does not).
+- [ ] An **architecture diagram** (reuse the D-specs in §6 and the SVG diagram component).
+- [ ] **One-command run** (`docker compose up`) and **CI with a passing badge**.
+- [ ] A **test suite that races or breaks things on a real database**, not only unit tests.
+- [ ] A **benchmark table** with method, hardware and date.
+- [ ] A **failure-modes table** and a **known limitations** section.
+- [ ] **ADRs** for the key decisions.
+- [ ] No secrets or client names committed (the SNOMED `.env` problem in §3.4 must not repeat).
+
+**Avoid:** tech-keyword projects that do not use the tech for a real reason (Kafka with one consumer and no ordering
+need), "scalable" with no numbers, tutorial clones, and READMEs that read as generated.
+
+### 13.6 Suggested order (about 10 to 12 weeks part-time)
+
+- [x] **Week 0 (a day):** fix the SNOMED/pgvector claim in `update.md` (§13.2 item 2) *(done 2026-11-05; also retitled the profile README to backend/distributed systems)*
+- [ ] Verify mypaw and record it in §3.4 *(blocked: the repo is not on the work machine; do this from the home PC)*
+- [ ] **Weeks 1 to 2:** P1 `seat-hold-lab` with Toxiproxy and a numbers table; publish the first two posts from §9
+- [x] **Week 3, part 1:** §13.2 items 7 and 8 *(done 2026-11-05: "When things fail" and "Limits and scale" sections on all three case studies, plus the orchestrated-saga decision on CS1)*
+- [ ] **Week 3, part 2:** §13.2 items 1 and 9 (measurements need P1 to exist; the SLO page needs real targets, so write it with production numbers from §11 Q4 rather than inventing any)
+- [ ] **Weeks 4 to 5:** P2 `pg-jobs`
+- [ ] **Weeks 6 to 7:** P3 CDC to Kafka; add its lag chart to CS1
+- [ ] **Weeks 8 to 12:** P4 Raft with the Angular visualiser (or P5 + P6 if you prefer breadth over depth)
+- [ ] **Throughout:** one ADR set per repo, one post a month (§9), one Notes reading-log entry per paper
+- [ ] After each project ships: record evidence in §3.1, add the claim to §7, add a case-study or project page
+
+**If you only have time for three:** P1 (with chaos + numbers), P2, and P4. Together they cover correctness,
+failure handling and consensus, which is the full arc a distributed-systems screen walks through.
+
+### 13.7 Decisions for you
+
+1. How many hours a week can you give this? It decides between "P1 + P2 + P3" (breadth, about 6 weeks) and adding Raft
+   (depth, about 12 weeks).
+2. Do you prefer to build Raft in **C#** (matches your CV) or **Go** (matches how most of this field's open-source reads)?
+   C# keeps the story consistent; Go opens more doors.
+3. Is it fine to keep Algomist as a low-profile side project, or should it be hidden from the distributed-systems view?
+4. Which production numbers can you share (§11 Q4)? They would let CS1 to CS3 carry real figures alongside P1's benchmark.
+
+### 13.8 Sanctioned wording for the SNOMED project (2026-11-05, from the verified repo state)
+
+**Résumé:** Built a SNOMED CT terminology search service in .NET 10 and PostgreSQL. It uses a denormalized search table with a generated tsvector column, GIN and trigram indexes, and word-similarity typo matching. Autocomplete returns at 9.5 ms p95 with one client (18.7 ms at 16) over 547k searchable descriptions, measured on a laptop. Added a transitive-closure table (7.6M IS-A pairs) for subtree queries and value sets, an RF2 loader, and 80+ tests against a real Postgres.
+
+**Profile README:** Postgres full-text and trigram search, an IS-A closure for value sets, and optional pgvector hybrid search in progress.
+
+**Upgrade rule:** add "semantic" or "hybrid" accuracy or latency only after `docs/evaluation.md` has rows for a real embedding model.
+

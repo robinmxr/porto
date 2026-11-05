@@ -4,11 +4,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ArchitectureDiagram } from '../../components/architecture-diagram/architecture-diagram';
 import { PROJECT_CARDS } from '../projects/project-cards.data';
 import { INFO } from '../../data/info';
+import { HeroArt } from '../../components/hero-art/hero-art';
 
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.html',
-  imports: [RouterLink, ArchitectureDiagram],
+  imports: [RouterLink, ArchitectureDiagram, HeroArt],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectDetail {
@@ -25,9 +26,10 @@ export class ProjectDetail {
     return { ...card, accent: dark ? card.accent : card.lightAccent };
   });
 
-  /** Section number, shifted by one when the "How it works" section is shown. */
+  /** Section number, shifted by one for each optional section shown before it (Background, How it works). */
   protected index(n: number): string {
-    const shift = this.project()?.diagrams?.length ? 1 : 0;
+    const p = this.project();
+    const shift = (p?.context ? 1 : 0) + (p?.diagrams?.length ? 1 : 0);
     return String(n + shift).padStart(2, '0');
   }
 

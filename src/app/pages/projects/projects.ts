@@ -24,7 +24,6 @@ export class Projects {
   protected readonly skillGroups = INFO.skills;
   protected readonly secondarySkills = INFO.secondarySkills;
   protected readonly experience = INFO.experience;
-  protected readonly focusAreas = INFO.profile.focus.split('·').map(s => s.trim());
   protected readonly caseStudies = INFO.caseStudies;
   protected readonly year = new Date().getFullYear();
 

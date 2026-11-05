@@ -12,6 +12,7 @@
 
     <main class="container">
       <section class="detail__hero">
+        <app-hero-art [variant]="s.id" />
         <p class="eyebrow">
           <span class="detail__swatch" aria-hidden="true"></span>
           Engineering work · {{ company }}
@@ -65,9 +66,26 @@
         </ol>
       </section>
 
+      @if (s.failureModes.length) {
+        <section class="section is-revealed">
+          <header class="section__head">
+            <span class="section__index">04</span>
+            <h2 class="section__title">When things fail</h2>
+          </header>
+          <ol class="decisions">
+            @for (f of s.failureModes; track f.choice) {
+              <li class="decision">
+                <h3 class="decision__choice">{{ f.choice }}</h3>
+                <p class="decision__why">{{ f.why }}</p>
+              </li>
+            }
+          </ol>
+        </section>
+      }
+
       <section class="section is-revealed">
         <header class="section__head">
-          <span class="section__index">04</span>
+          <span class="section__index">05</span>
           <h2 class="section__title">Results</h2>
         </header>
         <ol class="highlights">
@@ -77,9 +95,36 @@
         </ol>
       </section>
 
+      @if (s.nonGuarantees.length || s.atScale.length) {
+        <section class="section is-revealed">
+          <header class="section__head">
+            <span class="section__index">06</span>
+            <h2 class="section__title">Limits and scale</h2>
+          </header>
+          <div>
+            @if (s.nonGuarantees.length) {
+              <p class="eyebrow practice__label">What it does not promise</p>
+              <ol class="highlights">
+                @for (n of s.nonGuarantees; track n) {
+                  <li>{{ n }}</li>
+                }
+              </ol>
+            }
+            @if (s.atScale.length) {
+              <p class="eyebrow practice__label">At 10x scale: what I would change (reasoning, not built)</p>
+              <ol class="highlights">
+                @for (a of s.atScale; track a) {
+                  <li>{{ a }}</li>
+                }
+              </ol>
+            }
+          </div>
+        </section>
+      }
+
       <section class="section is-revealed">
         <header class="section__head">
-          <span class="section__index">05</span>
+          <span class="section__index">07</span>
           <h2 class="section__title">In practice</h2>
         </header>
         <div>
@@ -101,8 +146,8 @@
             }
           </ul>
           <p class="detail__note">
-            Built at {{ company }}. Details are generalised and no proprietary code is shown —
-            happy to go deeper on a call.
+            Built at {{ company }}. The platform is a new v1 that is still growing its user base, so the scale notes above are reasoning, not measurements.
+            Details are generalised and no proprietary code is shown. Happy to go deeper on a call.
           </p>
         </div>
       </section>

@@ -14,6 +14,11 @@ export interface PortfolioInfo {
     mode: string;
     email: string;
     education: string;
+    degree: string;
+    school: string;
+    timezone: string;
+    notice: string;
+    authorization: string;
     credibility: string;
   };
   links: {
@@ -83,9 +88,17 @@ export interface ProjectCardData {
   highlights: string[];
   proof: Figure;
   diagrams?: Diagram[];
+  /** Plain-language background for readers who do not know the domain. */
+  context?: ProjectContext;
   year: string;
   repoUrl: string;
   demoUrl: string;
+}
+
+export interface ProjectContext {
+  what: string;
+  why: Achievement[];
+  uses: Achievement[];
 }
 
 export interface Culture {
@@ -151,6 +164,12 @@ export interface CaseStudy {
   decisions: Decision[];
   results: string[];
   concepts: string[];
+  /** "If X goes wrong" rows: `choice` is the failure, `why` is how the design absorbs it. */
+  failureModes: Decision[];
+  /** What the design deliberately does not promise. */
+  nonGuarantees: string[];
+  /** Reasoning about the next order of magnitude. Not built. */
+  atScale: string[];
 }
 
 export interface Principle {

@@ -12,6 +12,7 @@
 
     <main class="container">
       <section class="detail__hero">
+        <app-hero-art [variant]="p.id" />
         <p class="eyebrow">
           <span class="detail__swatch" aria-hidden="true"></span>
           {{ p.type.replace('Side Project - ', '') }} · {{ p.year }}
@@ -39,10 +40,40 @@
         }
       </dl>
 
+      @if (p.context; as c) {
+        <section class="section is-revealed">
+          <header class="section__head">
+            <span class="section__index">01</span>
+            <h2 class="section__title">Background</h2>
+          </header>
+          <div>
+            <p class="about__lead">{{ c.what }}</p>
+            <p class="eyebrow practice__label">Why it matters</p>
+            <ul class="practice">
+              @for (w of c.why; track w.lead) {
+                <li class="practice__item">
+                  <h3 class="practice__title">{{ w.lead }}</h3>
+                  <p class="practice__detail">{{ w.detail }}</p>
+                </li>
+              }
+            </ul>
+            <p class="eyebrow practice__label">Where it is used in healthcare software</p>
+            <ul class="practice">
+              @for (u of c.uses; track u.lead) {
+                <li class="practice__item">
+                  <h3 class="practice__title">{{ u.lead }}</h3>
+                  <p class="practice__detail">{{ u.detail }}</p>
+                </li>
+              }
+            </ul>
+          </div>
+        </section>
+      }
+
       @if (p.diagrams?.length) {
         <section class="section section--wide is-revealed">
           <header class="section__head">
-            <span class="section__index">01</span>
+            <span class="section__index">{{ index(0) }}</span>
             <h2 class="section__title">How it works</h2>
           </header>
           <div class="detail__diagrams">
