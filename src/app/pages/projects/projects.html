@@ -63,7 +63,7 @@
   </section>
 
   <!-- Experience -->
-  <section id="experience" class="section reveal">
+  <section id="experience" class="section section--stacked reveal">
     <header class="section__head">
       <span class="section__index">01</span>
       <h2 class="section__title">Experience</h2>
@@ -71,14 +71,15 @@
     <ol class="exp-list">
       @for (item of experience; track item.role + item.company; let i = $index) {
         <li class="exp" [class.is-open]="expandedRole() === i">
-          <div class="exp__period">
-            {{ item.period }}
+          <div class="exp__side">
+            <h3 class="exp__company">{{ item.company }}</h3>
+            <p class="exp__role">{{ item.role }}</p>
+            <p class="exp__period">{{ item.period }}</p>
             @if (item.status) {
               <span class="exp__current">{{ item.status }}</span>
             }
           </div>
           <div class="exp__body">
-            <h3 class="exp__role">{{ item.role }} <span class="exp__at">at</span> {{ item.company }}</h3>
             <p class="exp__summary">{{ item.summary }}</p>
             <dl class="figures">
               @for (f of item.figures; track f.label) {
@@ -88,10 +89,13 @@
                 </div>
               }
             </dl>
-            <div class="exp__details">
+            <button type="button" class="exp__toggle" (click)="toggleRole(i)" [attr.aria-expanded]="expandedRole() === i" [attr.aria-controls]="'exp-' + i">
+              <span>Key contributions and stack</span>
+              <span class="exp__toggle-icon" aria-hidden="true"></span>
+            </button>
+            <div class="exp__details" [id]="'exp-' + i" role="region">
               <div class="exp__details-inner">
                 <div class="exp__panel">
-                  <p class="eyebrow exp__panel-label">Key contributions</p>
                   <ol class="exp__achievements">
                     @for (a of item.achievements; track a.lead) {
                       <li>
@@ -108,10 +112,6 @@
                 </div>
               </div>
             </div>
-            <button type="button" class="exp__toggle" (click)="toggleRole(i)" [attr.aria-expanded]="expandedRole() === i">
-              {{ expandedRole() === i ? 'Hide details' : 'View details' }}
-              <span class="exp__toggle-icon" aria-hidden="true"></span>
-            </button>
           </div>
         </li>
       }

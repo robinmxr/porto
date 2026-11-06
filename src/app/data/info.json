@@ -317,7 +317,7 @@
       "id": "snomed-search-api",
       "name": "SNOMED CT Clinical Search API",
       "type": "Side Project - Search / Clinical Data",
-      "description": "A clinical-terminology search service over the SNOMED CT International release on PostgreSQL: word-order-independent autocomplete, typo fallback, keyset paging, and subtree filters through a precomputed IS-A closure. Semantic and hybrid modes are built and tested, with the embedding model comparison still pending.",
+      "description": "A clinical-terminology search service over the SNOMED CT International release on PostgreSQL: word-order-independent autocomplete, typo fallback, keyset paging, and subtree filters through a precomputed IS-A closure. Semantic and hybrid modes are built and tested, with the embedding model comparison still pending. Lexical recall and latency are measured and published in the repo, including where it falls short.",
       "focusAreas": [
         "Ranked lexical search",
         "Trigram fuzzy matching",
@@ -361,14 +361,16 @@
       "highlights": [
         "A denormalized search table with a generated tsvector column, a GIN index and a trigram index. The query plans, kept in the repo, show the indexes being used.",
         "Word-order-independent matching ranked exact, then prefix, then the rest, with one row per concept. Only when nothing matches does a typo fallback using trigram word similarity run.",
-        "Autocomplete p95 of 9.5 ms with one client and 18.7 ms with 16 concurrent clients over 547k searchable descriptions, measured on a laptop with the API and database on the same machine. The method, hardware and date are in the repo.",
+        "Autocomplete p95 of 9.5 ms with one client and 18.7 ms at 16 concurrent clients (about 2,660 requests per second), and lexical search p95 of 62.8 ms and 121 ms, over 547k searchable descriptions. Closed-loop runs on one M1 Pro laptop with the load generator, API and database sharing it; the method and date are in the repo.",
+        "A 54-phrase evaluation of everyday wording against the concept a clinician would code: lexical search reaches Recall@1 0.39 and Recall@10 0.46 (MRR 0.41, p50 10.5 ms). It misses most lay phrases such as \"the runs\", which is the gap the semantic mode is for. The set is small and chosen by one person, so it is a regression check, not a general accuracy claim.",
+        "Deployed on free hosting tiers (API and database on separate providers). Driven from a laptop over the internet, autocomplete has a p50 of 241 ms, about 230 ms of which is network round trip, so those figures show the free plans, not the engine.",
         "A transitive-closure table of 7.6M IS-A pairs built at load time. It powers all-descendants queries and subtree-restricted search, which is the basis for clinical value sets.",
         "An RF2 loader that reads your own licensed release, a compose file, and 80+ tests against a real PostgreSQL using a synthetic fixture, so no SNOMED data lives in the repo.",
         "Semantic and hybrid modes (pgvector HNSW with reciprocal rank fusion) are built and tested. The embedding model comparison has not run yet, so no accuracy claim is made for them."
       ],
       "year": "2024",
       "repoUrl": "https://github.com/robinmxr/snomed",
-      "demoUrl": "",
+      "demoUrl": "http://mypaw.runasp.net",
       "proof": {
         "value": "9.5 ms",
         "label": "autocomplete p95, measured on a laptop"
@@ -991,7 +993,9 @@
       "results": [
         "1,052 automated tests, including real-Postgres race tests: eight patients racing for one slot get exactly one booking; a three-seat session gets exactly three; duplicate payment callbacks confirm once and notify once; a payment racing the sweep never confirms an expired hold.",
         "40 API endpoints and 7 background jobs, each single-run across replicas.",
-        "Live availability pushed over Server-Sent Events and fanned out across pods with Postgres LISTEN/NOTIFY: real-time without adding a broker."
+        "Live availability pushed over Server-Sent Events and fanned out across pods with Postgres LISTEN/NOTIFY: real-time without adding a broker.",
+        "Because production numbers are not available yet, I rebuilt the pattern from scratch on a toy domain as a separate personal reference project, and measured it. With 8 and 64 clients racing for one slot, 100 rounds each, exactly one wins every time, and the same test double-books in 100 of 100 rounds once the unique index is removed. Across 27 load runs and 5 fault runs there were zero double bookings.",
+        "In that reference build on an M1 Pro laptop, with the load generator, API and database on one machine, claim p95 latency was 22 ms at 64 concurrent clients. The invariants also held under injected database latency, connection resets, a black-holed database and a killed process. These are laptop figures for a toy domain, not a statement about the real platform, and the repository is private."
       ],
       "concepts": [
         "Database-enforced invariants",

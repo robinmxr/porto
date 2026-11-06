@@ -1098,3 +1098,10 @@ failure handling and consensus, which is the full arc a distributed-systems scre
 
 **Upgrade rule:** add "semantic" or "hybrid" accuracy or latency only after `docs/evaluation.md` has rows for a real embedding model.
 
+### 13.9 seat-hold-lab results added to the portfolio (2026-11-06)
+
+The reference build at `~/Work/robin/loadtest` (branch `feature/seat-hold-lab`) is **intentionally not pushed**. Its findings are on the
+booking case study as two Results entries, with no link. Because the repo is private, the claims cannot be checked by a reader, so keep the
+wording as "separate personal reference project" and never say "public". Source of every number: `docs/benchmarks.md`, `docs/fault-runs.md`,
+`docs/test-proof.md` in that repo. Re-check them there before changing the text.
+
